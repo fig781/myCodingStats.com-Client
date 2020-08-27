@@ -1,18 +1,48 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div id="home">
+    <div id="landing">
+      <div id="navbar">
+        <router-link to="/">Home</router-link>
+        <router-link to="/gridview">App</router-link>
+        <router-link class="right-nav" to="/login">Sign In</router-link>
+        <router-link class="right-nav" to="/register">Sign Up</router-link>
+      </div>
+      <div id="center-landing">
+        <h1>Track your coding time with this app</h1>
+        <router-link to="/login">Sign In</router-link>
+        <router-link to="/register">Sign Up</router-link>
+      </div>
+    </div>
+    <div id="descriptions">
+      other cool stuff here
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+  // @ is an alias to /src
 
-export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
-};
+  export default {
+    name: 'Home',
+  };
 </script>
+
+<style scoped>
+  #landing {
+    background-color: azure;
+    height: 100vh;
+  }
+
+  #navbar {
+    padding: 2rem;
+    background-color: whitesmoke;
+  }
+
+  .right-nav {
+    float: right;
+  }
+  #center-landing {
+    padding-left: 18%;
+    padding-top: 25vh;
+  }
+</style>
