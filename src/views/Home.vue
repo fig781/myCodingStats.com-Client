@@ -29,7 +29,11 @@
 
 <style scoped>
   #landing {
-    background-color: azure;
+    background: linear-gradient(
+      113deg,
+      rgba(95, 123, 182, 1) 0%,
+      rgba(127, 103, 214, 1) 100%
+    );
     height: 100vh;
   }
 

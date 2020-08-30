@@ -40,328 +40,20 @@
         </div>
       </div>
       <div id="month-container">
-        <h2>August</h2>
-        <button>&lt;</button>
-        <button>&gt;</button>
+        <h2>{{ month }}, {{ year }}</h2>
+        <button @click="decreaseMonthYear">&lt;</button>
+        <button @click="increaseMonthYear">&gt;</button>
       </div>
-      <table>
-        <tr>
-          <th>Date</th>
-          <th>Active Learning</th>
-          <th>Passive Learning</th>
-          <th>Coding Challenges</th>
-          <th>Project(s)</th>
-          <th>Description</th>
-          <th>Day Totals</th>
-          <th>Week Totals</th>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-        <tr>
-          <td>6/1</td>
-          <td>1:30</td>
-          <td>0:30</td>
-          <td>0:00</td>
-          <td>Big Project</td>
-          <td>sdfglk dfjg ldkfjgldk fgjldf kjgld fkgjl dkfjgl kdf jg</td>
-          <td>2:00</td>
-          <td>2:00</td>
-        </tr>
-      </table>
+      <Calendar />
     </div>
   </div>
 </template>
 
 <script>
   import SideNavigationBar from '../components/SideNavigationBar';
+  import Calendar from '../components/Calendar';
+  import { mapMutations } from 'vuex';
+  import { mapGetters } from 'vuex';
 
   //on load this page needs to get the totals from the db for the amount of times
   // each month. When you go to different months then it will make a request to the
@@ -372,6 +64,32 @@
     name: 'CoreGridView',
     components: {
       SideNavigationBar,
+      Calendar,
+    },
+
+    methods: {
+      ...mapMutations([
+        'increaseOrDecreaseMonthandYear',
+        'setTodaysDateMonthYear',
+      ]),
+      decreaseMonthYear() {
+        this.increaseOrDecreaseMonthandYear('-');
+      },
+      increaseMonthYear() {
+        this.increaseOrDecreaseMonthandYear('+');
+      },
+    },
+    computed: {
+      ...mapGetters(['Year', 'Month']),
+      year() {
+        return this.Year;
+      },
+      month() {
+        return this.Month.name;
+      },
+    },
+    created() {
+      this.setTodaysDateMonthYear();
     },
   };
 </script>
@@ -396,21 +114,5 @@
     display: flex;
     padding-bottom: 0.5rem;
     padding-left: 5rem;
-  }
-  table {
-    border-collapse: collapse;
-    margin-left: 5rem;
-  }
-  th {
-    border: 1px solid black;
-    padding-top: 2px;
-    padding-top: 2px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  td {
-    border: 1px solid grey;
-    padding: 2px;
-    text-align: center;
   }
 </style>

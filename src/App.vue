@@ -19,11 +19,11 @@
     box-sizing: border-box;
     height: 100%;
     position: relative;
+    background-color: #f5f5f5ee;
   }
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f6f6f6;
   }
 </style>

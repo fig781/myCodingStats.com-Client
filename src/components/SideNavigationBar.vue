@@ -8,7 +8,7 @@
       <router-link to="/gridview">Grid</router-link>
     </button>
     <button>
-      <router-link to="/">Graph</router-link>
+      <router-link to="/">Graphs</router-link>
     </button>
     <button>
       <router-link to="/">All time Stats</router-link>
@@ -38,7 +38,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: wheat;
+    background-color: #5f7bb6;
     overflow-x: hidden;
     padding-top: 1.5rem;
   }
