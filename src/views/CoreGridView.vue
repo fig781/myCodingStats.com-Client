@@ -40,11 +40,11 @@
         </div>
       </div>
       <div id="month-container">
-        <h2>{{ month }}, {{ year }}</h2>
+        <h2>{{ month.name }}, {{ year }}</h2>
         <button @click="decreaseMonthYear">&lt;</button>
         <button @click="increaseMonthYear">&gt;</button>
       </div>
-      <Calendar />
+      <Calendar :month="month" :year="year" :key="componentKey" />
     </div>
   </div>
 </template>
@@ -66,7 +66,11 @@
       SideNavigationBar,
       Calendar,
     },
-
+    data() {
+      return {
+        componentKey: 0,
+      };
+    },
     methods: {
       ...mapMutations([
         'increaseOrDecreaseMonthandYear',
@@ -74,9 +78,11 @@
       ]),
       decreaseMonthYear() {
         this.increaseOrDecreaseMonthandYear('-');
+        this.componentKey++;
       },
       increaseMonthYear() {
         this.increaseOrDecreaseMonthandYear('+');
+        this.componentKey++;
       },
     },
     computed: {
@@ -85,7 +91,7 @@
         return this.Year;
       },
       month() {
-        return this.Month.name;
+        return this.Month;
       },
     },
     created() {

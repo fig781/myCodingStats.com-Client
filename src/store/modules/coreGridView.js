@@ -15,32 +15,16 @@ const state = {
     date: 1,
     year: 0,
   },
-  firstDayOfWeekInMonth: 0,
-  //make calendar an empty array
-  //make a dayas a state and then create these
-  calendar: [],
-  oneCalendarDay: {
-    id: 0,
-    date: '',
-    day: '',
-    active: '0:00',
-    passive: '0:00',
-    coding: '0:00',
-    project: '',
-    desc: '',
-    day_total: '0:00',
-    week_total: '0:00',
-  },
 };
 
 const getters = {
-  Calendar: (state) => state.calendar,
-  OneCalandarDay: (state) => state.oneCalendarDay,
   Year: (state) => state.year,
   Month: (state) => state.month,
 };
 
 const mutations = {
+  //Only runs when the CoreGridView component is initially rendered.
+  //This function is used to initially populate all the main variables used.
   setTodaysDateMonthYear: (state) => {
     const today = new Date();
     const monthFormat = new Intl.DateTimeFormat('en-US', {
@@ -58,12 +42,9 @@ const mutations = {
     //month
     state.month.number = today.getMonth();
     state.month.name = monthFormat.format(today);
-
-    //firstDayOfWeekInMonth
-    state.firstDayOfWeekInMonth = new Date(
-      `${state.month.name} ${today.getDate()}, ${today.getFullYear()} 06:00:00`
-    ).getDay();
   },
+
+  //Runs when pressing the left and right arrow buttons next to the month and year
   increaseOrDecreaseMonthandYear: (state, payload) => {
     const months = [
       'January',
@@ -101,26 +82,6 @@ const mutations = {
     } else {
       console.error('function missing correct parameter');
     }
-  },
-  //payload is the one number incriment for each day
-  populateCalendarDate: (state, payload) => {
-    state.oneCalendarDay.id = payload;
-
-    const date = new Date();
-    const dayFormat = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
-    date.setFullYear(state.year);
-    date.setMonth(state.month.number);
-    date.setDate(payload);
-
-    const displayMonth = state.month.number + 1;
-    state.oneCalendarDay.date = `${displayMonth}/${payload}`;
-    state.oneCalendarDay.day = dayFormat.format(date);
-
-    console.log(state.oneCalendarDay.day);
-
-    state.calendar.push(state.oneCalendarDay);
-
-    console.log(state.oneCalendarDay);
   },
 };
 

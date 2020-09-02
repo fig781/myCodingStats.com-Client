@@ -1,88 +1,115 @@
 <template>
-  <table>
-    <tr>
-      <th colspan="2">Date</th>
-      <th>Active Learning</th>
-      <th>Passive Learning</th>
-      <th>Coding Challenges</th>
-      <th>Project(s)</th>
-      <th>Description</th>
-      <th>Day Total</th>
-      <th>Week Total</th>
-    </tr>
-    <tr v-for="calendarDay in Calendar" :key="calendarDay.id">
-      <td>{{ calendarDay.date }}</td>
-      <td>{{ calendarDay.day }}</td>
-      <td>{{ calendarDay.active }}</td>
-      <td>{{ calendarDay.passive }}</td>
-      <td>{{ calendarDay.coding }}</td>
-      <td>{{ calendarDay.project }}</td>
-      <td>{{ calendarDay.desc }}</td>
-      <td>{{ calendarDay.day_total }}</td>
-      <td>{{ calendarDay.week_total }}</td>
-    </tr>
-  </table>
+  <div id="table">
+    <div class="table-row">
+      <div class="table-header">Date</div>
+      <div class="table-header">Day</div>
+      <div class="table-header">Active Learning</div>
+      <div class="table-header">Passive Learning</div>
+      <div class="table-header">Coding Challenges</div>
+      <div class="table-header">Project(s)</div>
+      <div class="table-header">Description</div>
+      <div class="table-header">Day Total</div>
+      <div class="table-header">Week Total</div>
+    </div>
+    <CalendarDay
+      v-for="calendarDay in calendar"
+      :key="calendarDay.id"
+      :oneCalendarDay="calendarDay"
+    />
+  </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import CalendarDay from './CalendarDay';
 
   export default {
     name: 'Calendar',
+    components: {
+      CalendarDay,
+    },
+    props: {
+      month: Object,
+      year: Number,
+    },
     data() {
       return {
-        numberOfDaysThisInThisMonth: 0,
+        numberOfDaysInThisMonth: 0,
+        calendar: [],
       };
     },
-    methods: {},
-    computed: {
-      ...mapGetters(['Month', 'Calendar']),
-      month() {
-        return this.Month.number;
+    methods: {
+      populateCalendarRow(dayNumber) {
+        let oneCalendarDay = {
+          id: 0,
+          date: '',
+          day: '',
+          active: '0:00',
+          passive: '0:00',
+          coding: '0:00',
+          project: '',
+          desc: '',
+          day_total: '0:00',
+          week_total: '0:00',
+        };
+
+        const date = new Date();
+        const dayFormat = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
+
+        date.setFullYear(this.year);
+        date.setMonth(this.month.number);
+        date.setDate(dayNumber);
+
+        oneCalendarDay.id = dayNumber;
+        oneCalendarDay.date = `${this.month.number + 1}/${dayNumber}`;
+        oneCalendarDay.day = dayFormat.format(date);
+
+        return oneCalendarDay;
       },
-      calendar() {
-        return this.Calendar;
+      populateEachCalendarRow() {
+        const numberOfDaysInMonth = [
+          31,
+          28,
+          31,
+          30,
+          31,
+          30,
+          31,
+          31,
+          30,
+          31,
+          30,
+          31,
+        ];
+        this.numberOfDaysInThisMonth = numberOfDaysInMonth[this.month.number];
+
+        for (var x = 1; x <= this.numberOfDaysInThisMonth; x++) {
+          this.calendar.push(this.populateCalendarRow(x));
+        }
       },
     },
-    beforeMount() {
-      const numberOfDaysInMonth = [
-        31,
-        28,
-        31,
-        30,
-        31,
-        30,
-        31,
-        31,
-        30,
-        31,
-        30,
-        31,
-      ];
-      this.numberOfDaysThisInThisMonth = numberOfDaysInMonth[this.month];
-      for (var x = 1; x <= this.numberOfDaysThisInThisMonth; x++) {
-        this.$store.commit('populateCalendarDate', x);
-      }
+    computed: {},
+    mounted() {
+      this.populateEachCalendarRow();
     },
   };
 </script>
 
 <style scoped>
-  table {
+  #table {
+    display: table;
     border-collapse: collapse;
     margin-left: 5rem;
   }
 
-  th {
+  .table-row {
+    display: table-row;
+  }
+  .table-header {
+    display: table-cell;
     border: 1px solid black;
     padding-top: 2px;
     padding-top: 2px;
     padding-left: 2rem;
     padding-right: 2rem;
-  }
-  td {
-    border: 1px solid grey;
-    padding: 2px;
-    text-align: center;
   }
 </style>
