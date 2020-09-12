@@ -2,9 +2,20 @@
   <div id="sign-in">
     <div id="center-container">
       <h1>Sign into your account</h1>
-      <input type="text" placeholder="Email" /><br />
-      <input type="text" placeholder="Password" /><br />
-      <button>Sign In</button><br />
+      <form @submit.prevent="onSubmit">
+        <input
+          type="email"
+          placeholder="Email"
+          v-model="formData.email"
+        /><br />
+        <input
+          type="password"
+          placeholder="Password"
+          v-model="formData.password"
+        /><br />
+        <input type="submit" value="Submit" /><br />
+      </form>
+
       <router-link to="/">Home</router-link>
       <router-link to="/register">Don't have an account?</router-link>
     </div>
@@ -14,6 +25,19 @@
 <script>
   export default {
     name: 'SignIn',
+    data() {
+      return {
+        formData: {
+          email: '',
+          password: '',
+        },
+      };
+    },
+    methods: {
+      onSubmit() {
+        this.$store.dispatch('signIn', this.formData);
+      },
+    },
   };
 </script>
 

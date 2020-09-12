@@ -3,14 +3,25 @@
     <div id="landing">
       <div id="navbar">
         <router-link to="/">Home</router-link>
-        <router-link to="/gridview">App</router-link>
-        <router-link class="right-nav" to="/login">Sign In</router-link>
-        <router-link class="right-nav" to="/register">Sign Up</router-link>
+        <router-link class="right-nav" to="/login" v-if="!loggedIn"
+          >Sign In</router-link
+        >
+        <router-link class="right-nav" to="/register" v-if="!loggedIn"
+          >Sign Up</router-link
+        >
+
+        <button class="right-nav" v-if="loggedIn" @click="logout">
+          Logout
+        </button>
+        <p class="right-nav" v-if="loggedIn">
+          {{ user.firstName }} {{ user.lastName }}
+        </p>
       </div>
       <div id="center-landing">
         <h1>Track your coding time with this app</h1>
-        <router-link to="/login">Sign In</router-link>
-        <router-link to="/register">Sign Up</router-link>
+        <router-link to="/login" v-if="!loggedIn">Sign In</router-link>
+        <router-link to="/register" v-if="!loggedIn">Sign Up</router-link>
+        <router-link to="/gridview" v-if="loggedIn">App</router-link>
       </div>
     </div>
     <div id="descriptions">
@@ -24,6 +35,31 @@
 
   export default {
     name: 'Home',
+    data() {
+      return {
+        loggedIn: false,
+      };
+    },
+    methods: {
+      logout() {
+        this.$store.dispatch('logout');
+        this.loggedIn = false;
+      },
+    },
+    computed: {
+      user() {
+        return this.$store.getters.loggedInUser;
+      },
+    },
+    mounted() {
+      if (
+        this.user.userId != null &&
+        this.user.firstName != null &&
+        this.user.lastName != null
+      ) {
+        this.loggedIn = true;
+      }
+    },
   };
 </script>
 
