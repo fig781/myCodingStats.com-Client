@@ -1,5 +1,3 @@
-//import axios from 'axios'
-
 const state = {
   year: 0,
   month: {

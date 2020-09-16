@@ -21,6 +21,7 @@
 
 <script>
   import CalendarDay from './CalendarDay';
+  import router from '../router/index';
 
   export default {
     name: 'Calendar',
@@ -62,10 +63,17 @@
         oneCalendarDay.id = dayNumber;
         oneCalendarDay.date = `${this.month.number + 1}/${dayNumber}`;
         oneCalendarDay.day = dayFormat.format(date);
-
+        //set the other information based on the info from the server
         return oneCalendarDay;
       },
-      populateEachCalendarRow() {
+
+      async populateEachCalendarRow() {
+        const yearAndMonth = `${this.year}-${this.month.number + 1}`;
+        const fetchedRowInformation = await this.fetchRowsWithValues(
+          yearAndMonth,
+          this.userId
+        );
+        console.log('fetchedRowInformation: ' + fetchedRowInformation);
         const numberOfDaysInMonth = [
           31,
           28,
@@ -86,8 +94,35 @@
           this.calendar.push(this.populateCalendarRow(x));
         }
       },
+
+      async fetchRowsWithValues(date, userId) {
+        try {
+          const res = await fetch('http://localhost:3000/gridmonth', {
+            method: 'POST',
+            body: JSON.stringify({ date: date, userId: userId }),
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+          });
+          const jsonResponse = await res.json();
+
+          if (res.status == 200) {
+            return jsonResponse;
+          } else {
+            alert(jsonResponse.error);
+            router.push('/forbidden');
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      },
     },
-    computed: {},
+
+    computed: {
+      userId() {
+        return this.$store.getters.userId;
+      },
+    },
+
     mounted() {
       this.populateEachCalendarRow();
     },

@@ -10,6 +10,7 @@ const state = {
 
 const getters = {
   loggedInUser: (state) => state.loggedInUser,
+  userId: (state) => state.loggedInUser.userId,
 };
 
 const mutations = {

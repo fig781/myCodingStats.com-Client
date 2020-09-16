@@ -21,7 +21,11 @@
         <h1>Track your coding time with this app</h1>
         <router-link to="/login" v-if="!loggedIn">Sign In</router-link>
         <router-link to="/register" v-if="!loggedIn">Sign Up</router-link>
-        <router-link to="/gridview" v-if="loggedIn">App</router-link>
+        <router-link
+          :to="{ name: 'GridView', params: { id: user.userId } }"
+          v-if="loggedIn"
+          >App</router-link
+        >
       </div>
     </div>
     <div id="descriptions">

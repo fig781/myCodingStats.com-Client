@@ -26,8 +26,7 @@ const routes = [
     component: SignUp,
   },
   {
-    //temparary route, will need to use user id to go to their gridview
-    path: '/gridview',
+    path: '/app/:id/gridview',
     name: 'GridView',
     component: CoreGridView,
   },
