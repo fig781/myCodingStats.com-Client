@@ -1,15 +1,33 @@
 <template>
   <div id="table">
     <div class="table-row">
-      <div class="table-header">Date</div>
-      <div class="table-header">Day</div>
-      <div class="table-header">Active Learning</div>
-      <div class="table-header">Passive Learning</div>
-      <div class="table-header">Coding Challenges</div>
-      <div class="table-header">Project(s)</div>
-      <div class="table-header">Description</div>
-      <div class="table-header">Day Total</div>
-      <div class="table-header">Week Total</div>
+      <div class="table-header">
+        <p class="table-header-text">Date</p>
+      </div>
+      <div class="table-header">
+        <p class="table-header-text">Day</p>
+      </div>
+      <div class="table-header">
+        <p class="table-header-text">Active Learning</p>
+      </div>
+      <div class="table-header">
+        <p class="table-header-text">Passive Learning</p>
+      </div>
+      <div class="table-header">
+        <p class="table-header-text">Coding Challenges</p>
+      </div>
+      <div class="table-header">
+        <p class="table-header-text">Project</p>
+      </div>
+      <div class="table-header">
+        <p class="table-header-text">Description</p>
+      </div>
+      <div class="table-header">
+        <p class="table-header-text">Day Total</p>
+      </div>
+      <div class="table-header">
+        <p class="table-header-text">Week Total</p>
+      </div>
     </div>
     <CalendarDay
       v-for="calendarDay in calendar"
@@ -39,18 +57,18 @@
       };
     },
     methods: {
-      populateCalendarRow(dayNumber) {
+      populateOneCalendarRow(rowId, dayObject) {
         let oneCalendarDay = {
           id: 0,
           date: '',
           day: '',
-          active: '0:00',
-          passive: '0:00',
-          coding: '0:00',
+          active: '',
+          passive: '',
+          coding: '',
           project: '',
           desc: '',
-          day_total: '0:00',
-          week_total: '0:00',
+          dayTotal: '',
+          week_total: '',
         };
 
         const date = new Date();
@@ -58,22 +76,52 @@
 
         date.setFullYear(this.year);
         date.setMonth(this.month.number);
-        date.setDate(dayNumber);
+        date.setDate(rowId);
 
-        oneCalendarDay.id = dayNumber;
-        oneCalendarDay.date = `${this.month.number + 1}/${dayNumber}`;
+        oneCalendarDay.id = rowId;
+        oneCalendarDay.date = `${this.month.number + 1}/${rowId}`;
         oneCalendarDay.day = dayFormat.format(date);
+        if (dayObject.active_time != 0) {
+          oneCalendarDay.active = this.convertNumberToTime(
+            dayObject.active_time
+          );
+        }
+        if (dayObject.passive_time != 0) {
+          oneCalendarDay.passive = this.convertNumberToTime(
+            dayObject.passive_time
+          );
+        }
+        if (dayObject.coding_problems_time != 0) {
+          oneCalendarDay.coding = this.convertNumberToTime(
+            dayObject.coding_problems_time
+          );
+        }
+        if (dayObject.project != null) {
+          oneCalendarDay.project = dayObject.project;
+        }
+        if (dayObject.description != null) {
+          oneCalendarDay.description = dayObject.description;
+        }
+        const dayTotals =
+          dayObject.active_time +
+          dayObject.passive_time +
+          dayObject.coding_problems_time;
+        if (dayTotals != 0) {
+          oneCalendarDay.dayTotal = this.convertNumberToTime(dayTotals);
+        }
+
         //set the other information based on the info from the server
         return oneCalendarDay;
       },
 
-      async populateEachCalendarRow() {
+      async generateAllCalendarRows() {
         const yearAndMonth = `${this.year}-${this.month.number + 1}`;
         const fetchedRowInformation = await this.fetchRowsWithValues(
           yearAndMonth,
           this.userId
         );
-        console.log('fetchedRowInformation: ' + fetchedRowInformation);
+
+        const extractedDates = this.convertDates(fetchedRowInformation);
         const numberOfDaysInMonth = [
           31,
           28,
@@ -90,8 +138,29 @@
         ];
         this.numberOfDaysInThisMonth = numberOfDaysInMonth[this.month.number];
 
-        for (var x = 1; x <= this.numberOfDaysInThisMonth; x++) {
-          this.calendar.push(this.populateCalendarRow(x));
+        let dateEntered = false;
+        for (let id = 1; id <= this.numberOfDaysInThisMonth; id++) {
+          for (let entry = 0; entry < extractedDates.length; entry++) {
+            if (id == extractedDates[entry]) {
+              this.calendar.push(
+                this.populateOneCalendarRow(id, fetchedRowInformation[entry])
+              );
+              dateEntered = true;
+              break;
+            }
+          }
+          if (dateEntered == false) {
+            this.calendar.push(
+              this.populateOneCalendarRow(id, {
+                active_time: 0,
+                passive_time: 0,
+                coding_problems_time: 0,
+                projects: null,
+                description: null,
+              })
+            );
+          }
+          dateEntered = false;
         }
       },
 
@@ -115,6 +184,26 @@
           console.log(err);
         }
       },
+      convertDates(rowsArray) {
+        let convertedDays = [];
+        let slicedString;
+        for (let x = 0; x < rowsArray.length; x++) {
+          slicedString = rowsArray[x].in_app_date.slice(3, 5);
+          parseInt(slicedString);
+          convertedDays.push(slicedString);
+        }
+        return convertedDays;
+      },
+      convertNumberToTime(time) {
+        let hours = Math.floor(time / 60);
+        let minutes = time % 60;
+        if (minutes == 0) {
+          minutes = '00';
+        } else if (minutes.length < 2) {
+          minutes = '0' + minutes.toString();
+        }
+        return `${hours}:${minutes}`;
+      },
     },
 
     computed: {
@@ -124,7 +213,7 @@
     },
 
     mounted() {
-      this.populateEachCalendarRow();
+      this.generateAllCalendarRows();
     },
   };
 </script>
@@ -133,7 +222,7 @@
   #table {
     display: table;
     border-collapse: collapse;
-    margin-left: 5rem;
+    margin-left: 3rem;
   }
 
   .table-row {
@@ -141,10 +230,13 @@
   }
   .table-header {
     display: table-cell;
-    border: 1px solid black;
+
     padding-top: 2px;
-    padding-top: 2px;
+    padding-bottom: 2px;
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+  .table-header-text {
+    font-weight: bold;
   }
 </style>

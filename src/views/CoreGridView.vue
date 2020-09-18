@@ -119,6 +119,6 @@
   #month-container {
     display: flex;
     padding-bottom: 0.5rem;
-    padding-left: 5rem;
+    padding-left: 3rem;
   }
 </style>
