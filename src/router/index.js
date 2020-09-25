@@ -4,7 +4,8 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import SignIn from '../views/SignIn';
 import SignUp from '../views/SignUp';
-import CoreGridView from '../views/CoreGridView';
+import AppGridView from '../views/AppGridView';
+import AppSettings from '../views/AppSettings';
 import FourOThree from '../views/FourOThree';
 import FourOFour from '../views/FourOFour';
 Vue.use(VueRouter);
@@ -28,7 +29,12 @@ const routes = [
   {
     path: '/app/:id/gridview',
     name: 'GridView',
-    component: CoreGridView,
+    component: AppGridView,
+  },
+  {
+    path: '/app/:id/settings',
+    name: 'Settings',
+    component: AppSettings,
   },
   {
     path: '/forbidden',

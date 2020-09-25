@@ -1,6 +1,8 @@
 <template>
   <div class="table-row" :class="oddId && shader">
-    <div class="table-cell date">{{ oneCalendarDay.date }}</div>
+    <div class="table-cell date" @click="showCalendarDayEdit(oneCalendarDay)">
+      {{ oneCalendarDay.date }}
+    </div>
     <div class="table-cell">{{ oneCalendarDay.day }}</div>
     <div class="table-cell">{{ oneCalendarDay.active }}</div>
     <div class="table-cell">{{ oneCalendarDay.passive }}</div>
@@ -24,6 +26,11 @@
     props: {
       oneCalendarDay: Object,
     },
+    methods: {
+      showCalendarDayEdit(rowInfo) {
+        this.$emit('toggleCalendarDayEdit', rowInfo);
+      },
+    },
     mounted() {
       if (this.oneCalendarDay.id % 2 != 0) {
         this.oddId = true;
@@ -44,6 +51,10 @@
   }
   .date {
     color: #5f7bb6;
+  }
+  .date:hover {
+    background-color: rgba(53, 53, 53, 0.089);
+    cursor: pointer;
   }
   .shaded {
     background-color: #4a7eee18;

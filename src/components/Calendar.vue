@@ -33,6 +33,12 @@
       v-for="calendarDay in calendar"
       :key="calendarDay.id"
       :oneCalendarDay="calendarDay"
+      @toggleCalendarDayEdit="toggleCalendarDayEdit"
+    />
+    <CalendarDayEdit
+      v-if="showCalendarDayEdit"
+      @close="showCalendarDayEdit = false"
+      :oneCalendarDay="dayToEdit"
     />
   </div>
 </template>
@@ -40,11 +46,12 @@
 <script>
   import CalendarDay from './CalendarDay';
   import router from '../router/index';
-
+  import CalendarDayEdit from './CalendarDayEdit';
   export default {
     name: 'Calendar',
     components: {
       CalendarDay,
+      CalendarDayEdit,
     },
     props: {
       month: Object,
@@ -54,9 +61,15 @@
       return {
         numberOfDaysInThisMonth: 0,
         calendar: [],
+        showCalendarDayEdit: false,
+        dayToEdit: Object,
       };
     },
     methods: {
+      toggleCalendarDayEdit(rowInfo) {
+        this.showCalendarDayEdit = true;
+        this.dayToEdit = rowInfo;
+      },
       populateOneCalendarRow(rowId, dayObject) {
         let oneCalendarDay = {
           id: 0,

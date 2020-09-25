@@ -1,8 +1,6 @@
 <template>
   <div id="grid-view">
-    <div id="side-nav">
-      <SideNavigationBar />
-    </div>
+    <SideNavigationBar />
     <div id="main-container">
       <div id="headings-container">
         <h1>Monthly Progress</h1>
@@ -61,7 +59,7 @@
   // client side
 
   export default {
-    name: 'CoreGridView',
+    name: 'AppGridView',
     components: {
       SideNavigationBar,
       Calendar,

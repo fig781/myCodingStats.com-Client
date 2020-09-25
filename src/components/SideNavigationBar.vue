@@ -5,20 +5,19 @@
     </button>
 
     <button>
-      <router-link to="/gridview">Grid</router-link>
+      <router-link to="{ name: 'GridView', params: { id: user.userId }}"
+        >Grid</router-link
+      >
     </button>
-    <button>
-      <router-link to="/">Graphs</router-link>
-    </button>
-    <button>
-      <router-link to="/">All time Stats</router-link>
-    </button>
+
     <div id="bottom-container">
       <button>
         <router-link to="/">Profile</router-link>
       </button>
       <button>
-        <router-link to="/">Settings</router-link>
+        <router-link to="{ name: 'Settings', params: { id: user.userId }}"
+          >Settings</router-link
+        >
       </button>
     </div>
   </div>
@@ -27,6 +26,14 @@
 <script>
   export default {
     name: 'SideNavigationBar',
+    computed: {
+      user() {
+        return this.$store.getters.loggedInUser;
+      },
+    },
+    mounted() {
+      console.log(this.user);
+    },
   };
 </script>
 
