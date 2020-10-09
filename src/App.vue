@@ -22,7 +22,7 @@
     box-sizing: border-box;
     height: 100%;
     position: relative;
-    background-color: #f5f5f5ee;
+    background-color: #f0f3f6;
   }
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;

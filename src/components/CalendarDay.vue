@@ -7,6 +7,7 @@
     <div class="table-cell">{{ oneCalendarDay.active }}</div>
     <div class="table-cell">{{ oneCalendarDay.passive }}</div>
     <div class="table-cell">{{ oneCalendarDay.coding }}</div>
+    <div class="table-cell">{{ oneCalendarDay.tag }}</div>
     <div class="table-cell">{{ oneCalendarDay.project }}</div>
     <div class="table-cell">{{ oneCalendarDay.desc }}</div>
     <div class="table-cell">{{ oneCalendarDay.dayTotal }}</div>

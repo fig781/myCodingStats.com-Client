@@ -6,8 +6,8 @@ import SignIn from '../views/SignIn';
 import SignUp from '../views/SignUp';
 import AppGridView from '../views/AppGridView';
 import AppSettings from '../views/AppSettings';
-import FourOThree from '../views/FourOThree';
-import FourOFour from '../views/FourOFour';
+import FourOThree from '../views/ErrorScreens/FourOThree';
+import FourOFour from '../views/ErrorScreens/FourOFour';
 Vue.use(VueRouter);
 
 const routes = [

@@ -17,6 +17,9 @@
         <p class="table-header-text">Coding Challenges</p>
       </div>
       <div class="table-header">
+        <p class="table-header-text">Tag</p>
+      </div>
+      <div class="table-header">
         <p class="table-header-text">Project</p>
       </div>
       <div class="table-header">
@@ -78,6 +81,7 @@
           active: '',
           passive: '',
           coding: '',
+          tag: '',
           project: '',
           desc: '',
           dayTotal: '',
@@ -108,6 +112,9 @@
           oneCalendarDay.coding = this.convertNumberToTime(
             dayObject.coding_problems_time
           );
+        }
+        if (dayObject.tag != null) {
+          oneCalendarDay.tag = dayObject.tag;
         }
         if (dayObject.project != null) {
           oneCalendarDay.project = dayObject.project;

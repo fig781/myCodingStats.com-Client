@@ -5,8 +5,8 @@
     </button>
 
     <button>
-      <router-link to="{ name: 'GridView', params: { id: user.userId }}"
-        >Grid</router-link
+      <router-link :to="{ name: 'GridView', params: { id: user.userId } }"
+        >Table</router-link
       >
     </button>
 
@@ -15,7 +15,7 @@
         <router-link to="/">Profile</router-link>
       </button>
       <button>
-        <router-link to="{ name: 'Settings', params: { id: user.userId }}"
+        <router-link :to="{ name: 'Settings', params: { id: user.userId } }"
           >Settings</router-link
         >
       </button>

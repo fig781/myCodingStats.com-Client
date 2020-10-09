@@ -38,9 +38,9 @@
         </div>
       </div>
       <div id="month-container">
-        <h2>{{ month.name }}, {{ year }}</h2>
         <button @click="decreaseMonthYear">&lt;</button>
         <button @click="increaseMonthYear">&gt;</button>
+        <h2>{{ month.name }}, {{ year }}</h2>
       </div>
       <Calendar :month="month" :year="year" :key="componentKey" />
     </div>
