@@ -1,10 +1,10 @@
 <template>
-  <div class="table-row" :class="evenId && shader">
+  <div class="table-row">
     <div class="table-cell name">
       {{ entry.name }}
     </div>
     <div class="table-cell delete">
-      <img src="../assets/trash-can.png" @click="deleteRow(entry.id)" />
+      <img src="../assets/trash-can.png" @click="deleteTagOrProject(entry)" />
     </div>
   </div>
 </template>
@@ -12,24 +12,17 @@
 <script>
   export default {
     name: 'AppSettingsTableRow',
-    data() {
-      return {
-        evenId: false,
-        shader: 'shaded',
-      };
-    },
     props: {
       entry: Object,
     },
     methods: {
-      deleteRow: (entryId) => {
-        this.$emit('deleteRow', entryId);
+      deleteTagOrProject(entry) {
+        if (entry.type == 'tag') {
+          this.$store.dispatch('deleteTag', entry.id);
+        } else if (entry.type == 'project') {
+          this.$store.dispatch('deleteProject', entry.id);
+        }
       },
-    },
-    mounted() {
-      if (this.entry.rowId % 2 == 0) {
-        this.evenId = true;
-      }
     },
   };
 </script>
@@ -44,6 +37,8 @@
   }
   .table-row {
     display: table-row;
+    border-top: 1px solid rgba(128, 128, 128, 0.452);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.452);
   }
   .name {
     width: 28rem;
@@ -51,9 +46,6 @@
   .delete {
     text-align: right;
     padding-right: 0.2rem;
-  }
-  .shaded {
-    background-color: #4a7eee18;
   }
   img {
     height: 15px;
