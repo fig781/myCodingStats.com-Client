@@ -54,7 +54,6 @@
       toggleAppSettingsEdit(type) {
         this.whatIsBeingAdded = type;
         this.showAppSettingsEdit = true;
-        console.log(type);
       },
     },
     computed: {

@@ -41,6 +41,15 @@ const mutations = {
       }
     }
   },
+  activeTagExists: (state, payload) => {
+    for (let a = 0; a < state.allTags.length; a++) {
+      console.log(state.allTags[a].name);
+      if (state.allTags[a].name === payload) {
+        return true;
+      }
+    }
+    return false;
+  },
   deleteProjectFromAllProjects: (state, payload) => {
     for (let a = 0; a < state.allProjects.length; a++) {
       if (state.allProjects[a].id === payload) {
@@ -48,12 +57,28 @@ const mutations = {
       }
     }
   },
+  addProjectToAllProjects: (state, payload) => {
+    let formattedObject = {
+      id: payload.projectid,
+      name: payload.projectname,
+      type: 'project',
+    };
+    state.allProjects.push(formattedObject);
+  },
   insertProjectType: (state) => {
     if (state.allProjects.length > 0) {
       for (let x = 0; x < state.allProjects.length; x++) {
         state.allProjects[x].type = 'project';
       }
     }
+  },
+  activeProjectExists: (state, payload) => {
+    for (let a = 0; a < state.allProjects.length; a++) {
+      if (state.allProjects[a].name === payload) {
+        return true;
+      }
+    }
+    return false;
   },
 };
 
@@ -73,14 +98,13 @@ const actions = {
         commit('setAllTags', jsonResponse);
         commit('insertTagType');
       } else {
-        alert(jsonResponse.error);
+        alert(jsonResponse.message);
         router.push('/forbidden');
       }
     } catch (err) {
       console.log('fetchAllTags: ' + err);
     }
   },
-  //commit,
   addTag: async ({ commit, rootState }, tagName) => {
     try {
       const res = await fetch('http://localhost:3000/settings/tags/', {
@@ -97,7 +121,7 @@ const actions = {
       if (res.status == 200) {
         commit('addTagToAllTags', jsonResponse);
       } else {
-        alert(jsonResponse.error);
+        alert(jsonResponse.message);
         router.push('/forbidden');
       }
     } catch (err) {
@@ -136,7 +160,7 @@ const actions = {
         commit('setAllProjects', jsonResponse);
         commit('insertProjectType');
       } else {
-        alert(jsonResponse.error);
+        alert(jsonResponse.message);
         router.push('/forbidden');
       }
     } catch (err) {
@@ -159,6 +183,28 @@ const actions = {
       }
     } catch (err) {
       console.log('deleteProject: ' + err);
+    }
+  },
+  addProject: async ({ commit, rootState }, projectName) => {
+    try {
+      const res = await fetch('http://localhost:3000/settings/projects', {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: rootState.userAccounts.loggedInUser.userId,
+          projectName: projectName,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+      const jsonResponse = await res.json();
+      if (res.status == 200) {
+        commit('addProjectToAllProjects', jsonResponse);
+      } else {
+        alert(jsonResponse.message);
+        router.push('/forbidden');
+      }
+    } catch (err) {
+      console.log('addTag: ' + err);
     }
   },
 };

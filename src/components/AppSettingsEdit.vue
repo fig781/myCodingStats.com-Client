@@ -5,6 +5,7 @@
       <h2>Add a new {{ type }}</h2>
       <form @submit.prevent="onSubmit">
         <input type="text" id="input" name="input" v-model="value" /><br />
+        <InputErrorMessage v-if="errorMessage" :message="errorMessage" />
         <input type="submit" value="Submit" />
       </form>
     </div>
@@ -12,23 +13,66 @@
 </template>
 
 <script>
+  import InputErrorMessage from './InputErrorMessage';
+  import { inputValidation } from '../globalFunctions/inputValidation';
   export default {
     name: 'AppSettingsEdit',
     data() {
       return {
         value: '',
+        errorMessage: '',
       };
     },
     props: {
       type: String,
     },
+    components: {
+      InputErrorMessage,
+    },
     methods: {
       onSubmit() {
-        if (this.type == 'Tag') {
-          this.$store.dispatch('addTag', this.value);
+        let valueEmpty = inputValidation.checkIfInputEmpty(this.value);
+        let valueTooLong = inputValidation.checkIfInputTooLong(this.value, 50);
+        if (valueEmpty == true) {
+          this.errorMessage = 'Input empty';
+          return;
+        } else if (valueTooLong == true) {
+          this.errorMessage = 'Input is too long, 50 characters max';
+          return;
         }
 
-        this.$emit('close');
+        let activeDuplicateExists = false;
+        if (this.type == 'Tag') {
+          activeDuplicateExists = inputValidation.checkIfActiveEntryExists(
+            this.value,
+            this.allTags
+          );
+          if (activeDuplicateExists == true) {
+            this.errorMessage = 'Active tag already exists';
+          } else {
+            this.$store.dispatch('addTag', this.value);
+            this.$emit('close');
+          }
+        } else if (this.type == 'Project') {
+          activeDuplicateExists = inputValidation.checkIfActiveEntryExists(
+            this.value,
+            this.allProjects
+          );
+          if (activeDuplicateExists == true) {
+            this.errorMessage = 'Active project already exists';
+          } else {
+            this.$store.dispatch('addProject', this.value);
+            this.$emit('close');
+          }
+        }
+      },
+    },
+    computed: {
+      allTags() {
+        return this.$store.getters.getAllTags;
+      },
+      allProjects() {
+        return this.$store.getters.getAllProjects;
       },
     },
   };
