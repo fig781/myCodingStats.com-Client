@@ -38,8 +38,8 @@
         </div>
       </div>
       <div id="month-container">
-        <button @click="decreaseMonthYear">&lt;</button>
-        <button @click="increaseMonthYear">&gt;</button>
+        <img src="../assets/left-arrow.png" @click="decreaseMonthYear" />
+        <img src="../assets/right-arrow.png" @click="increaseMonthYear" />
         <h2>{{ month.name }}, {{ year }}</h2>
       </div>
       <Calendar :month="month" :year="year" :key="componentKey" />
@@ -100,7 +100,7 @@
 
 <style scoped>
   #main-container {
-    margin-left: 7rem;
+    margin-left: 5rem;
   }
   #totals-container {
     display: flex;
@@ -118,5 +118,10 @@
     display: flex;
     padding-bottom: 0.5rem;
     padding-left: 3rem;
+  }
+  img {
+    cursor: pointer;
+    max-height: 24px;
+    max-width: 24px;
   }
 </style>

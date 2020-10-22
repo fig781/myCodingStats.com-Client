@@ -1,24 +1,24 @@
 <template>
   <div id="side-navigation-bar">
-    <button>
-      <router-link to="/">Home</router-link>
-    </button>
+    <div id="top-container">
+      <div id="home-button">
+        <router-link to="/">
+          <img
+            src="../assets/house-black-silhouette-without-door.png"
+            alt="Home"
+          />
+        </router-link>
+      </div>
 
-    <button>
       <router-link :to="{ name: 'GridView', params: { id: user.userId } }"
-        >Table</router-link
-      >
-    </button>
+        ><img src="../assets/listing-option.png" alt="List"
+      /></router-link>
+    </div>
 
     <div id="bottom-container">
-      <button>
-        <router-link to="/">Profile</router-link>
-      </button>
-      <button>
-        <router-link :to="{ name: 'Settings', params: { id: user.userId } }"
-          >Settings</router-link
-        >
-      </button>
+      <router-link :to="{ name: 'Settings', params: { id: user.userId } }"
+        ><img src="../assets/settings (1).png" alt="Settings"
+      /></router-link>
     </div>
   </div>
 </template>
@@ -40,7 +40,7 @@
 <style>
   #side-navigation-bar {
     height: 100%;
-    width: 7rem;
+    width: 5rem;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -50,16 +50,22 @@
     padding-top: 1.5rem;
   }
 
-  #side-navigation-bar button {
-    display: block;
-    margin: auto;
-    margin-bottom: 3rem;
+  #home-button {
+    margin-bottom: 2rem;
+  }
+  img {
+    max-height: 28px;
+    max-width: 28px;
+  }
+
+  #top-container {
+    width: 36%;
+    margin: 0 auto;
   }
 
   #bottom-container {
-    position: absolute;
-    bottom: 0;
-    left: 1.8rem;
-    margin: auto;
+    position: fixed;
+    bottom: 2rem;
+    left: 1.5rem;
   }
 </style>

@@ -73,7 +73,7 @@
 
 <style scoped>
   #main-container {
-    margin-left: 7rem;
+    margin-left: 5rem;
   }
 
   #tags-container {

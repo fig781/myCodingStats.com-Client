@@ -243,6 +243,7 @@
     display: table;
     border-collapse: collapse;
     margin-left: 3rem;
+    margin-bottom: 3rem;
   }
 
   .table-row {
@@ -255,6 +256,7 @@
     padding-bottom: 2px;
     padding-left: 2rem;
     padding-right: 2rem;
+    border-bottom: 1px solid grey;
   }
   .table-header-text {
     font-weight: bold;
