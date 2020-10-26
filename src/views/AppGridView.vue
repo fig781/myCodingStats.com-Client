@@ -42,7 +42,12 @@
         <img src="../assets/right-arrow.png" @click="increaseMonthYear" />
         <h2>{{ month.name }}, {{ year }}</h2>
       </div>
-      <Calendar :month="month" :year="year" :key="componentKey" />
+      <Calendar
+        :month="month"
+        :year="year"
+        :calendar="calendar"
+        :key="componentKey"
+      />
     </div>
   </div>
 </template>
@@ -50,13 +55,6 @@
 <script>
   import SideNavigationBar from '../components/SideNavigationBar';
   import Calendar from '../components/Calendar';
-  import { mapMutations } from 'vuex';
-  import { mapGetters } from 'vuex';
-
-  //on load this page needs to get the totals from the db for the amount of times
-  // each month. When you go to different months then it will make a request to the
-  // db for that months info. The day total, week total, month total will be calculated
-  // client side
 
   export default {
     name: 'AppGridView',
@@ -70,30 +68,37 @@
       };
     },
     methods: {
-      ...mapMutations([
-        'increaseOrDecreaseMonthandYear',
-        'setTodaysDateMonthYear',
-      ]),
       decreaseMonthYear() {
-        this.increaseOrDecreaseMonthandYear('-');
+        this.$store.commit('clearCalendar');
+        this.$store.commit('decreaseMonthAndYear');
+        this.$store.dispatch('generateAllCalendarRows');
         this.componentKey++;
       },
       increaseMonthYear() {
-        this.increaseOrDecreaseMonthandYear('+');
+        this.$store.commit('clearCalendar');
+        this.$store.commit('increaseMonthAndYear');
+        this.$store.dispatch('generateAllCalendarRows');
         this.componentKey++;
       },
     },
     computed: {
-      ...mapGetters(['Year', 'Month']),
       year() {
-        return this.Year;
+        return this.$store.getters.year;
       },
       month() {
-        return this.Month;
+        return this.$store.getters.month;
+      },
+      calendar() {
+        return this.$store.getters.calendar;
       },
     },
     created() {
-      this.setTodaysDateMonthYear();
+      this.$store.commit('clearCalendar');
+      this.$store.commit('setTodaysDateMonthYear');
+    },
+    mounted() {
+      this.$store.commit('clearCalendar');
+      this.$store.dispatch('generateAllCalendarRows');
     },
   };
 </script>
@@ -121,7 +126,7 @@
   }
   img {
     cursor: pointer;
-    max-height: 24px;
-    max-width: 24px;
+    max-height: 20px;
+    max-width: 20px;
   }
 </style>

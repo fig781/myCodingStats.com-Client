@@ -9,7 +9,7 @@
     <div class="table-cell">{{ oneCalendarDay.coding }}</div>
     <div class="table-cell">{{ oneCalendarDay.tag }}</div>
     <div class="table-cell">{{ oneCalendarDay.project }}</div>
-    <div class="table-cell">{{ oneCalendarDay.desc }}</div>
+    <div class="table-cell">{{ oneCalendarDay.description }}</div>
     <div class="table-cell">{{ oneCalendarDay.dayTotal }}</div>
     <div class="table-cell">{{ oneCalendarDay.weekTotal }}</div>
   </div>

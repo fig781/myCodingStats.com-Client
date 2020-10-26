@@ -66,7 +66,10 @@ const actions = {
       if (res.status == 200) {
         commit('setUserCredentials', jsonResponse);
         sessionStorage.setItem('user', JSON.stringify(jsonResponse));
-        router.push('/');
+        router.push({
+          name: 'GridView',
+          params: { id: state.loggedInUser.userId },
+        });
       }
     } catch (err) {
       console.log(err);

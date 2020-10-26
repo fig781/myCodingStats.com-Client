@@ -1,7 +1,7 @@
 <template>
   <div id="settings-edit-mask">
     <div id="settings-edit-inner">
-      <button @click="$emit('close')">X</button>
+      <img src="../assets/cancel.png" @click="$emit('close')" />
       <h2>Add a new {{ type }}</h2>
       <form @submit.prevent="onSubmit">
         <input type="text" id="input" name="input" v-model="value" /><br />
@@ -90,8 +90,8 @@
   }
 
   #settings-edit-inner {
-    max-width: 300px;
-    max-height: 500px;
+    width: 300px;
+    height: 250px;
     position: absolute;
     margin: 0px auto;
     background-color: #fff;
