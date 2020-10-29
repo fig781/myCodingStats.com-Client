@@ -31,9 +31,6 @@
         return this.$store.getters.loggedInUser;
       },
     },
-    mounted() {
-      console.log(this.user);
-    },
   };
 </script>
 

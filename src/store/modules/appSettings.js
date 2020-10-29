@@ -1,8 +1,8 @@
 import router from '../../router/index';
 
 const state = {
-  allTags: Array,
-  allProjects: Array,
+  allTags: [],
+  allProjects: [],
   tagIdToDelete: Number,
   projectIdToDelete: Number,
 };

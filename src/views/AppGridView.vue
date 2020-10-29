@@ -91,14 +91,21 @@
       calendar() {
         return this.$store.getters.calendar;
       },
+      allTags() {
+        return this.$store.getters.getAllTags;
+      },
+      allProjects() {
+        return this.$store.getters.getAllProjects;
+      },
     },
     created() {
       this.$store.commit('clearCalendar');
       this.$store.commit('setTodaysDateMonthYear');
-    },
-    mounted() {
-      this.$store.commit('clearCalendar');
       this.$store.dispatch('generateAllCalendarRows');
+      if (this.allTags.length == 0 && this.allProjects.length == 0) {
+        this.$store.dispatch('fetchAllTags');
+        this.$store.dispatch('fetchAllProjects');
+      }
     },
   };
 </script>

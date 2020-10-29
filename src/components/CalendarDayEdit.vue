@@ -49,7 +49,7 @@
           <option
             v-for="project in allProjects"
             :key="project.id"
-            value="project"
+            :value="project"
             >{{ project.name }}</option
           ></select
         ><br />
@@ -57,7 +57,6 @@
         <label for="description">Description</label><br />
         <textarea
           name="description"
-          id=""
           class="input"
           cols="30"
           rows="6"
@@ -174,6 +173,10 @@
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  option {
+    max-width: 20px;
   }
   .button {
     float: right;
