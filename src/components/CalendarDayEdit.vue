@@ -33,26 +33,20 @@
         /><br />
 
         <label for="tag">Tag</label><br />
-        <select type="text" class="input" name="tag" v-model="formData.tag">
-          <option v-for="tag in allTags" :key="tag.id" value="tag">{{
-            tag.name
-          }}</option> </select
-        ><br />
+        <CustomSelect
+          :options="allTags"
+          :default="formData.tag"
+          @input="insertTag"
+        />
+        <br />
 
         <label for="project">Project</label><br />
-        <select
-          type="text"
-          class="input"
-          name="project"
-          v-model="formData.project"
-        >
-          <option
-            v-for="project in allProjects"
-            :key="project.id"
-            :value="project"
-            >{{ project.name }}</option
-          ></select
-        ><br />
+        <CustomSelect
+          :options="allProjects"
+          :default="formData.project"
+          @input="insertProject"
+        />
+        <br />
 
         <label for="description">Description</label><br />
         <textarea
@@ -78,8 +72,12 @@
 </template>
 
 <script>
+  import CustomSelect from './CustomSelect';
   export default {
     name: 'CalendarDayEdit',
+    components: {
+      CustomSelect,
+    },
     data() {
       return {
         descChar: 300,
@@ -87,8 +85,8 @@
           activeTime: '',
           passiveTime: '',
           codingChallengesTime: '',
-          tag: '',
-          project: '',
+          tag: { id: null, name: null },
+          project: { id: null, name: null },
           description: '',
         },
       };
@@ -97,6 +95,14 @@
       oneCalendarDay: Object,
     },
     methods: {
+      insertTag(option) {
+        this.formData.tag.id = option.id;
+        this.formData.tag.name = option.name;
+      },
+      insertProject(option) {
+        this.formData.project.id = option.id;
+        this.formData.project.name = option.name;
+      },
       onSubmit() {
         this.$emit('close');
       },
@@ -117,11 +123,27 @@
       },
     },
     created() {
+      //autistic
+      function cloneValue(external) {
+        const internalToCloneTo = {};
+        internalToCloneTo.id = external.id;
+        internalToCloneTo.name = external.name;
+        return internalToCloneTo;
+      }
+
       this.formData.activeTime = this.oneCalendarDay.active;
       this.formData.passiveTime = this.oneCalendarDay.passive;
       this.formData.codingChallengesTime = this.oneCalendarDay.coding;
-      this.formData.tag = this.oneCalendarDay.tag;
-      this.formData.project = this.oneCalendarDay.project;
+      this.formData.tag = cloneValue(this.oneCalendarDay.tag);
+      if (this.formData.tag.id == null) {
+        //invisable character for name
+        this.formData.tag = { id: null, name: '‎' };
+      }
+      this.formData.project = cloneValue(this.oneCalendarDay.project);
+      if (this.formData.project.id == null) {
+        //invisable character for name
+        this.formData.project = { id: null, name: '‎' };
+      }
       this.formData.description = this.oneCalendarDay.description;
       this.remainingCharCount();
     },
@@ -130,13 +152,12 @@
 
 <style scoped>
   #calendar-day-edit-mask {
-    position: fixed; /* Stay in place */
-    z-index: 99; /* Sit on top */
+    position: fixed;
+    z-index: 99;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.623);
   }
 
@@ -152,11 +173,6 @@
 
   #date {
     margin-bottom: 15px;
-  }
-  img {
-    margin: 20px;
-    width: 16px;
-    height: 16px;
   }
 
   .input {
@@ -176,7 +192,8 @@
   }
 
   option {
-    max-width: 20px;
+    overflow: hidden;
+    max-width: inherit;
   }
   .button {
     float: right;
@@ -196,8 +213,14 @@
     color: white;
     margin-right: 5px;
   }
+  #submit:hover {
+    background: #2a54b1;
+  }
   #cancel {
     background-color: #ced6e7;
     color: black;
+  }
+  #cancel:hover {
+    background-color: #afb8cc;
   }
 </style>

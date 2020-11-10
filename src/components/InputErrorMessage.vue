@@ -15,6 +15,6 @@
 
 <style scoped>
   p {
-    color: red;
+    color: rgb(228, 88, 88);
   }
 </style>

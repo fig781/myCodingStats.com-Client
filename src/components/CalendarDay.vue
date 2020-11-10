@@ -58,24 +58,34 @@
   };
 </script>
 
-<style>
+<style scoped>
+  .table-row {
+    display: table-row;
+  }
   .table-cell {
     display: table-cell;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    text-align: center;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    max-width: 20vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 10px;
   }
   .rounded {
     border: 1px solid grey;
     border-radius: 25px;
-    max-width: 85%;
-    margin: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    padding-right: 5px;
+    padding-left: 5px;
   }
-  .table-row {
-    display: table-row;
-  }
+
   .date {
     color: #5f7bb6;
+    padding-left: 10px;
   }
   .date:hover {
     background-color: rgba(53, 53, 53, 0.089);

@@ -28,18 +28,19 @@
 </script>
 
 <style scoped>
-  .table-cell {
-    display: table-cell;
-    padding-top: 4px;
-    padding-left: 0.2rem;
-
-    text-align: left;
-  }
   .table-row {
     display: table-row;
     border-top: 1px solid rgba(128, 128, 128, 0.452);
     border-bottom: 1px solid rgba(128, 128, 128, 0.452);
   }
+  .table-cell {
+    display: table-cell;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 0.2rem;
+    text-align: left;
+  }
+
   .name {
     width: 28rem;
   }

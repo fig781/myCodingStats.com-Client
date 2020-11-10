@@ -33,17 +33,13 @@
     display: table;
     border-collapse: collapse;
   }
-
   .table-row {
     display: table-row;
   }
   .table-header {
     display: table-cell;
-
-    padding-top: 2px;
     padding-bottom: 2px;
-    padding-left: 0.2rem;
-    padding-right: 2rem;
+    padding-left: 2px;
   }
   .table-header-text {
     font-weight: bold;

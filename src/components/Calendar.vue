@@ -28,7 +28,7 @@
       <div class="table-header">
         <p class="table-header-text">Day Total</p>
       </div>
-      <div class="table-header">
+      <div class="table-header" id="last-column">
         <p class="table-header-text">Week Total</p>
       </div>
     </div>
@@ -68,8 +68,8 @@
     },
     methods: {
       toggleCalendarDayEdit(rowInfo) {
-        this.showCalendarDayEdit = true;
         this.dayToEdit = rowInfo;
+        this.showCalendarDayEdit = true;
       },
     },
   };
@@ -82,17 +82,19 @@
     margin-left: 3rem;
     margin-bottom: 3rem;
   }
-
   .table-row {
     display: table-row;
   }
+  #last-column {
+    padding-right: 10px;
+  }
   .table-header {
     display: table-cell;
-
+    white-space: nowrap;
     padding-top: 2px;
     padding-bottom: 2px;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-right: 4rem;
+    padding-left: 10px;
     border-bottom: 1px solid grey;
   }
   .table-header-text {

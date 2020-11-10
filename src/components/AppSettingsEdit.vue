@@ -1,12 +1,19 @@
 <template>
   <div id="settings-edit-mask">
     <div id="settings-edit-inner">
-      <img src="../assets/cancel.png" @click="$emit('close')" />
-      <h2>Add a new {{ type }}</h2>
+      <h1>Add a new {{ type }}</h1>
       <form @submit.prevent="onSubmit">
-        <input type="text" id="input" name="input" v-model="value" /><br />
+        <input
+          type="text"
+          id="input"
+          name="input"
+          v-model="value"
+          @keyup="remainingCharCount()"
+        /><br />
+        <p>{{ remainingChars }} characters left</p>
         <InputErrorMessage v-if="errorMessage" :message="errorMessage" />
-        <input type="submit" value="Submit" />
+        <div id="cancel" class="button" @click="$emit('close')">Cancel</div>
+        <input class="button" id="submit" type="submit" value="Submit" />
       </form>
     </div>
   </div>
@@ -21,6 +28,7 @@
       return {
         value: '',
         errorMessage: '',
+        remainingChars: 50,
       };
     },
     props: {
@@ -30,6 +38,13 @@
       InputErrorMessage,
     },
     methods: {
+      remainingCharCount() {
+        const maxChar = 50;
+        this.remainingChars = maxChar - this.value.length;
+        if (this.remainingChars < 0) {
+          this.remainingChars = 0;
+        }
+      },
       onSubmit() {
         let valueEmpty = inputValidation.checkIfInputEmpty(this.value);
         let valueTooLong = inputValidation.checkIfInputTooLong(this.value, 50);
@@ -78,23 +93,62 @@
   };
 </script>
 
-<style>
+<style scoped>
   #settings-edit-mask {
     position: fixed;
-    z-index: 9998;
-    top: 0;
+    z-index: 99;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.623);
   }
-
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+  }
   #settings-edit-inner {
-    width: 300px;
-    height: 250px;
-    position: absolute;
-    margin: 0px auto;
+    margin: auto;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    border-radius: 3px;
+    width: 400px;
+    padding: 40px 40px 60px 40px;
+    margin-top: 5%;
+  }
+  #input {
+    width: 100%;
+    padding: 5px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 18px;
+  }
+  .button {
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 13px;
+    width: 8rem;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+  }
+  #submit {
+    background-color: #5f7bb6;
+    color: white;
+    margin-right: 5px;
+  }
+  #submit:hover {
+    background: #2a54b1;
+  }
+  #cancel {
+    background-color: #ced6e7;
+    color: black;
+  }
+  #cancel:hover {
+    background-color: #afb8cc;
   }
 </style>
