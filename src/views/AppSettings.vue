@@ -6,12 +6,11 @@
         <h1>Add or Remove Tags</h1>
         <p>Tags are used to mark the type of work you've done each day.</p>
         <div class="table-container">
+          <h3 v-if="allTags.length == 0">No tags have been added</h3>
           <div class="button-row">
             <div class="icon" @click="toggleAppSettingsEdit('Tag')"></div>
           </div>
-
           <AppSettingsTable :allEntries="allTags" v-if="allTags.length != 0" />
-          <h3 v-if="allTags.length == 0">No tags have been added</h3>
         </div>
       </div>
       <div id="projects-container">
@@ -21,15 +20,14 @@
           day.
         </p>
         <div class="table-container">
+          <h3 v-if="allProjects.length == 0">No projects have been added</h3>
           <div class="button-row">
             <div class="icon" @click="toggleAppSettingsEdit('Project')"></div>
           </div>
-
           <AppSettingsTable
             :allEntries="allProjects"
             v-if="allProjects.length != 0"
           />
-          <h3 v-if="allProjects.length == 0">No projects have been added</h3>
         </div>
       </div>
     </div>

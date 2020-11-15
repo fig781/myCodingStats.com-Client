@@ -19,6 +19,7 @@
       <router-link :to="{ name: 'Settings', params: { id: user.userId } }"
         ><img src="../assets/settings (1).png" alt="Settings"
       /></router-link>
+      <p>v0.1</p>
     </div>
   </div>
 </template>
@@ -34,7 +35,7 @@
   };
 </script>
 
-<style>
+<style scoped>
   #side-navigation-bar {
     height: 100%;
     width: 5rem;
@@ -62,7 +63,13 @@
 
   #bottom-container {
     position: fixed;
-    bottom: 2rem;
+    bottom: 0.5rem;
     left: 1.5rem;
+  }
+  p {
+    text-align: center;
+    margin-top: 15px;
+    color: white;
+    font-size: 12px;
   }
 </style>

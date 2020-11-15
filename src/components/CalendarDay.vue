@@ -18,8 +18,8 @@
       </div>
     </div>
     <div class="table-cell">{{ oneCalendarDay.description }}</div>
-    <div class="table-cell">{{ oneCalendarDay.dayTotal }}</div>
-    <div class="table-cell">{{ oneCalendarDay.weekTotal }}</div>
+    <div class="table-cell total">{{ oneCalendarDay.dayTotal }}</div>
+    <div class="table-cell total">{{ oneCalendarDay.weekTotal }}</div>
   </div>
 </template>
 
@@ -47,7 +47,14 @@
       if (this.oneCalendarDay.id % 2 != 0) {
         this.oddId = true;
       }
-
+      if (this.oneCalendarDay.tag.id != null) {
+        this.tagNotNull = true;
+      }
+      if (this.oneCalendarDay.project.id != null) {
+        this.projectNotNull = true;
+      }
+    },
+    beforeUpdate() {
       if (this.oneCalendarDay.tag.id != null) {
         this.tagNotNull = true;
       }
@@ -82,7 +89,9 @@
     padding-right: 5px;
     padding-left: 5px;
   }
-
+  .total {
+    border-left: 1px solid grey;
+  }
   .date {
     color: #5f7bb6;
     padding-left: 10px;

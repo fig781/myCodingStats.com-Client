@@ -81,6 +81,7 @@
     border-collapse: collapse;
     margin-left: 3rem;
     margin-bottom: 3rem;
+    border-bottom: 1px solid grey;
   }
   .table-row {
     display: table-row;

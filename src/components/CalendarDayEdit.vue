@@ -104,6 +104,8 @@
         this.formData.project.name = option.name;
       },
       onSubmit() {
+        const requestInfo = this.compiledRequestInfo();
+        this.$store.dispatch('addGridRow', requestInfo);
         this.$emit('close');
       },
       remainingCharCount: function() {
@@ -112,6 +114,19 @@
         if (this.descChar < 0) {
           this.descChar = 0;
         }
+      },
+      compiledRequestInfo() {
+        let returnValue = {
+          inAppId: this.oneCalendarDay.id,
+          inAppDate: this.oneCalendarDay.date,
+          activeTime: this.formData.activeTime,
+          passiveTime: this.formData.passiveTime,
+          codingChallengesTime: this.formData.codingChallengesTime,
+          tag: this.formData.tag,
+          project: this.formData.project,
+          description: this.formData.description,
+        };
+        return returnValue;
       },
     },
     computed: {

@@ -156,6 +156,14 @@ const mutations = {
     //set the other information based on the info from the server
     state.calendar.push(oneCalendarDay);
   },
+  updateOneCalendarRow: (state, payload) => {
+    state.calendar[payload.inAppId - 1].active = payload.activeTime;
+    state.calendar[payload.inAppId - 1].passive = payload.passiveTime;
+    state.calendar[payload.inAppId - 1].coding = payload.codingChallengesTime;
+    state.calendar[payload.inAppId - 1].tag = payload.tag;
+    state.calendar[payload.inAppId - 1].project = payload.project;
+    state.calendar[payload.inAppId - 1].description = payload.description;
+  },
 };
 
 const actions = {
@@ -228,6 +236,34 @@ const actions = {
         });
       }
       dateEntered = false;
+    }
+  },
+  addGridRow: async ({ rootState, state, commit }, rowEntryInfo) => {
+    try {
+      const formattedDate = rowEntryInfo.inAppDate + '/' + state.year;
+      const res = await fetch('http://localhost:3000/gridmonth', {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: rootState.userAccounts.loggedInUser.userId,
+          inAppDate: formattedDate,
+          activeTime: rowEntryInfo.activeTime,
+          passiveTime: rowEntryInfo.passiveTime,
+          codingChallengesTime: rowEntryInfo.codingChallengesTime,
+          tag: rowEntryInfo.tag.id,
+          project: rowEntryInfo.project.id,
+          description: rowEntryInfo.description,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+
+      if (res.status == 200) {
+        commit('updateOneCalendarRow', rowEntryInfo);
+      } else {
+        router.push('/forbidden');
+      }
+    } catch (err) {
+      console.log('addGridRow: ' + err);
     }
   },
 };
