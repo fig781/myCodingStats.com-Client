@@ -111,6 +111,9 @@
 </script>
 
 <style scoped>
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+  }
   #main-container {
     margin-left: 5rem;
   }

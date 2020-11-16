@@ -3,34 +3,25 @@
     <div id="calendar-day-edit-inner">
       <form @submit.prevent="onSubmit">
         <div id="date">
-          <h2>{{ oneCalendarDay.day }} {{ oneCalendarDay.date }}</h2>
+          <h1>{{ oneCalendarDay.day }} {{ oneCalendarDay.date }}</h1>
         </div>
         <label for="active">Active Learning Time</label><br />
-        <input
-          type="text"
-          class="input"
-          name="active"
-          placeholder="hh:mm"
-          v-model="formData.activeTime"
-        /><br />
+        <CustomTimeInput
+          :timeInput="formData.activeTime"
+          @change="updateActive"
+        />
 
         <label for="passive">Passive Learning Time</label><br />
-        <input
-          type="text"
-          class="input"
-          name="passive"
-          placeholder="hh:mm"
-          v-model="formData.passiveTime"
-        /><br />
+        <CustomTimeInput
+          :timeInput="formData.passiveTime"
+          @change="updatePassive"
+        />
 
         <label for="codingChallenges">Coding Challenges Time</label><br />
-        <input
-          type="text"
-          class="input"
-          name="codingChallenges"
-          placeholder="hh:mm"
-          v-model="formData.codingChallengesTime"
-        /><br />
+        <CustomTimeInput
+          :timeInput="formData.codingChallengesTime"
+          @change="updateCodingTime"
+        />
 
         <label for="tag">Tag</label><br />
         <CustomSelect
@@ -49,14 +40,19 @@
         <br />
 
         <label for="description">Description</label><br />
+        <InputErrorMessage
+          v-if="descriptionErrorMessage"
+          :message="descriptionErrorMessage"
+        />
         <textarea
           name="description"
-          class="input"
+          class="input description-input"
           cols="30"
           rows="6"
           v-model="formData.description"
           @keyup="remainingCharCount()"
         ></textarea>
+
         <p>{{ descChar }} characters left</p>
       </form>
       <div id="cancel" class="button" @click="$emit('close')">Cancel</div>
@@ -73,14 +69,18 @@
 
 <script>
   import CustomSelect from './CustomSelect';
+  import InputErrorMessage from './InputErrorMessage';
+  import CustomTimeInput from './CustomTimeInput';
   export default {
     name: 'CalendarDayEdit',
     components: {
       CustomSelect,
+      InputErrorMessage,
+      CustomTimeInput,
     },
     data() {
       return {
-        descChar: 300,
+        descChar: 200,
         formData: {
           activeTime: '',
           passiveTime: '',
@@ -89,6 +89,10 @@
           project: { id: null, name: null },
           description: '',
         },
+        descriptionErrorMessage: '',
+        activeErrorMessage: '',
+        passiveErrorMessage: '',
+        codingErrorMessage: '',
       };
     },
     props: {
@@ -103,19 +107,50 @@
         this.formData.project.id = option.id;
         this.formData.project.name = option.name;
       },
+      updateActive(compiledTime) {
+        this.formData.activeTime = compiledTime;
+      },
+      updatePassive(compiledTime) {
+        this.formData.passiveTime = compiledTime;
+      },
+      updateCodingTime(compiledTime) {
+        this.formData.codingChallengesTime = compiledTime;
+      },
+      validateDescription(description) {
+        if (description.length > 200) {
+          return 'Too many characters';
+        } else {
+          return '';
+        }
+      },
+
       onSubmit() {
-        const requestInfo = this.compiledRequestInfo();
-        this.$store.dispatch('addGridRow', requestInfo);
-        this.$emit('close');
+        const descriptionValid = this.validateDescription(
+          this.formData.description
+        );
+        if (descriptionValid.length != 0) {
+          this.descriptionErrorMessage = descriptionValid;
+        } else {
+          const requestInfo = this.compiledRequestInfo();
+          this.$store.dispatch('addGridRow', requestInfo);
+          this.$emit('close');
+        }
       },
       remainingCharCount: function() {
-        const maxChar = 300;
+        const maxChar = 200;
         this.descChar = maxChar - this.formData.description.length;
         if (this.descChar < 0) {
           this.descChar = 0;
         }
       },
       compiledRequestInfo() {
+        if (this.formData.tag.id == null) {
+          this.formData.tag.name = null;
+        }
+        if (this.formData.project.id == null) {
+          this.formData.project.name = null;
+        }
+
         let returnValue = {
           inAppId: this.oneCalendarDay.id,
           inAppDate: this.oneCalendarDay.date,
@@ -166,6 +201,10 @@
 </script>
 
 <style scoped>
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+  }
+
   #calendar-day-edit-mask {
     position: fixed;
     z-index: 99;
@@ -193,9 +232,13 @@
   .input {
     width: 100%;
     padding: 5px 10px;
-    margin: 8px 0;
+    margin-top: 4px;
+    margin-bottom: 10px;
     box-sizing: border-box;
     font-size: 18px;
+  }
+  .description-input {
+    margin-bottom: 0px;
   }
   textarea {
     resize: none;

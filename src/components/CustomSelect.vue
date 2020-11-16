@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-select" :tabindex="tabindex" @blur="open = false">
+  <div class="custom-select" :tabindex="tabindex">
     <div class="selected" :class="{ open: open }" @click="open = !open">
       {{ selected.name }}
     </div>
