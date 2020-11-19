@@ -17,6 +17,7 @@ const state = {
     year: 0,
   },
   calendar: [],
+  weekTotals: [],
 };
 
 const getters = {
@@ -48,7 +49,6 @@ const mutations = {
     state.month.name = monthFormat.format(today);
   },
 
-  //Runs when pressing the left and right arrow buttons next to the month and year
   decreaseMonthAndYear: (state) => {
     const months = [
       'January',
@@ -102,14 +102,14 @@ const mutations = {
       id: 0,
       date: '',
       day: '',
+      dayId: null,
       active: '',
       passive: '',
       coding: '',
       tag: { id: null, name: null },
       project: { id: null, name: null },
       description: '',
-      dayTotal: '',
-      week_total: '',
+      weekRow: null,
     };
 
     const date = new Date();
@@ -122,6 +122,7 @@ const mutations = {
     oneCalendarDay.id = payload.rowId;
     oneCalendarDay.date = `${state.month.number + 1}/${payload.rowId}`;
     oneCalendarDay.day = dayFormat.format(date);
+    oneCalendarDay.dayId = moduleFunctions.setDayOfWeekId(oneCalendarDay.day);
     if (payload.dayObject.active_time != 0) {
       oneCalendarDay.active = moduleFunctions.convertNumberToTime(
         payload.dayObject.active_time
@@ -146,14 +147,7 @@ const mutations = {
     if (payload.dayObject.description != null) {
       oneCalendarDay.description = payload.dayObject.description;
     }
-    const dayTotals =
-      payload.dayObject.active_time +
-      payload.dayObject.passive_time +
-      payload.dayObject.coding_problems_time;
-    if (dayTotals != 0) {
-      oneCalendarDay.dayTotal = moduleFunctions.convertNumberToTime(dayTotals);
-    }
-    //set the other information based on the info from the server
+
     state.calendar.push(oneCalendarDay);
   },
   updateOneCalendarRow: (state, payload) => {
@@ -164,8 +158,35 @@ const mutations = {
     state.calendar[payload.inAppId - 1].project = payload.project;
     state.calendar[payload.inAppId - 1].description = payload.description;
   },
-};
+  setWeekTotals: (state) => {
+    for (let x = 0; x < state.calendar.length; x++) {
+      let rowTotal = 0;
+      let rowTime = null;
+      if (state.calendar[x].dayId == 0 || x == 0) {
+        rowTotal = moduleFunctions.totalTimesToNumber(
+          state.calendar[x].active,
+          state.calendar[x].passive,
+          state.calendar[x].coding
+        );
+        rowTime = moduleFunctions.convertNumberToTime(rowTotal);
 
+        state.calendar[x].weekRow = { rowTotal: rowTotal, rowTime: rowTime };
+      } else {
+        rowTotal =
+          state.calendar[x - 1].weekRow.rowTotal +
+          moduleFunctions.totalTimesToNumber(
+            state.calendar[x].active,
+            state.calendar[x].passive,
+            state.calendar[x].coding
+          );
+        rowTime = moduleFunctions.convertNumberToTime(rowTotal);
+
+        state.calendar[x].weekRow = { rowTotal: rowTotal, rowTime: rowTime };
+      }
+    }
+  },
+};
+//state.weekTotals[x - 1].rowTotal +
 const actions = {
   fetchRowsWithValues: async ({ rootState }, date) => {
     try {
@@ -237,6 +258,7 @@ const actions = {
       }
       dateEntered = false;
     }
+    commit('setWeekTotals');
   },
   addGridRow: async ({ rootState, state, commit }, rowEntryInfo) => {
     try {
@@ -259,6 +281,7 @@ const actions = {
 
       if (res.status == 200) {
         commit('updateOneCalendarRow', rowEntryInfo);
+        commit('setWeekTotals');
       } else {
         router.push('/forbidden');
       }

@@ -94,11 +94,12 @@
     white-space: nowrap;
     padding-top: 2px;
     padding-bottom: 2px;
-    padding-right: 4rem;
-    padding-left: 10px;
+    padding-right: 12px;
+    padding-left: 12px;
     border-bottom: 1px solid grey;
   }
   .table-header-text {
     font-weight: bold;
+    text-align: center;
   }
 </style>
