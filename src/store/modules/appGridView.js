@@ -17,13 +17,21 @@ const state = {
     year: 0,
   },
   calendar: [],
-  weekTotals: [],
+  monthTotals: {
+    monthTime: '0:00',
+    activeTime: '0:00',
+    passiveTime: '0:00',
+    codingChallengesTime: '0:00',
+    mainProject: '--',
+    mainTag: '--',
+  },
 };
 
 const getters = {
   year: (state) => state.year,
   month: (state) => state.month,
   calendar: (state) => state.calendar,
+  monthTotals: (state) => state.monthTotals,
 };
 
 const mutations = {
@@ -185,8 +193,72 @@ const mutations = {
       }
     }
   },
+  setMonthTotals: (state) => {
+    let monthTotal = 0;
+    let activeTotal = 0;
+    let passiveTotal = 0;
+    let codingChallengesTotal = 0;
+    let mainProject = [];
+    let mainTag = [];
+
+    function mode(array) {
+      if (array.length == 0) {
+        return '--';
+      }
+      let modeMap = {};
+      let maxEl = array[0];
+      let maxCount = 1;
+      for (let i = 0; i < array.length; i++) {
+        let el = array[i];
+        if (modeMap[el] == null) modeMap[el] = 1;
+        else modeMap[el]++;
+        if (modeMap[el] > maxCount) {
+          maxEl = el;
+          maxCount = modeMap[el];
+        }
+      }
+      if (maxEl == null) {
+        return '--';
+      } else {
+        return maxEl;
+      }
+    }
+
+    for (let x = 0; x < state.calendar.length; x++) {
+      activeTotal =
+        activeTotal +
+        moduleFunctions.convertTimeToNumber(state.calendar[x].active);
+      passiveTotal =
+        passiveTotal +
+        moduleFunctions.convertTimeToNumber(state.calendar[x].passive);
+      codingChallengesTotal =
+        codingChallengesTotal +
+        moduleFunctions.convertTimeToNumber(state.calendar[x].coding);
+      if (state.calendar[x].project.name != null) {
+        mainProject.push(state.calendar[x].project.name);
+      }
+      if (state.calendar[x].tag.name != null) {
+        mainTag.push(state.calendar[x].tag.name);
+      }
+    }
+    monthTotal = activeTotal + passiveTotal + codingChallengesTotal;
+    state.monthTotals.monthTime = moduleFunctions.convertNumberToTime(
+      monthTotal
+    );
+    state.monthTotals.activeTime = moduleFunctions.convertNumberToTime(
+      activeTotal
+    );
+    state.monthTotals.passiveTime = moduleFunctions.convertNumberToTime(
+      passiveTotal
+    );
+    state.monthTotals.codingChallengesTime = moduleFunctions.convertNumberToTime(
+      codingChallengesTotal
+    );
+    state.monthTotals.mainProject = mode(mainProject);
+    state.monthTotals.mainTag = mode(mainTag);
+  },
 };
-//state.weekTotals[x - 1].rowTotal +
+
 const actions = {
   fetchRowsWithValues: async ({ rootState }, date) => {
     try {
@@ -259,6 +331,7 @@ const actions = {
       dateEntered = false;
     }
     commit('setWeekTotals');
+    commit('setMonthTotals');
   },
   addGridRow: async ({ rootState, state, commit }, rowEntryInfo) => {
     try {
@@ -282,6 +355,7 @@ const actions = {
       if (res.status == 200) {
         commit('updateOneCalendarRow', rowEntryInfo);
         commit('setWeekTotals');
+        commit('setMonthTotals');
       } else {
         router.push('/forbidden');
       }

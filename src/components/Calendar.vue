@@ -101,5 +101,6 @@
   .table-header-text {
     font-weight: bold;
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
   }
 </style>

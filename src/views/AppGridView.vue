@@ -5,35 +5,29 @@
       <div id="headings-container">
         <h1>Monthly Progress</h1>
         <div id="totals-container">
-          <div class="totals-row">
-            <div class="total">
-              <h4>Time this Week:</h4>
-              <p>0:00</p>
-            </div>
-            <div class="total">
-              <h4>Time this Month:</h4>
-              <p>0:00</p>
-            </div>
+          <div class="total">
+            <p class="highlight">Time this Month</p>
+            <p class="total-number">{{ monthTotals.monthTime }}</p>
           </div>
-          <div class="totals-row">
-            <div class="total">
-              <h4>Active Learning this Month:</h4>
-              <p>0:00</p>
-            </div>
-            <div class="total">
-              <h4>Passive Learning this Month:</h4>
-              <p>0:00</p>
-            </div>
+          <div class="total">
+            <p class="highlight">Active Learning</p>
+            <p class="total-number">{{ monthTotals.activeTime }}</p>
           </div>
-          <div class="totals-row">
-            <div class="total">
-              <h4>Coding Challenges Time this Month:</h4>
-              <p>0:00</p>
-            </div>
-            <div class="total">
-              <h4>Main Project:</h4>
-              <p>Big Project</p>
-            </div>
+          <div class="total">
+            <p class="highlight">Passive Learning</p>
+            <p class="total-number">{{ monthTotals.passiveTime }}</p>
+          </div>
+          <div class="total">
+            <p class="highlight">Coding Challenges Time</p>
+            <p class="total-number">{{ monthTotals.codingChallengesTime }}</p>
+          </div>
+          <div class="total">
+            <p class="highlight">Main Tag</p>
+            <p class="total-number">{{ monthTotals.mainTag }}</p>
+          </div>
+          <div class="total">
+            <p class="highlight">Main Project</p>
+            <p class="total-number">{{ monthTotals.mainProject }}</p>
           </div>
         </div>
       </div>
@@ -91,6 +85,9 @@
       calendar() {
         return this.$store.getters.calendar;
       },
+      monthTotals() {
+        return this.$store.getters.monthTotals;
+      },
       allTags() {
         return this.$store.getters.getAllTags;
       },
@@ -113,26 +110,40 @@
 <style scoped>
   h1 {
     font-family: 'Montserrat', sans-serif;
+    padding-top: 3rem;
+    margin-left: 3rem;
   }
   #main-container {
     margin-left: 5rem;
   }
   #totals-container {
     display: flex;
-    justify-content: center;
+    margin-left: 3rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
   }
   .total {
-    display: flex;
-    padding: 0.5rem;
+    text-align: center;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 5px;
+    border: solid 1px grey;
+    font-size: 20px;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+      0 6.7px 5.3px rgba(0, 0, 0, 0.048);
   }
-  h1 {
-    padding-top: 3rem;
-    margin-left: 3rem;
+  .total-number {
+    font-size: 32px;
+  }
+  .highlight {
+    font-family: 'Montserrat', sans-serif;
   }
   #month-container {
     display: flex;
     padding-bottom: 0.5rem;
     padding-left: 3rem;
+    font-family: 'Montserrat', sans-serif;
   }
   img {
     cursor: pointer;

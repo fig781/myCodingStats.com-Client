@@ -138,7 +138,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
     text-align: center;
   }
   .rounded {
@@ -150,6 +149,8 @@
     text-align: center;
     padding-right: 5px;
     padding-left: 5px;
+    background-color: #f0f3f6;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034);
   }
   .total {
     border-left: 1px solid grey;

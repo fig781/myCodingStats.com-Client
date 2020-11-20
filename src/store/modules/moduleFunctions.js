@@ -83,4 +83,13 @@ export default {
 
     return convertedActiveTime + convertedPassiveTime + convertedCodingTime;
   },
+  convertTimeToNumber: (time) => {
+    if (time.length == 4) {
+      return 60 * parseInt(time.slice(0, 1)) + parseInt(time.slice(2, 4));
+    } else if (time.length == 5) {
+      return 60 * parseInt(time.slice(0, 2)) + parseInt(time.slice(3, 5));
+    } else {
+      return 0;
+    }
+  },
 };
