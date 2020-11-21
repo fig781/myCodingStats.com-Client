@@ -120,7 +120,7 @@
     display: flex;
     margin-left: 3rem;
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     flex-wrap: wrap;
   }
   .total {

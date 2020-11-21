@@ -71,15 +71,19 @@
   #landing {
     background: linear-gradient(
       113deg,
-      rgba(95, 123, 182, 1) 0%,
-      rgba(127, 103, 214, 1) 100%
+      rgb(89, 60, 194) 0%,
+      rgb(17, 69, 182) 100%
     );
     height: 100vh;
+    color: white;
+  }
+  #landing a {
+    text-decoration: none;
+    color: white;
   }
 
   #navbar {
-    padding: 2rem;
-    background-color: whitesmoke;
+    padding: 3rem 3rem 0rem 3rem;
   }
 
   .right-nav {
