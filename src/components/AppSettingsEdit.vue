@@ -137,7 +137,7 @@
     text-align: center;
   }
   #submit {
-    background-color: #5f7bb6;
+    background-color: #1f43b8;
     color: white;
     margin-right: 5px;
   }

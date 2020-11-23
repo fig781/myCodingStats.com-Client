@@ -2,7 +2,7 @@
   <div id="sign-in">
     <div id="center-container">
       <div id="header">
-        <h1>Sign Into Your Account</h1>
+        <h2>Sign Into Your Account</h2>
       </div>
 
       <form @submit.prevent="onSubmit">
@@ -54,17 +54,15 @@
   #sign-in {
     height: 100vh;
     display: flex;
-  }
-  #center-container {
-    margin: auto;
-    text-align: center;
+    background-color: #1f43b8;
   }
   #header {
     background-color: rgb(235, 235, 235);
     font-family: 'Montserrat', sans-serif;
     padding: 20px;
+    border-radius: 6px;
   }
-  #header h1 {
+  #header h2 {
     font-weight: normal;
   }
   form {
@@ -76,10 +74,8 @@
     margin: auto;
     text-align: center;
     border: solid 1px grey;
-    border-radius: 3px;
+    border-radius: 6px;
     background-color: #f6f8fa;
-    -webkit-box-shadow: 8px 8px 5px -3px rgba(104, 104, 104, 0.62);
-    box-shadow: 8px 8px 5px -3px rgba(104, 104, 104, 0.62);
   }
   .text-input {
     border: 1px solid black;
@@ -91,6 +87,11 @@
     box-sizing: border-box;
   }
 
+  input:focus {
+    border: solid 1px #0069ff;
+    outline: #0069ff;
+  }
+
   #button {
     padding: 10px;
     border: none;
@@ -99,7 +100,7 @@
     font-size: 18px;
     cursor: pointer;
     text-align: center;
-    background-color: #5f7bb6;
+    background-color: #1f43b8;
     color: white;
     width: 100%;
   }

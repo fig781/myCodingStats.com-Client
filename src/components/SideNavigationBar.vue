@@ -43,7 +43,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #5f7bb6;
+    background-color: #1f43b8;
     overflow-x: hidden;
     padding-top: 1.5rem;
   }

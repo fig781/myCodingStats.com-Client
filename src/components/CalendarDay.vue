@@ -156,7 +156,7 @@
     border-left: 1px solid grey;
   }
   .date {
-    color: #5f7bb6;
+    color: #1f43b8;
     padding-left: 10px;
   }
   .date:hover {
@@ -164,7 +164,7 @@
     cursor: pointer;
   }
   .shaded {
-    background-color: #4a7eee18;
+    background-color: #0951ec18;
   }
   .highlightWeek {
     border-top: solid grey 1px;

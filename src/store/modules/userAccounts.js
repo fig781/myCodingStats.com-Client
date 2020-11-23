@@ -39,7 +39,6 @@ const actions = {
       const jsonResponse = await res.json();
 
       console.log(jsonResponse);
-      alert(jsonResponse.error);
 
       if (res.status == 201) {
         dispatch('signIn', {
@@ -61,7 +60,6 @@ const actions = {
       });
       const jsonResponse = await res.json();
       console.log(jsonResponse);
-      alert(jsonResponse.error);
 
       if (res.status == 200) {
         commit('setUserCredentials', jsonResponse);
