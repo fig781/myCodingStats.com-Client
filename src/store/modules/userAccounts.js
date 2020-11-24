@@ -37,7 +37,6 @@ const actions = {
         credentials: 'include',
       });
       const jsonResponse = await res.json();
-
       console.log(jsonResponse);
 
       if (res.status == 201) {
@@ -59,7 +58,6 @@ const actions = {
         credentials: 'include',
       });
       const jsonResponse = await res.json();
-      console.log(jsonResponse);
 
       if (res.status == 200) {
         commit('setUserCredentials', jsonResponse);
@@ -68,6 +66,8 @@ const actions = {
           name: 'GridView',
           params: { id: state.loggedInUser.userId },
         });
+      } else {
+        return jsonResponse;
       }
     } catch (err) {
       console.log(err);
