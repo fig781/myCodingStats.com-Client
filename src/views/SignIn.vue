@@ -6,18 +6,29 @@
       </div>
 
       <form @submit.prevent="onSubmit">
+        <InputErrorMessage
+          :message="emailErrorMessage"
+          v-if="emailErrorMessage"
+          class="error"
+        />
         <input
           class="text-input"
-          type="email"
+          type="text"
           placeholder="Email"
           v-model="formData.email"
         /><br />
+        <InputErrorMessage
+          :message="passwordErrorMessage"
+          v-if="passwordErrorMessage"
+          class="error"
+        />
         <input
           class="text-input"
           type="password"
           placeholder="Password"
           v-model="formData.password"
         /><br />
+
         <input id="button" type="submit" value="Submit" /><br />
       </form>
 
@@ -32,19 +43,66 @@
 </template>
 
 <script>
+  import InputErrorMessage from '../components/InputErrorMessage';
+  import { inputValidation } from '../globalFunctions/inputValidation';
+
   export default {
     name: 'SignIn',
+    components: {
+      InputErrorMessage,
+    },
     data() {
       return {
         formData: {
           email: '',
           password: '',
         },
+        emailErrorMessage: '',
+        passwordErrorMessage: '',
       };
     },
     methods: {
-      onSubmit() {
-        this.$store.dispatch('signIn', this.formData);
+      async onSubmit() {
+        this.emailErrorMessage = '';
+        this.passwordErrorMessage = '';
+        const emailEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.email
+        );
+        const passwordEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.password
+        );
+
+        const emailToolong = inputValidation.checkIfInputTooLong(
+          this.formData.email,
+          40
+        );
+        const passwordTooLong = inputValidation.checkIfInputTooLong(
+          this.formData.password,
+          40
+        );
+
+        if (emailEmpty) {
+          this.emailErrorMessage = 'Email empty';
+        } else if (emailToolong) {
+          this.emailErrorMessage = 'Email too long';
+        }
+
+        if (passwordEmpty) {
+          this.passwordErrorMessage = 'Password empty';
+        } else if (passwordTooLong) {
+          this.passwordErrorMessage = 'Password too long';
+        }
+
+        if (this.emailErrorMessage == '' && this.passwordErrorMessage == '') {
+          const response = await this.$store.dispatch('signIn', this.formData);
+
+          if (response && response.type == 'email') {
+            this.emailErrorMessage = response.response;
+          }
+          if (response && response.type == 'password') {
+            this.passwordErrorMessage = response.response;
+          }
+        }
       },
     },
   };
@@ -69,6 +127,10 @@
     padding: 20px;
     max-width: 270px;
     margin: auto;
+  }
+  .error {
+    text-align: left;
+    margin-bottom: 2px;
   }
   #center-container {
     margin: auto;
