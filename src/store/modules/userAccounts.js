@@ -37,13 +37,14 @@ const actions = {
         credentials: 'include',
       });
       const jsonResponse = await res.json();
-      console.log(jsonResponse);
 
       if (res.status == 201) {
         dispatch('signIn', {
           email: formData.email,
           password: formData.password,
         });
+      } else {
+        return jsonResponse;
       }
     } catch (err) {
       console.log(err);

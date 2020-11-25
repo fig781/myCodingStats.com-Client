@@ -6,24 +6,44 @@
       </div>
 
       <form @submit.prevent="onSubmit">
+        <InputErrorMessage
+          class="error"
+          :message="firstNameErrorMessage"
+          v-if="firstNameErrorMessage"
+        />
         <input
           class="text-input"
           type="text"
           placeholder="First Name"
           v-model="formData.firstName"
         /><br />
+        <InputErrorMessage
+          class="error"
+          :message="lastNameErrorMessage"
+          v-if="lastNameErrorMessage"
+        />
         <input
           class="text-input"
           type="text"
           placeholder="Last Name"
           v-model="formData.lastName"
         /><br />
+        <InputErrorMessage
+          class="error"
+          :message="emailErrorMessage"
+          v-if="emailErrorMessage"
+        />
         <input
           class="text-input"
-          type="email"
+          type="text"
           placeholder="Email"
           v-model="formData.email"
         /><br />
+        <InputErrorMessage
+          class="error"
+          :message="passwordErrorMessage"
+          v-if="passwordErrorMessage"
+        />
         <input
           class="text-input"
           type="password"
@@ -44,8 +64,13 @@
 </template>
 
 <script>
+  import InputErrorMessage from '../components/InputErrorMessage';
+  import { inputValidation } from '../globalFunctions/inputValidation';
   export default {
     name: 'SignUp',
+    components: {
+      InputErrorMessage,
+    },
     data() {
       return {
         formData: {
@@ -54,11 +79,96 @@
           email: '',
           password: '',
         },
+        firstNameErrorMessage: '',
+        lastNameErrorMessage: '',
+        emailErrorMessage: '',
+        passwordErrorMessage: '',
       };
     },
     methods: {
       async onSubmit() {
-        this.$store.dispatch('signUp', this.formData);
+        this.firstNameErrorMessage = '';
+        this.lastNameErrorMessage = '';
+        this.emailErrorMessage = '';
+        this.passwordErrorMessage = '';
+
+        const firstNameEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.firstName
+        );
+        const lastNameEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.lastName
+        );
+        const emailEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.email
+        );
+        const passwordEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.password
+        );
+
+        const firstNameToolong = inputValidation.checkIfInputTooLong(
+          this.formData.firstName,
+          40
+        );
+        const lastNameTooLong = inputValidation.checkIfInputTooLong(
+          this.formData.lastName,
+          40
+        );
+        const emailToolong = inputValidation.checkIfInputTooLong(
+          this.formData.email,
+          40
+        );
+        const passwordTooLong = inputValidation.checkIfInputTooLong(
+          this.formData.password,
+          40
+        );
+
+        if (firstNameEmpty) {
+          this.firstNameErrorMessage = 'First name empty';
+        } else if (firstNameToolong) {
+          this.firstNameErrorMessage = 'First name too long';
+        }
+
+        if (lastNameEmpty) {
+          this.lastNameErrorMessage = 'Last name empty';
+        } else if (lastNameTooLong) {
+          this.lastNameErrorMessage = 'Last name too long';
+        }
+
+        if (emailEmpty) {
+          this.emailErrorMessage = 'Email empty';
+        } else if (emailToolong) {
+          this.emailErrorMessage = 'Email too long';
+        }
+
+        if (passwordEmpty) {
+          this.passwordErrorMessage = 'Password empty';
+        } else if (passwordTooLong) {
+          this.passwordErrorMessage = 'Password too long';
+        }
+
+        if (
+          this.emailErrorMessage == '' &&
+          this.passwordErrorMessage == '' &&
+          this.firstNameErrorMessage == '' &&
+          this.lastNameErrorMessage == ''
+        ) {
+          const response = await this.$store.dispatch('signUp', this.formData);
+
+          if (response) {
+            if (response.type == 'email') {
+              this.emailErrorMessage = response.response;
+            }
+            if (response.type == 'password') {
+              this.passwordErrorMessage = response.response;
+            }
+            if (response.type == 'firstName') {
+              this.firstNameErrorMessage = response.response;
+            }
+            if (response.type == 'lastName') {
+              this.lastNameErrorMessage = response.response;
+            }
+          }
+        }
       },
     },
   };
@@ -104,6 +214,10 @@
   input:focus {
     border: solid 1px #0069ff;
     outline: #0069ff;
+  }
+  .error {
+    text-align: left;
+    margin-bottom: 2px;
   }
   #button {
     padding: 10px;

@@ -47,24 +47,44 @@
             <h2>Create Your Account</h2>
           </div>
           <form @submit.prevent="onSubmit">
+            <InputErrorMessage
+              class="error"
+              :message="firstNameErrorMessage"
+              v-if="firstNameErrorMessage"
+            />
             <input
               class="text-input"
               type="text"
               placeholder="First Name"
               v-model="formData.firstName"
             /><br />
+            <InputErrorMessage
+              class="error"
+              :message="lastNameErrorMessage"
+              v-if="lastNameErrorMessage"
+            />
             <input
               class="text-input"
               type="text"
               placeholder="Last Name"
               v-model="formData.lastName"
             /><br />
+            <InputErrorMessage
+              class="error"
+              :message="emailErrorMessage"
+              v-if="emailErrorMessage"
+            />
             <input
               class="text-input"
-              type="email"
+              type="text"
               placeholder="Email"
               v-model="formData.email"
             /><br />
+            <InputErrorMessage
+              class="error"
+              :message="passwordErrorMessage"
+              v-if="passwordErrorMessage"
+            />
             <input
               class="text-input"
               type="password"
@@ -88,8 +108,13 @@
   //<div id="descriptions">
   //      other cool stuff here
   //    </div>
+  import InputErrorMessage from '../components/InputErrorMessage';
+  import { inputValidation } from '../globalFunctions/inputValidation';
   export default {
     name: 'Home',
+    components: {
+      InputErrorMessage,
+    },
     data() {
       return {
         loggedIn: false,
@@ -99,6 +124,10 @@
           email: '',
           password: '',
         },
+        firstNameErrorMessage: '',
+        lastNameErrorMessage: '',
+        emailErrorMessage: '',
+        passwordErrorMessage: '',
       };
     },
     methods: {
@@ -107,7 +136,88 @@
         this.loggedIn = false;
       },
       async onSubmit() {
-        this.$store.dispatch('signUp', this.formData);
+        this.firstNameErrorMessage = '';
+        this.lastNameErrorMessage = '';
+        this.emailErrorMessage = '';
+        this.passwordErrorMessage = '';
+
+        const firstNameEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.firstName
+        );
+        const lastNameEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.lastName
+        );
+        const emailEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.email
+        );
+        const passwordEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.password
+        );
+
+        const firstNameToolong = inputValidation.checkIfInputTooLong(
+          this.formData.firstName,
+          40
+        );
+        const lastNameTooLong = inputValidation.checkIfInputTooLong(
+          this.formData.lastName,
+          40
+        );
+        const emailToolong = inputValidation.checkIfInputTooLong(
+          this.formData.email,
+          40
+        );
+        const passwordTooLong = inputValidation.checkIfInputTooLong(
+          this.formData.password,
+          40
+        );
+
+        if (firstNameEmpty) {
+          this.firstNameErrorMessage = 'First name empty';
+        } else if (firstNameToolong) {
+          this.firstNameErrorMessage = 'First name too long';
+        }
+
+        if (lastNameEmpty) {
+          this.lastNameErrorMessage = 'Last name empty';
+        } else if (lastNameTooLong) {
+          this.lastNameErrorMessage = 'Last name too long';
+        }
+
+        if (emailEmpty) {
+          this.emailErrorMessage = 'Email empty';
+        } else if (emailToolong) {
+          this.emailErrorMessage = 'Email too long';
+        }
+
+        if (passwordEmpty) {
+          this.passwordErrorMessage = 'Password empty';
+        } else if (passwordTooLong) {
+          this.passwordErrorMessage = 'Password too long';
+        }
+
+        if (
+          this.emailErrorMessage == '' &&
+          this.passwordErrorMessage == '' &&
+          this.firstNameErrorMessage == '' &&
+          this.lastNameErrorMessage == ''
+        ) {
+          const response = await this.$store.dispatch('signUp', this.formData);
+
+          if (response) {
+            if (response.type == 'email') {
+              this.emailErrorMessage = response.response;
+            }
+            if (response.type == 'password') {
+              this.passwordErrorMessage = response.response;
+            }
+            if (response.type == 'firstName') {
+              this.firstNameErrorMessage = response.response;
+            }
+            if (response.type == 'lastName') {
+              this.lastNameErrorMessage = response.response;
+            }
+          }
+        }
       },
     },
     computed: {
@@ -196,7 +306,7 @@
   /* MIDDLE HERO */
   #main-container {
     display: grid;
-    grid-template-columns: 1fr 340px;
+    grid-template-columns: 1fr 300px;
     grid-template-rows: auto;
     margin-right: 18%;
     margin-left: 18%;
@@ -240,13 +350,17 @@
     padding: 20px;
     margin: auto;
   }
+  .error {
+    text-align: left;
+    margin-bottom: 2px;
+  }
   .text-input {
     border: 1px solid lightgrey;
     padding: 5px 10px;
     font-size: 18px;
     border-radius: 2px;
     margin-bottom: 10px;
-    width: 80%;
+    width: 100%;
     box-sizing: border-box;
   }
   input:focus {
@@ -263,7 +377,7 @@
     text-align: center;
     background-color: #1f43b8;
     color: white;
-    width: 80%;
+    width: 100%;
   }
   #signup-button:hover {
     background: #2a54b1;
