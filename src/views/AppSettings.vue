@@ -3,27 +3,26 @@
     <SideNavigationBar />
     <div id="main-container">
       <div id="tags-container">
-        <h1>Add or Remove Tags</h1>
+        <h1>Tags</h1>
         <p>Tags are used to mark the type of work you've done each day.</p>
         <div class="table-container">
-          <h3 v-if="allTags.length == 0">No tags have been added</h3>
           <div class="button-row">
             <div class="icon" @click="toggleAppSettingsEdit('Tag')"></div>
           </div>
+          <h3 v-if="allTags.length == 0">No tags have been added</h3>
           <AppSettingsTable :allEntries="allTags" v-if="allTags.length != 0" />
         </div>
       </div>
       <div id="projects-container">
-        <h1>Add or Remove Projects</h1>
+        <h1>Projects</h1>
         <p>
-          Use the projects tag to track what project you were working on each
-          day.
+          Use the projects tag to track what project you were working on.
         </p>
         <div class="table-container">
-          <h3 v-if="allProjects.length == 0">No projects have been added</h3>
           <div class="button-row">
             <div class="icon" @click="toggleAppSettingsEdit('Project')"></div>
           </div>
+          <h3 v-if="allProjects.length == 0">No projects have been added</h3>
           <AppSettingsTable
             :allEntries="allProjects"
             v-if="allProjects.length != 0"

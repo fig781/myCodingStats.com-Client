@@ -4,6 +4,7 @@
     <div id="main-container">
       <div id="headings-container">
         <h1>Monthly Progress</h1>
+
         <div id="totals-container">
           <div class="total">
             <p class="highlight">Time this Month</p>

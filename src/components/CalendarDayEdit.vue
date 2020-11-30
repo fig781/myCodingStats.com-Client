@@ -151,9 +151,23 @@
           this.formData.project.name = null;
         }
 
+        let normalizedDate = this.oneCalendarDay.date;
+        let month = normalizedDate[0] + normalizedDate[1];
+        if (month != '10' && month != '11' && month != '12') {
+          normalizedDate = '0' + normalizedDate;
+        }
+        if (normalizedDate.length == 4) {
+          let lastValue = normalizedDate.slice(3, 4);
+          normalizedDate = normalizedDate.substring(
+            0,
+            normalizedDate.length - 1
+          );
+          normalizedDate = normalizedDate + '0' + lastValue;
+        }
+
         let returnValue = {
           inAppId: this.oneCalendarDay.id,
-          inAppDate: this.oneCalendarDay.date,
+          inAppDate: normalizedDate,
           activeTime: this.formData.activeTime,
           passiveTime: this.formData.passiveTime,
           codingChallengesTime: this.formData.codingChallengesTime,

@@ -3,6 +3,7 @@
     <div id="settings-edit-inner">
       <h1>Add a new {{ type }}</h1>
       <form @submit.prevent="onSubmit">
+        <InputErrorMessage v-if="errorMessage" :message="errorMessage" />
         <input
           type="text"
           id="input"
@@ -11,7 +12,6 @@
           @keyup="remainingCharCount()"
         /><br />
         <p>{{ remainingChars }} characters left</p>
-        <InputErrorMessage v-if="errorMessage" :message="errorMessage" />
         <div id="cancel" class="button" @click="$emit('close')">Cancel</div>
         <input class="button" id="submit" type="submit" value="Submit" />
       </form>
@@ -122,6 +122,13 @@
     margin: 8px 0;
     box-sizing: border-box;
     font-size: 18px;
+  }
+  input {
+    border: solid 1px black;
+  }
+  input:focus {
+    border: solid 1px #0069ff;
+    outline: #0069ff;
   }
   .button {
     float: right;

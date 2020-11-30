@@ -1,6 +1,8 @@
 import router from '../../router/index';
 import moduleFunctions from './moduleFunctions';
 
+import globalUrl from '../../globalFunctions/globalUrl';
+
 const state = {
   year: 0,
   month: {
@@ -263,7 +265,7 @@ const actions = {
   fetchRowsWithValues: async ({ rootState }, date) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/gridmonth/?date=${date}&userid=${rootState.userAccounts.loggedInUser.userId}`,
+        `${globalUrl}gridmonth/?date=${date}&userid=${rootState.userAccounts.loggedInUser.userId}`,
         {
           method: 'GET',
           credentials: 'include',
@@ -281,7 +283,11 @@ const actions = {
     }
   },
   generateAllCalendarRows: async ({ commit, dispatch, state }) => {
-    const yearAndMonth = `${state.year}-${state.month.number + 1}`;
+    let monthNumber = state.month.number + 1;
+    if (monthNumber < 10) {
+      monthNumber = '0' + monthNumber.toString();
+    }
+    const yearAndMonth = `${state.year}-${monthNumber}`;
     const fetchedRowInformation = await dispatch(
       'fetchRowsWithValues',
       yearAndMonth
@@ -336,7 +342,7 @@ const actions = {
   addGridRow: async ({ rootState, state, commit }, rowEntryInfo) => {
     try {
       const formattedDate = rowEntryInfo.inAppDate + '/' + state.year;
-      const res = await fetch('http://localhost:3000/gridmonth', {
+      const res = await fetch(`${globalUrl}gridmonth`, {
         method: 'POST',
         body: JSON.stringify({
           userId: rootState.userAccounts.loggedInUser.userId,
@@ -357,7 +363,8 @@ const actions = {
         commit('setWeekTotals');
         commit('setMonthTotals');
       } else {
-        router.push('/forbidden');
+        console.log(await res.json());
+        //router.push('/forbidden');
       }
     } catch (err) {
       console.log('addGridRow: ' + err);

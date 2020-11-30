@@ -1,4 +1,5 @@
 import router from '../../router/index';
+import globalUrl from '../../globalFunctions/globalUrl';
 
 const state = {
   loggedInUser: {
@@ -30,7 +31,7 @@ const mutations = {
 const actions = {
   async signUp({ dispatch }, formData) {
     try {
-      const res = await fetch('http://localhost:3000/register', {
+      const res = await fetch(`${globalUrl}register`, {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: { 'Content-Type': 'application/json' },
@@ -52,7 +53,7 @@ const actions = {
   },
   async signIn({ commit }, formData) {
     try {
-      const res = await fetch('http://localhost:3000/login', {
+      const res = await fetch(`${globalUrl}login`, {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: { 'Content-Type': 'application/json' },

@@ -1,4 +1,4 @@
-import router from '../../router/index';
+import globalUrl from '../../globalFunctions/globalUrl';
 
 const state = {
   allTags: [],
@@ -86,7 +86,7 @@ const actions = {
   fetchAllTags: async ({ commit, rootState }) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/settings/tags/${rootState.userAccounts.loggedInUser.userId}`,
+        `${globalUrl}settings/tags/${rootState.userAccounts.loggedInUser.userId}`,
         {
           method: 'GET',
           credentials: 'include',
@@ -98,8 +98,7 @@ const actions = {
         commit('setAllTags', jsonResponse);
         commit('insertTagType');
       } else {
-        alert(jsonResponse.message);
-        router.push('/forbidden');
+        console.log(jsonResponse);
       }
     } catch (err) {
       console.log('fetchAllTags: ' + err);
@@ -107,7 +106,7 @@ const actions = {
   },
   addTag: async ({ commit, rootState }, tagName) => {
     try {
-      const res = await fetch('http://localhost:3000/settings/tags/', {
+      const res = await fetch(`${globalUrl}settings/tags/`, {
         method: 'POST',
         body: JSON.stringify({
           userId: rootState.userAccounts.loggedInUser.userId,
@@ -121,8 +120,7 @@ const actions = {
       if (res.status == 200) {
         commit('addTagToAllTags', jsonResponse);
       } else {
-        alert(jsonResponse.message);
-        router.push('/forbidden');
+        console.log(jsonResponse);
       }
     } catch (err) {
       console.log('addTag: ' + err);
@@ -130,17 +128,18 @@ const actions = {
   },
   deleteTag: async ({ commit }, tagId) => {
     try {
-      const res = await fetch('http://localhost:3000/settings/tags/', {
+      const res = await fetch(`${globalUrl}settings/tags/`, {
         method: 'PUT',
         body: JSON.stringify({ tagId: tagId }),
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       });
+
       if (res.status == 200) {
         commit('deleteTagFromAllTags', tagId);
       } else {
-        console.log('forbidden');
-        router.push('/forbidden');
+        const jsonResponse = await res.json();
+        console.log(jsonResponse);
       }
     } catch (err) {
       console.log('deleteTag: ' + err);
@@ -149,7 +148,7 @@ const actions = {
   fetchAllProjects: async ({ commit, rootState }) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/settings/projects/${rootState.userAccounts.loggedInUser.userId}`,
+        `${globalUrl}settings/projects/${rootState.userAccounts.loggedInUser.userId}`,
         {
           method: 'GET',
           credentials: 'include',
@@ -160,8 +159,7 @@ const actions = {
         commit('setAllProjects', jsonResponse);
         commit('insertProjectType');
       } else {
-        alert(jsonResponse.message);
-        router.push('/forbidden');
+        console.log(jsonResponse);
       }
     } catch (err) {
       console.log('fetchAllProjects: ' + err);
@@ -169,7 +167,7 @@ const actions = {
   },
   deleteProject: async ({ commit }, projectId) => {
     try {
-      const res = await fetch('http://localhost:3000/settings/projects', {
+      const res = await fetch(`${globalUrl}settings/projects`, {
         method: 'PUT',
         body: JSON.stringify({ projectId: projectId }),
         headers: { 'Content-Type': 'application/json' },
@@ -178,8 +176,8 @@ const actions = {
       if (res.status == 200) {
         commit('deleteProjectFromAllProjects', projectId);
       } else {
-        console.log('forbidden');
-        router.push('/forbidden');
+        const jsonResponse = await res.json();
+        console.log(jsonResponse);
       }
     } catch (err) {
       console.log('deleteProject: ' + err);
@@ -187,7 +185,7 @@ const actions = {
   },
   addProject: async ({ commit, rootState }, projectName) => {
     try {
-      const res = await fetch('http://localhost:3000/settings/projects', {
+      const res = await fetch(`${globalUrl}settings/projects`, {
         method: 'POST',
         body: JSON.stringify({
           userId: rootState.userAccounts.loggedInUser.userId,
@@ -200,8 +198,7 @@ const actions = {
       if (res.status == 200) {
         commit('addProjectToAllProjects', jsonResponse);
       } else {
-        alert(jsonResponse.message);
-        router.push('/forbidden');
+        console.log(jsonResponse);
       }
     } catch (err) {
       console.log('addTag: ' + err);

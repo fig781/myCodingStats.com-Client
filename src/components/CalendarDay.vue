@@ -145,6 +145,7 @@
     border-radius: 25px;
     white-space: nowrap;
     overflow: hidden;
+    max-width: 9vw;
     text-overflow: ellipsis;
     text-align: center;
     padding-right: 5px;
@@ -160,7 +161,7 @@
     padding-left: 10px;
   }
   .date:hover {
-    background-color: rgba(53, 53, 53, 0.089);
+    background-color: rgb(192, 192, 192);
     cursor: pointer;
   }
   .shaded {

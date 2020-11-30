@@ -6,10 +6,15 @@
           <div id="logo">
             <router-link to="/">My Coding Stats</router-link>
           </div>
-          <div id="app-button" class="nav-button" v-if="loggedIn">
-            <router-link :to="{ name: 'GridView', params: { id: user.userId } }"
-              >Go To App</router-link
-            >
+          <div
+            id="app-button"
+            class="nav-button"
+            v-if="loggedIn"
+            @click="
+              $router.push({ name: 'GridView', params: { id: user.userId } })
+            "
+          >
+            Go To App
           </div>
         </div>
 
@@ -269,9 +274,6 @@
   #app-button {
     background-color: white;
     margin-left: 30px;
-  }
-  #app-button a {
-    text-decoration: none;
     color: #1f43b8;
   }
   #right-nav {
