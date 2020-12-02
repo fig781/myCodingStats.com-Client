@@ -37,7 +37,7 @@ const actions = {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       });
-      const jsonResponse = await res.json();
+      console.log(res);
 
       if (res.status == 201) {
         dispatch('signIn', {
@@ -45,6 +45,7 @@ const actions = {
           password: formData.password,
         });
       } else {
+        const jsonResponse = await res.json();
         return jsonResponse;
       }
     } catch (err) {
