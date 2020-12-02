@@ -62,8 +62,6 @@ const actions = {
       });
       const jsonResponse = await res.json();
 
-      console.log(jsonResponse);
-      console.log(res);
       if (res.status == 200) {
         commit('setUserCredentials', jsonResponse);
         sessionStorage.setItem('user', JSON.stringify(jsonResponse));
