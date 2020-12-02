@@ -275,7 +275,6 @@ const actions = {
       if (res.status == 200) {
         return jsonResponse;
       } else {
-        alert(jsonResponse.response);
         router.push('/forbidden');
       }
     } catch (err) {

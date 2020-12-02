@@ -8,4 +8,8 @@
   };
 </script>
 
-<style></style>
+<style scoped>
+  div {
+    font-size: 30px;
+  }
+</style>
