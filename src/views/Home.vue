@@ -250,7 +250,7 @@
       rgb(89, 60, 194) 0%,
       rgb(17, 69, 182) 100%
     );
-    height: 100vh;
+    min-height: 100vh;
     color: white;
   }
   /* NAVBAR */
@@ -335,6 +335,7 @@
     text-align: center;
     border-radius: 6px;
     background-color: #f6f8fa;
+    width: 300px;
   }
 
   #header {
@@ -383,5 +384,42 @@
   }
   #signup-button:hover {
     background: #2a54b1;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    #main-container {
+      display: block;
+      text-align: center;
+      margin-right: 8%;
+      margin-left: 8%;
+    }
+    #left-container {
+      margin: 30px auto 30px auto;
+    }
+    #right-container {
+      margin: 0px auto 50px auto;
+    }
+  }
+  @media only screen and (max-width: 700px) {
+    #navbar {
+      padding: 3rem 2rem 0rem 2rem;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    #main-container {
+      margin-right: 1%;
+      margin-left: 1%;
+    }
+    #navbar {
+      padding: 3rem 2rem 0rem 2rem;
+      display: block;
+    }
+    #right-nav {
+      justify-content: center;
+      margin-top: 15px;
+    }
+    #left-container h1 {
+      font-size: 30px;
+    }
   }
 </style>
