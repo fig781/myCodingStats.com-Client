@@ -295,4 +295,11 @@
   #cancel:hover {
     background-color: #afb8cc;
   }
+  @media only screen and (max-width: 768px) {
+    #calendar-day-edit-mask {
+    }
+    #calendar-day-edit-inner {
+      width: 300px;
+    }
+  }
 </style>

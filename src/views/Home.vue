@@ -310,11 +310,10 @@
     display: grid;
     grid-template-columns: 1fr 300px;
     grid-template-rows: auto;
-    margin-right: 18%;
-    margin-left: 18%;
+    margin: 0 18vw 0 18vw;
     position: relative;
     align-items: center;
-    height: 80%;
+    height: 80vh;
   }
   #left-container {
     max-width: 650px;
@@ -392,6 +391,7 @@
       text-align: center;
       margin-right: 8%;
       margin-left: 8%;
+      height: auto;
     }
     #left-container {
       margin: 30px auto 30px auto;
@@ -420,6 +420,11 @@
     }
     #left-container h1 {
       font-size: 30px;
+    }
+  }
+  @media only screen and (max-width: 300px) {
+    #right-container {
+      width: 250px;
     }
   }
 </style>

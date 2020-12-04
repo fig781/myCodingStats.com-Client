@@ -72,4 +72,10 @@
     color: white;
     font-size: 12px;
   }
+
+  @media only screen and (max-width: 768px) {
+    #side-navigation-bar {
+      display: none;
+    }
+  }
 </style>

@@ -103,4 +103,16 @@
     text-align: center;
     font-family: 'Montserrat', sans-serif;
   }
+
+  @media only screen and (max-width: 768px) {
+    #table {
+      margin-left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .table-row {
+      display: none;
+    }
+  }
 </style>

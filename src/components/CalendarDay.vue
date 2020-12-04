@@ -1,25 +1,46 @@
 <template>
-  <div class="table-row" :class="oddId && shader">
+  <div id="table-row" :class="oddId && shader">
     <div class="table-cell date" @click="showCalendarDayEdit(oneCalendarDay)">
       {{ oneCalendarDay.date }}
     </div>
-    <div class="table-cell">{{ oneCalendarDay.day }}</div>
-    <div class="table-cell">{{ oneCalendarDay.active }}</div>
-    <div class="table-cell">{{ oneCalendarDay.passive }}</div>
-    <div class="table-cell">{{ oneCalendarDay.coding }}</div>
+    <div class="table-cell day">{{ oneCalendarDay.day }}</div>
     <div class="table-cell">
+      <div class="mobile-only">Active time:</div>
+      {{ oneCalendarDay.active }}
+    </div>
+    <div class="table-cell mobile-shaded">
+      <div class="mobile-only">Passive time:</div>
+      {{ oneCalendarDay.passive }}
+    </div>
+    <div class="table-cell">
+      <div class="mobile-only">Coding Challenges time:</div>
+      {{ oneCalendarDay.coding }}
+    </div>
+    <div class="table-cell mobile-flex mobile-shaded">
+      <div class="mobile-only">Tag:</div>
       <div :class="tagNotNull && rounded">
         {{ oneCalendarDay.tag.name }}
       </div>
     </div>
-    <div class="table-cell">
+    <div class="table-cell mobile-flex">
+      <div class="mobile-only">Project:</div>
       <div :class="projectNotNull && rounded">
         {{ oneCalendarDay.project.name }}
       </div>
     </div>
-    <div class="table-cell">{{ oneCalendarDay.description }}</div>
-    <div class="table-cell total">{{ dayTotal }}</div>
-    <div class="table-cell total" :class="sunday && highlightWeek">
+    <div class="table-cell mobile-shaded">
+      <div class="mobile-only">Description:</div>
+      {{ oneCalendarDay.description }}
+    </div>
+    <div class="table-cell total">
+      <div class="mobile-only">Day Total:</div>
+      {{ dayTotal }}
+    </div>
+    <div
+      class="table-cell total mobile-shaded"
+      :class="sunday && highlightWeek"
+    >
+      <div class="mobile-only">Week Total:</div>
       {{ oneCalendarDay.weekRow.rowTime }}
     </div>
   </div>
@@ -125,7 +146,7 @@
 </script>
 
 <style scoped>
-  .table-row {
+  #table-row {
     display: table-row;
   }
   .table-cell {
@@ -171,5 +192,57 @@
     border-top: solid grey 1px;
     border-bottom: solid grey 1px;
     font-weight: bold;
+  }
+  .mobile-only {
+    display: none;
+  }
+  @media only screen and (max-width: 768px) {
+    #table-row {
+      display: grid;
+      margin: 5px;
+      border: 1px solid grey;
+      border-radius: 10px;
+      background-color: #f7fbff;
+      box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+    }
+    .table-cell {
+      padding: 2px 5px 2px 5px;
+      max-width: none;
+      text-align: left;
+    }
+    .mobile-only {
+      display: inline;
+    }
+    .total {
+      border: none;
+      border-radius: 10px;
+    }
+    .highlightWeek {
+      border: none;
+    }
+    .date {
+      text-align: center;
+      background-color: #0951ec18;
+      border-radius: 10px 10px 0px 0px;
+    }
+    .day {
+      text-align: center;
+      font-weight: 700;
+    }
+    .rounded {
+      border: 1px solid grey;
+      border-radius: 25px;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 150px;
+      text-overflow: ellipsis;
+    }
+    .mobile-flex {
+      display: flex;
+    }
+    .mobile-shaded {
+      background-color: rgba(110, 110, 110, 0.082);
+    }
   }
 </style>

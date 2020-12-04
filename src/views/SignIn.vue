@@ -125,7 +125,6 @@
   }
   form {
     padding: 20px;
-    max-width: 270px;
     margin: auto;
   }
   .error {
@@ -143,7 +142,7 @@
     border: 1px solid black;
     padding: 5px 10px;
     font-size: 18px;
-    border-radius: 3px;
+    border-radius: 2px;
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;

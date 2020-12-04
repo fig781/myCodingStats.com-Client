@@ -1,5 +1,6 @@
 <template>
   <div>
+    <MobileNav />
     <SideNavigationBar />
     <div id="main-container">
       <div id="tags-container">
@@ -43,6 +44,7 @@
   import SideNavigationBar from '../components/SideNavigationBar';
   import AppSettingsTable from '../components/AppSettingsTable';
   import AppSettingsEdit from '../components/AppSettingsEdit';
+  import MobileNav from '../components/MobileNav';
 
   export default {
     name: 'AppSettings',
@@ -56,6 +58,7 @@
       SideNavigationBar,
       AppSettingsTable,
       AppSettingsEdit,
+      MobileNav,
     },
     methods: {
       toggleAppSettingsEdit(type) {

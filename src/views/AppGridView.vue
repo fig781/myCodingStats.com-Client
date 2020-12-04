@@ -1,48 +1,51 @@
 <template>
-  <div id="grid-view">
-    <SideNavigationBar />
-    <div id="main-container">
-      <div id="headings-container">
-        <h1>Monthly Progress</h1>
+  <div>
+    <MobileNav />
+    <div id="grid-view">
+      <SideNavigationBar />
+      <div id="main-container">
+        <div id="headings-container">
+          <h1>Monthly Progress</h1>
 
-        <div id="totals-container">
-          <div class="total">
-            <p class="highlight">Time this Month</p>
-            <p class="total-number">{{ monthTotals.monthTime }}</p>
-          </div>
-          <div class="total">
-            <p class="highlight">Active Learning</p>
-            <p class="total-number">{{ monthTotals.activeTime }}</p>
-          </div>
-          <div class="total">
-            <p class="highlight">Passive Learning</p>
-            <p class="total-number">{{ monthTotals.passiveTime }}</p>
-          </div>
-          <div class="total">
-            <p class="highlight">Coding Challenges Time</p>
-            <p class="total-number">{{ monthTotals.codingChallengesTime }}</p>
-          </div>
-          <div class="total">
-            <p class="highlight">Main Tag</p>
-            <p class="total-number">{{ monthTotals.mainTag }}</p>
-          </div>
-          <div class="total">
-            <p class="highlight">Main Project</p>
-            <p class="total-number">{{ monthTotals.mainProject }}</p>
+          <div id="totals-container">
+            <div class="total">
+              <p class="highlight">Time this Month</p>
+              <p class="total-number">{{ monthTotals.monthTime }}</p>
+            </div>
+            <div class="total">
+              <p class="highlight">Active Learning</p>
+              <p class="total-number">{{ monthTotals.activeTime }}</p>
+            </div>
+            <div class="total">
+              <p class="highlight">Passive Learning</p>
+              <p class="total-number">{{ monthTotals.passiveTime }}</p>
+            </div>
+            <div class="total">
+              <p class="highlight">Coding Challenges Time</p>
+              <p class="total-number">{{ monthTotals.codingChallengesTime }}</p>
+            </div>
+            <div class="total">
+              <p class="highlight">Main Tag</p>
+              <p class="total-number">{{ monthTotals.mainTag }}</p>
+            </div>
+            <div class="total">
+              <p class="highlight">Main Project</p>
+              <p class="total-number">{{ monthTotals.mainProject }}</p>
+            </div>
           </div>
         </div>
+        <div id="month-container">
+          <img src="../assets/left-arrow.png" @click="decreaseMonthYear" />
+          <img src="../assets/right-arrow.png" @click="increaseMonthYear" />
+          <h2>{{ month.name }} {{ year }}</h2>
+        </div>
+        <Calendar
+          :month="month"
+          :year="year"
+          :calendar="calendar"
+          :key="componentKey"
+        />
       </div>
-      <div id="month-container">
-        <img src="../assets/left-arrow.png" @click="decreaseMonthYear" />
-        <img src="../assets/right-arrow.png" @click="increaseMonthYear" />
-        <h2>{{ month.name }}, {{ year }}</h2>
-      </div>
-      <Calendar
-        :month="month"
-        :year="year"
-        :calendar="calendar"
-        :key="componentKey"
-      />
     </div>
   </div>
 </template>
@@ -50,16 +53,19 @@
 <script>
   import SideNavigationBar from '../components/SideNavigationBar';
   import Calendar from '../components/Calendar';
+  import MobileNav from '../components/MobileNav';
 
   export default {
     name: 'AppGridView',
     components: {
       SideNavigationBar,
       Calendar,
+      MobileNav,
     },
     data() {
       return {
         componentKey: 0,
+        mobile: false,
       };
     },
     methods: {
@@ -116,6 +122,7 @@
   }
   #main-container {
     margin-left: 5rem;
+    min-width: 100%;
   }
   #totals-container {
     display: flex;
@@ -150,5 +157,37 @@
     cursor: pointer;
     max-height: 20px;
     max-width: 20px;
+  }
+  @media only screen and (max-width: 768px) {
+    #grid-view {
+      margin: 0px 5% 0px 5%;
+    }
+    #main-container {
+      margin-left: 0px;
+    }
+    #month-container {
+      padding-left: 0;
+    }
+    h1 {
+      margin-left: 0;
+      padding-top: 0;
+      margin-top: 10px;
+    }
+    #totals-container {
+      margin-left: 0;
+      justify-content: center;
+    }
+    .total {
+      padding: 5px;
+      border-radius: 5px;
+      margin: 5px;
+      border: solid 1px grey;
+      font-size: 12px;
+      box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+    }
+    .total-number {
+      font-size: 20px;
+    }
   }
 </style>
