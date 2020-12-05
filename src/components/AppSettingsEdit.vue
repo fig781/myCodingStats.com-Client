@@ -158,4 +158,14 @@
   #cancel:hover {
     background-color: #afb8cc;
   }
+  @media only screen and (max-width: 768px) {
+    #settings-edit-inner {
+      width: 250px;
+      padding: 20px 20px 40px 20px;
+    }
+    .button {
+      padding: 4px;
+      width: 5rem;
+    }
+  }
 </style>

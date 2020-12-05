@@ -4,42 +4,39 @@
       {{ oneCalendarDay.date }}
     </div>
     <div class="table-cell day">{{ oneCalendarDay.day }}</div>
-    <div class="table-cell">
+    <div class="table-cell mobile-shaded">
       <div class="mobile-only">Active time:</div>
       {{ oneCalendarDay.active }}
     </div>
-    <div class="table-cell mobile-shaded">
+    <div class="table-cell">
       <div class="mobile-only">Passive time:</div>
       {{ oneCalendarDay.passive }}
     </div>
-    <div class="table-cell">
+    <div class="table-cell mobile-shaded">
       <div class="mobile-only">Coding Challenges time:</div>
       {{ oneCalendarDay.coding }}
     </div>
-    <div class="table-cell mobile-flex mobile-shaded">
+    <div class="table-cell mobile-flex ">
       <div class="mobile-only">Tag:</div>
       <div :class="tagNotNull && rounded">
         {{ oneCalendarDay.tag.name }}
       </div>
     </div>
-    <div class="table-cell mobile-flex">
+    <div class="table-cell mobile-flex mobile-shaded">
       <div class="mobile-only">Project:</div>
       <div :class="projectNotNull && rounded">
         {{ oneCalendarDay.project.name }}
       </div>
     </div>
-    <div class="table-cell mobile-shaded">
+    <div class="table-cell ">
       <div class="mobile-only">Description:</div>
       {{ oneCalendarDay.description }}
     </div>
-    <div class="table-cell total">
+    <div class="table-cell total mobile-shaded">
       <div class="mobile-only">Day Total:</div>
       {{ dayTotal }}
     </div>
-    <div
-      class="table-cell total mobile-shaded"
-      :class="sunday && highlightWeek"
-    >
+    <div class="table-cell total " :class="sunday && highlightWeek">
       <div class="mobile-only">Week Total:</div>
       {{ oneCalendarDay.weekRow.rowTime }}
     </div>
@@ -199,12 +196,11 @@
   @media only screen and (max-width: 768px) {
     #table-row {
       display: grid;
+      border: 1px solid rgba(167, 167, 167, 0.466);
       margin: 5px;
-      border: 1px solid grey;
-      border-radius: 10px;
+      border-radius: 5px;
       background-color: #f7fbff;
-      box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-        0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+      box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
     }
     .table-cell {
       padding: 2px 5px 2px 5px;
@@ -216,7 +212,7 @@
     }
     .total {
       border: none;
-      border-radius: 10px;
+      border-radius: 0px 0px 5px 5px;
     }
     .highlightWeek {
       border: none;
@@ -224,7 +220,7 @@
     .date {
       text-align: center;
       background-color: #0951ec18;
-      border-radius: 10px 10px 0px 0px;
+      border-radius: 5px 5px 0px 0px;
     }
     .day {
       text-align: center;
@@ -242,7 +238,7 @@
       display: flex;
     }
     .mobile-shaded {
-      background-color: rgba(110, 110, 110, 0.082);
+      background-color: rgba(61, 61, 61, 0.075);
     }
   }
 </style>

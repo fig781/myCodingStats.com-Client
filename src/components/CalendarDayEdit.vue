@@ -296,10 +296,14 @@
     background-color: #afb8cc;
   }
   @media only screen and (max-width: 768px) {
-    #calendar-day-edit-mask {
-    }
     #calendar-day-edit-inner {
       width: 300px;
+    }
+  }
+  @media only screen and (max-width: 300px) {
+    #calendar-day-edit-inner {
+      width: 200px;
+      height: 500px;
     }
   }
 </style>

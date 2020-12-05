@@ -400,9 +400,28 @@
       margin: 0px auto 50px auto;
     }
   }
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 768px) {
     #navbar {
       padding: 3rem 2rem 0rem 2rem;
+      text-align: center;
+      display: inline;
+    }
+    #app-button {
+      margin: 10px auto 0 auto;
+      max-width: 300px;
+    }
+    #left-nav {
+      display: block;
+    }
+    #right-nav {
+      display: block;
+    }
+    #right-nav p {
+      margin-top: 10px;
+    }
+    #logout {
+      max-width: 300px;
+      margin: 10px auto 0 auto;
     }
   }
   @media only screen and (max-width: 500px) {

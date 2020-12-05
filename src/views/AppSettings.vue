@@ -147,4 +147,21 @@
   h3 {
     margin: 4rem;
   }
+  @media only screen and (max-width: 768px) {
+    #main-container {
+      margin-left: 5%;
+    }
+    #tags-container {
+      margin-left: 0;
+    }
+    #projects-container {
+      margin-left: 0;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    .table-container {
+      width: auto;
+      margin-right: 5%;
+    }
+  }
 </style>

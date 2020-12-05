@@ -138,8 +138,7 @@
     margin: 5px;
     border: solid 1px grey;
     font-size: 20px;
-    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-      0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
   }
   .total-number {
     font-size: 32px;
@@ -183,8 +182,6 @@
       margin: 5px;
       border: solid 1px grey;
       font-size: 12px;
-      box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-        0 6.7px 5.3px rgba(0, 0, 0, 0.048);
     }
     .total-number {
       font-size: 20px;

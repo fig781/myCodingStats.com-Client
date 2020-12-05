@@ -35,6 +35,7 @@
           <img src="../assets/settings (1).png" alt="settings" />
           <p>Settings</p>
         </div>
+        <div id="version">v0.1</div>
       </div>
     </transition>
   </div>
@@ -106,6 +107,10 @@
   .alter-leave-to {
     opacity: 0;
     transform: translateX(10px);
+  }
+  #version {
+    color: white;
+    text-align: right;
   }
 
   @media only screen and (min-width: 768px) {
