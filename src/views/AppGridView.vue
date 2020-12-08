@@ -122,7 +122,6 @@
   }
   #main-container {
     margin-left: 5rem;
-    min-width: 100%;
   }
   #totals-container {
     display: flex;
@@ -136,7 +135,7 @@
     padding: 15px;
     border-radius: 5px;
     margin: 5px;
-    border: solid 1px grey;
+    border: solid 1px rgb(128, 128, 128);
     font-size: 20px;
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
   }
@@ -156,6 +155,8 @@
     cursor: pointer;
     max-height: 20px;
     max-width: 20px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 10px;
   }
   @media only screen and (max-width: 768px) {
     #grid-view {

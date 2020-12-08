@@ -4,20 +4,21 @@
       <div id="home-button">
         <router-link to="/">
           <img
+            id="home"
             src="../assets/house-black-silhouette-without-door.png"
-            alt="Home"
+            alt="home"
           />
         </router-link>
       </div>
 
       <router-link :to="{ name: 'GridView', params: { id: user.userId } }"
-        ><img src="../assets/listing-option.png" alt="List"
+        ><img id="table" src="../assets/listing-option.png" alt="List"
       /></router-link>
     </div>
 
     <div id="bottom-container">
       <router-link :to="{ name: 'Settings', params: { id: user.userId } }"
-        ><img src="../assets/settings (1).png" alt="Settings"
+        ><img id="settings" src="../assets/settings (1).png" alt="Settings"
       /></router-link>
       <p>v0.1</p>
     </div>
@@ -71,6 +72,30 @@
     margin-top: 15px;
     color: white;
     font-size: 12px;
+  }
+  #settings {
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0);
+  }
+  #settings:hover {
+    box-shadow: 0 0 14px 0 rgba(255, 255, 255, 0.548);
+    background-color: rgba(255, 255, 255, 0.219);
+  }
+  #home {
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0);
+  }
+  #home:hover {
+    box-shadow: 0 0 14px 0 rgba(255, 255, 255, 0.548);
+    background-color: rgba(255, 255, 255, 0.219);
+  }
+  #table {
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0);
+  }
+  #table:hover {
+    box-shadow: 0 0 14px 0 rgba(255, 255, 255, 0.548);
+    background-color: rgba(255, 255, 255, 0.219);
   }
 
   @media only screen and (max-width: 768px) {

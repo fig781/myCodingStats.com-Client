@@ -16,7 +16,7 @@
       @click="displayOptions = !displayOptions"
     />
     <transition name="alter">
-      <div id="options" v-if="displayOptions">
+      <div id="options" v-if="displayOptions" v-on-clickaway="away">
         <div
           class="option"
           @click="
@@ -42,12 +42,23 @@
 </template>
 
 <script>
+  import { directive as onClickaway } from 'vue-clickaway';
+
   export default {
     name: 'MobileNav',
+
     data() {
       return {
         displayOptions: false,
       };
+    },
+    directives: {
+      onClickaway: onClickaway,
+    },
+    methods: {
+      away: function() {
+        this.displayOptions = false;
+      },
     },
     computed: {
       user() {
@@ -67,12 +78,17 @@
   .nav-img {
     height: 32px;
     width: 32px;
+    border-radius: 10px;
+    padding: 0px 3px 0px 3px;
+  }
+  .nav-img:active {
+    background-color: rgba(255, 255, 255, 0.185);
   }
   #right {
-    padding-right: 5%;
+    margin-right: 5%;
   }
   #left {
-    padding-left: 5%;
+    margin-left: 5%;
   }
   #options {
     z-index: 99;
@@ -85,6 +101,10 @@
   }
   .option {
     display: flex;
+    border-radius: 10px;
+  }
+  .option:active {
+    background-color: rgba(255, 255, 255, 0.185);
   }
   .option img {
     height: 28px;

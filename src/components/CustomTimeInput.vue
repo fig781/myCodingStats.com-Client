@@ -1,15 +1,17 @@
 <template>
-  <div id="custom-time-input-container" @blur="open = false">
+  <div id="custom-time-input-container">
     <div id="selected" @click="open = !open">
       {{ timeInput }}
     </div>
     <div id="dropdown" v-if="open" v-on-clickaway="away">
       <div class="time-clicker">
-        <div class="button" @click="increaseHours">
+        <div class="button increase-hours-button" @click="increaseHours">
           <img class="arrow" src="../assets/up-arrow.png" alt="arrow" />
         </div>
         <div class="time-window">
-          {{ hoursInput }}
+          <div id="hours">
+            {{ hoursInput }}
+          </div>
         </div>
         <div class="button" @click="decreaseHours">
           <img class="arrow" src="../assets/down-arrow.png" alt="arrow" />
@@ -19,8 +21,10 @@
         <div class="button" @click="increaseMinutes">
           <img class="arrow" src="../assets/up-arrow.png" alt="arrow" />
         </div>
-        <div class="time-window">
-          {{ minutesInput }}
+        <div class="time-window minutes">
+          <div id="minutes">
+            {{ minutesInput }}
+          </div>
         </div>
         <div class="button" @click="decreaseMinutes">
           <img class="arrow" src="../assets/down-arrow.png" alt="arrow" />
@@ -152,6 +156,10 @@
     font-size: 18px;
     border-radius: 2px;
     min-height: 23px;
+  }
+  #selected:hover {
+    border: solid 1px #0069ff;
+    outline: #0069ff;
   }
   #dropdown {
     border-bottom: 1px solid black;

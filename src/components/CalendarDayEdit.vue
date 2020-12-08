@@ -1,6 +1,6 @@
 <template>
   <div id="calendar-day-edit-mask">
-    <div id="calendar-day-edit-inner">
+    <div id="calendar-day-edit-inner" v-on-clickaway="away">
       <form @submit.prevent="onSubmit">
         <div id="date">
           <h1>{{ oneCalendarDay.day }} {{ oneCalendarDay.date }}</h1>
@@ -47,8 +47,6 @@
         <textarea
           name="description"
           class="input description-input"
-          cols="30"
-          rows="6"
           v-model="formData.description"
           @keyup="remainingCharCount()"
         ></textarea>
@@ -71,6 +69,8 @@
   import CustomSelect from './CustomSelect';
   import InputErrorMessage from './InputErrorMessage';
   import CustomTimeInput from './CustomTimeInput';
+  import { directive as onClickaway } from 'vue-clickaway';
+
   export default {
     name: 'CalendarDayEdit',
     components: {
@@ -95,10 +95,16 @@
         codingErrorMessage: '',
       };
     },
+    directives: {
+      onClickaway: onClickaway,
+    },
     props: {
       oneCalendarDay: Object,
     },
     methods: {
+      away: function() {
+        this.$emit('close');
+      },
       insertTag(option) {
         this.formData.tag.id = option.id;
         this.formData.tag.name = option.name;
@@ -262,6 +268,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  textarea:focus {
+    border: solid 1px #0069ff;
+    outline: #0069ff;
+  }
 
   option {
     overflow: hidden;
@@ -288,6 +298,9 @@
   #submit:hover {
     background: #2a54b1;
   }
+  #submit:active {
+    background: #2a54b1;
+  }
   #cancel {
     background-color: #ced6e7;
     color: black;
@@ -295,15 +308,26 @@
   #cancel:hover {
     background-color: #afb8cc;
   }
+  #cancel:active {
+    background-color: #afb8cc;
+  }
   @media only screen and (max-width: 768px) {
     #calendar-day-edit-inner {
       width: 300px;
     }
   }
-  @media only screen and (max-width: 300px) {
+  @media only screen and (max-width: 360px) {
     #calendar-day-edit-inner {
       width: 200px;
       height: 500px;
+      padding: 20px 20px 40px 20px;
+    }
+    #date h1 {
+      font-size: 20px;
+    }
+    .button {
+      padding: 5px;
+      width: auto;
     }
   }
 </style>

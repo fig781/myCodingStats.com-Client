@@ -93,7 +93,7 @@
     color: black;
     border-radius: 0px 0px 2px 2px;
     overflow-y: scroll;
-    max-height: 300px;
+    max-height: 200px;
     border-right: 1px solid black;
     border-left: 1px solid black;
     border-bottom: 1px solid black;

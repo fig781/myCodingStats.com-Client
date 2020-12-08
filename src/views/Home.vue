@@ -410,6 +410,10 @@
       margin: 10px auto 0 auto;
       max-width: 300px;
     }
+    .nav-button {
+      margin: 10px auto 0 auto;
+      max-width: 300px;
+    }
     #left-nav {
       display: block;
     }

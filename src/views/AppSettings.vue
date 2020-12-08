@@ -6,6 +6,7 @@
       <div id="tags-container">
         <h1>Tags</h1>
         <p>Tags are used to mark the type of work you've done each day.</p>
+        <p>Ex: Python, Javascript, UX, DevOps</p>
         <div class="table-container">
           <div class="button-row">
             <div class="icon" @click="toggleAppSettingsEdit('Tag')"></div>
@@ -18,6 +19,9 @@
         <h1>Projects</h1>
         <p>
           Use the projects tag to track what project you were working on.
+        </p>
+        <p>
+          Ex: Weather app, Stock trading app
         </p>
         <div class="table-container">
           <div class="button-row">
@@ -94,7 +98,7 @@
   }
   #tags-container {
     margin-left: 3rem;
-    padding-top: 3rem;
+    margin-top: 3rem;
   }
 
   #projects-container {
@@ -162,6 +166,9 @@
     .table-container {
       width: auto;
       margin-right: 5%;
+    }
+    #tags-container {
+      margin-top: 10px;
     }
   }
 </style>

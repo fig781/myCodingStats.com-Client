@@ -1,6 +1,10 @@
 <template>
-  <div id="table-row" :class="oddId && shader">
-    <div class="table-cell date" @click="showCalendarDayEdit(oneCalendarDay)">
+  <div
+    id="table-row"
+    :class="oddId && shader"
+    @click="showCalendarDayEdit(oneCalendarDay)"
+  >
+    <div class="table-cell date">
       {{ oneCalendarDay.date }}
     </div>
     <div class="table-cell day">{{ oneCalendarDay.day }}</div>
@@ -178,8 +182,8 @@
     color: #1f43b8;
     padding-left: 10px;
   }
-  .date:hover {
-    background-color: rgb(192, 192, 192);
+  #table-row:hover {
+    background-color: rgba(121, 134, 252, 0.233);
     cursor: pointer;
   }
   .shaded {
