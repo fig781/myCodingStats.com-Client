@@ -20,7 +20,7 @@
       <router-link :to="{ name: 'Settings', params: { id: user.userId } }"
         ><img id="settings" src="../assets/settings (1).png" alt="Settings"
       /></router-link>
-      <p>v0.1</p>
+      <p>v1.0</p>
     </div>
   </div>
 </template>

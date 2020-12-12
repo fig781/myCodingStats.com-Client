@@ -35,7 +35,7 @@
           <img src="../assets/settings (1).png" alt="settings" />
           <p>Settings</p>
         </div>
-        <div id="version">v0.1</div>
+        <div id="version">v1.0</div>
       </div>
     </transition>
   </div>

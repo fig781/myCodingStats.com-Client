@@ -19,7 +19,7 @@
           >
             <img src="../assets/information.png" alt="info." />
             <span class="tooltip-text active" v-if="activeTimeHover">
-              Activaly writting code
+              Activaly writing code
             </span>
           </div>
         </div>
