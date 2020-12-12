@@ -82,7 +82,7 @@
             <input
               class="text-input"
               type="text"
-              placeholder="Email"
+              placeholder="Username"
               v-model="formData.email"
             /><br />
             <InputErrorMessage

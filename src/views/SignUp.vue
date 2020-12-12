@@ -36,7 +36,7 @@
         <input
           class="text-input"
           type="text"
-          placeholder="Email"
+          placeholder="Username"
           v-model="formData.email"
         /><br />
         <InputErrorMessage
@@ -50,6 +50,7 @@
           placeholder="Password"
           v-model="formData.password"
         /><br />
+        <Loader v-if="loading" />
         <input id="button" type="submit" value="Submit" name="submit" /><br />
       </form>
       <div id="bottom-container">
@@ -66,10 +67,12 @@
 <script>
   import InputErrorMessage from '../components/InputErrorMessage';
   import { inputValidation } from '../globalFunctions/inputValidation';
+  import Loader from '../components/Loader';
   export default {
     name: 'SignUp',
     components: {
       InputErrorMessage,
+      Loader,
     },
     data() {
       return {
@@ -83,6 +86,7 @@
         lastNameErrorMessage: '',
         emailErrorMessage: '',
         passwordErrorMessage: '',
+        loading: false,
       };
     },
     methods: {
@@ -152,6 +156,7 @@
           this.firstNameErrorMessage == '' &&
           this.lastNameErrorMessage == ''
         ) {
+          this.loading = true;
           const response = await this.$store.dispatch('signUp', this.formData);
 
           if (response) {
@@ -169,6 +174,7 @@
             }
           }
         }
+        this.loading = false;
       },
     },
   };

@@ -43,7 +43,6 @@ const mutations = {
   },
   activeTagExists: (state, payload) => {
     for (let a = 0; a < state.allTags.length; a++) {
-      console.log(state.allTags[a].name);
       if (state.allTags[a].name === payload) {
         return true;
       }
@@ -116,7 +115,6 @@ const actions = {
         credentials: 'include',
       });
       const jsonResponse = await res.json();
-      console.log(jsonResponse);
       if (res.status == 200) {
         commit('addTagToAllTags', jsonResponse);
       } else {

@@ -5,6 +5,7 @@
         <p class="table-header-text">Name</p>
       </div>
     </div>
+    <transition-group> </transition-group>
     <AppSettingsTableRow
       v-for="entry in allEntries"
       :key="entry.id"

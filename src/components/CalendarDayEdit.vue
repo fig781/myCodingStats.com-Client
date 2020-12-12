@@ -23,7 +23,20 @@
           @change="updateCodingTime"
         />
 
-        <label for="tag">Tag</label><br />
+        <div class="no-tags">
+          <label for="tag">Tag</label>
+          <div v-if="allTags.length == 0">
+            <i> - No Tags - </i>
+            <p
+              @click="
+                $router.push({ name: 'Settings', params: { id: user.userId } })
+              "
+            >
+              Settings
+            </p>
+          </div>
+        </div>
+
         <CustomSelect
           :options="allTags"
           :default="formData.tag"
@@ -31,7 +44,19 @@
         />
         <br />
 
-        <label for="project">Project</label><br />
+        <div class="no-tags">
+          <label for="projects">Projects</label>
+          <div v-if="allProjects.length == 0">
+            <i> - No Projects - </i>
+            <p
+              @click="
+                $router.push({ name: 'Settings', params: { id: user.userId } })
+              "
+            >
+              Settings
+            </p>
+          </div>
+        </div>
         <CustomSelect
           :options="allProjects"
           :default="formData.project"
@@ -191,6 +216,9 @@
       allProjects() {
         return this.$store.getters.getAllProjects;
       },
+      user() {
+        return this.$store.getters.loggedInUser;
+      },
     },
     created() {
       //autistic
@@ -257,6 +285,21 @@
     box-sizing: border-box;
     font-size: 18px;
   }
+  i {
+    color: rgb(97, 97, 97);
+    padding: 0 4px;
+  }
+  .no-tags {
+    display: flex;
+  }
+  .no-tags div {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .no-tags p {
+    color: #1f43b8;
+    cursor: pointer;
+  }
   .description-input {
     margin-bottom: 0px;
   }
@@ -320,7 +363,7 @@
     #calendar-day-edit-inner {
       width: 200px;
       height: 500px;
-      padding: 20px 20px 40px 20px;
+      padding: 20px 20px 60px 20px;
     }
     #date h1 {
       font-size: 20px;

@@ -197,6 +197,7 @@
   .mobile-only {
     display: none;
   }
+
   @media only screen and (max-width: 768px) {
     #table-row {
       display: grid;

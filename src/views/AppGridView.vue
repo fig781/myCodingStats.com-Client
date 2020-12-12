@@ -35,16 +35,26 @@
           </div>
         </div>
         <div id="month-container">
-          <img src="../assets/left-arrow.png" @click="decreaseMonthYear" />
-          <img src="../assets/right-arrow.png" @click="increaseMonthYear" />
+          <img
+            src="../assets/left-arrow.png"
+            @click="decreaseMonthYear"
+            alt="left-arrow"
+          />
+          <img
+            src="../assets/right-arrow.png"
+            @click="increaseMonthYear"
+            alt="right-arrow"
+          />
           <h2>{{ month.name }} {{ year }}</h2>
         </div>
-        <Calendar
-          :month="month"
-          :year="year"
-          :calendar="calendar"
-          :key="componentKey"
-        />
+        <transition :name="transitionDirection">
+          <Calendar
+            :month="month"
+            :year="year"
+            :calendar="calendar"
+            :key="componentKey"
+          />
+        </transition>
       </div>
     </div>
   </div>
@@ -66,6 +76,7 @@
       return {
         componentKey: 0,
         mobile: false,
+        transitionDirection: 'left-transition',
       };
     },
     methods: {
@@ -74,12 +85,14 @@
         this.$store.commit('decreaseMonthAndYear');
         this.$store.dispatch('generateAllCalendarRows');
         this.componentKey++;
+        this.transitionDirection = 'left-transition';
       },
       increaseMonthYear() {
         this.$store.commit('clearCalendar');
         this.$store.commit('increaseMonthAndYear');
         this.$store.dispatch('generateAllCalendarRows');
         this.componentKey++;
+        this.transitionDirection = 'right-transition';
       },
     },
     computed: {
@@ -151,12 +164,37 @@
     padding-left: 3rem;
     font-family: 'Montserrat', sans-serif;
   }
+  #month-container h2 {
+    font-size: 27px;
+  }
   img {
     cursor: pointer;
-    max-height: 20px;
-    max-width: 20px;
-    border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 10px;
+    max-height: 32px;
+    max-width: 32px;
+  }
+  .right-transition-enter-active {
+    transition: all 0.1s;
+  }
+  .right-transition-leave-active {
+    transition: all 0.3s;
+  }
+
+  .left-transition-enter,
+  .right-transition-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+
+  .left-transition-enter-active {
+    transition: all 0.1s;
+  }
+  .left-transition-leave-active {
+    transition: all 0.3s;
+  }
+  .left-transition-enter,
+  .left-transition-leave-to {
+    transform: translateX(-10px);
+    opacity: 0;
   }
   @media only screen and (max-width: 768px) {
     #grid-view {

@@ -39,7 +39,7 @@
 <style scoped>
   #side-navigation-bar {
     height: 100%;
-    width: 5rem;
+    width: 5.1rem;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -53,8 +53,8 @@
     margin-bottom: 2rem;
   }
   img {
-    max-height: 28px;
-    max-width: 28px;
+    max-height: 32px;
+    max-width: 32px;
   }
 
   #top-container {

@@ -14,7 +14,7 @@
         <input
           class="text-input"
           type="text"
-          placeholder="Email"
+          placeholder="Username"
           v-model="formData.email"
         /><br />
         <InputErrorMessage
@@ -28,10 +28,9 @@
           placeholder="Password"
           v-model="formData.password"
         /><br />
-
+        <Loader v-if="loading" />
         <input id="button" type="submit" value="Submit" /><br />
       </form>
-
       <div id="bottom-container">
         <router-link class="bottom-text" to="/">Home</router-link> |
         <router-link class="bottom-text" to="/register"
@@ -44,12 +43,14 @@
 
 <script>
   import InputErrorMessage from '../components/InputErrorMessage';
+  import Loader from '../components/Loader';
   import { inputValidation } from '../globalFunctions/inputValidation';
 
   export default {
     name: 'SignIn',
     components: {
       InputErrorMessage,
+      Loader,
     },
     data() {
       return {
@@ -59,6 +60,7 @@
         },
         emailErrorMessage: '',
         passwordErrorMessage: '',
+        loading: false,
       };
     },
     methods: {
@@ -94,6 +96,7 @@
         }
 
         if (this.emailErrorMessage == '' && this.passwordErrorMessage == '') {
+          this.loading = true;
           const response = await this.$store.dispatch('signIn', this.formData);
 
           if (response && response.type == 'email') {
@@ -103,6 +106,7 @@
             this.passwordErrorMessage = response.response;
           }
         }
+        this.loading = false;
       },
     },
   };

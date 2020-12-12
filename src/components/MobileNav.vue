@@ -107,8 +107,8 @@
     background-color: rgba(255, 255, 255, 0.185);
   }
   .option img {
-    height: 28px;
-    width: 28px;
+    height: 32px;
+    width: 32px;
     margin-right: 10px;
   }
   .option p {
