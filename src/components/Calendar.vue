@@ -154,10 +154,6 @@
   img {
     margin-left: 2px;
   }
-  img:hover {
-    background: #a5adb47e;
-    border-radius: 10px;
-  }
   .tooltip {
     position: relative;
   }

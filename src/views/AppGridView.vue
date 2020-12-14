@@ -172,6 +172,10 @@
     max-height: 32px;
     max-width: 32px;
   }
+  img:hover {
+    filter: invert(44%) sepia(0%) saturate(153%) hue-rotate(166deg)
+      brightness(98%) contrast(92%);
+  }
   .right-transition-enter-active {
     transition: all 0.1s;
   }

@@ -73,29 +73,20 @@
     color: white;
     font-size: 12px;
   }
-  #settings {
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0);
-  }
+
   #settings:hover {
-    box-shadow: 0 0 14px 0 rgba(255, 255, 255, 0.548);
-    background-color: rgba(255, 255, 255, 0.219);
+    filter: invert(1%) sepia(1%) saturate(1%) hue-rotate(1deg) brightness(1000%)
+      contrast(60%);
   }
-  #home {
-    border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0);
-  }
+
   #home:hover {
-    box-shadow: 0 0 14px 0 rgba(255, 255, 255, 0.548);
-    background-color: rgba(255, 255, 255, 0.219);
+    filter: invert(1%) sepia(1%) saturate(1%) hue-rotate(1deg) brightness(1000%)
+      contrast(60%);
   }
-  #table {
-    border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0);
-  }
+
   #table:hover {
-    box-shadow: 0 0 14px 0 rgba(255, 255, 255, 0.548);
-    background-color: rgba(255, 255, 255, 0.219);
+    filter: invert(1%) sepia(1%) saturate(1%) hue-rotate(1deg) brightness(1000%)
+      contrast(60%);
   }
 
   @media only screen and (max-width: 768px) {

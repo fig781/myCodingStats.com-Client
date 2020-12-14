@@ -294,13 +294,26 @@
   .sign-up {
     background-color: white;
     color: #1f43b8;
+    border: solid 1px #1f43b8;
+  }
+  .sign-up:hover {
+    border: solid 1px #eef0ff;
+    color: #1f43b8;
+    background-color: #eef0ff;
   }
   .sign-in {
     border: solid 1px white;
-    background-color: rgba(178, 34, 34, 0);
     margin-right: 10px;
   }
+  .sign-in:hover {
+    color: #eeeeee;
+    border: solid 1px rgb(209, 209, 209);
+  }
   #logout {
+    background-color: rgba(178, 34, 34, 0);
+    border: solid 1px white;
+  }
+  #logout:hover {
     background-color: rgba(178, 34, 34, 0);
     border: solid 1px white;
   }
