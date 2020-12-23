@@ -1,26 +1,36 @@
 <template>
-  <div id="side-navigation-bar">
-    <div id="top-container">
-      <div id="home-button">
-        <router-link to="/">
-          <img
-            id="home"
-            src="../assets/house-black-silhouette-without-door.png"
-            alt="home"
-          />
-        </router-link>
-      </div>
-
-      <router-link :to="{ name: 'GridView', params: { id: user.userId } }"
-        ><img id="table" src="../assets/listing-option.png" alt="List"
-      /></router-link>
+  <div class="navbar">
+    <div class="top-container">
+      <img
+        class="button"
+        src="../assets/house-black-silhouette-without-door.png"
+        alt="home"
+        @click="$router.push({ name: 'Home' })"
+      />
+      <img
+        class="button"
+        src="../assets/listing-option.png"
+        alt="List"
+        @click="$router.push({ name: 'GridView', params: { id: user.userId } })"
+      />
+      <img
+        class="button"
+        src="../assets/bar-chart.png"
+        alt="Graph"
+        @click="
+          $router.push({ name: 'Analytics', params: { id: user.userId } })
+        "
+      />
     </div>
 
-    <div id="bottom-container">
-      <router-link :to="{ name: 'Settings', params: { id: user.userId } }"
-        ><img id="settings" src="../assets/settings (1).png" alt="Settings"
-      /></router-link>
-      <p>v1.0</p>
+    <div class="bottom-container">
+      <img
+        class="button"
+        src="../assets/settings (1).png"
+        alt="Settings"
+        @click="$router.push({ name: 'Settings', params: { id: user.userId } })"
+      />
+      <p class="bottom-container__version">v1.0</p>
     </div>
   </div>
 </template>
@@ -37,7 +47,7 @@
 </script>
 
 <style scoped>
-  #side-navigation-bar {
+  .navbar {
     height: 100%;
     width: 5.1rem;
     position: fixed;
@@ -48,49 +58,33 @@
     overflow-x: hidden;
     padding-top: 1.5rem;
   }
-
-  #home-button {
-    margin-bottom: 2rem;
-  }
-  img {
-    max-height: 32px;
-    max-width: 32px;
-  }
-
-  #top-container {
+  .top-container {
     width: 36%;
     margin: 0 auto;
   }
-
-  #bottom-container {
+  .button {
+    max-height: 32px;
+    max-width: 32px;
+    margin-bottom: 2.5rem;
+    cursor: pointer;
+  }
+  .button:hover {
+    filter: invert(1%) sepia(1%) saturate(1%) hue-rotate(1deg) brightness(1000%)
+      contrast(60%);
+  }
+  .bottom-container {
     position: fixed;
     bottom: 0.5rem;
     left: 1.5rem;
   }
-  p {
+  .bottom-container__version {
     text-align: center;
-    margin-top: 15px;
     color: white;
     font-size: 12px;
   }
 
-  #settings:hover {
-    filter: invert(1%) sepia(1%) saturate(1%) hue-rotate(1deg) brightness(1000%)
-      contrast(60%);
-  }
-
-  #home:hover {
-    filter: invert(1%) sepia(1%) saturate(1%) hue-rotate(1deg) brightness(1000%)
-      contrast(60%);
-  }
-
-  #table:hover {
-    filter: invert(1%) sepia(1%) saturate(1%) hue-rotate(1deg) brightness(1000%)
-      contrast(60%);
-  }
-
   @media only screen and (max-width: 768px) {
-    #side-navigation-bar {
+    .navbar {
       display: none;
     }
   }

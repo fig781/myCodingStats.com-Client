@@ -1,41 +1,49 @@
 <template>
-  <div id="mobile-nav">
-    <img
-      id="left"
-      class="nav-img"
-      src="../assets/house-black-silhouette-without-door.png"
-      alt="Home"
-      @click="$router.push({ name: 'Home' })"
-    />
+  <div class="mobile-nav">
+    <h2 class="mobile-nav__header" @click="$router.push({ name: 'Home' })">
+      myCodingStats
+    </h2>
 
     <img
-      id="right"
-      class="nav-img"
+      class="nav-img mobile-nav__hamburger"
       src="../assets/menu.png"
       alt="Menu"
       @click="displayOptions = !displayOptions"
     />
     <transition name="alter">
-      <div id="options" v-if="displayOptions" v-on-clickaway="away">
+      <div class="options" v-if="displayOptions" v-on-clickaway="away">
         <div
-          class="option"
+          class="options__selection"
           @click="
             $router.push({ name: 'GridView', params: { id: user.userId } })
           "
         >
-          <img src="../assets/listing-option.png" alt="table" />
-          <p>Table</p>
+          <img class="nav-img" src="../assets/listing-option.png" alt="table" />
+          <p class="options__text">Table</p>
         </div>
         <div
-          class="option"
+          class="options__selection"
+          @click="
+            $router.push({ name: 'Analytics', params: { id: user.userId } })
+          "
+        >
+          <img class="nav-img" src="../assets/bar-chart.png" alt="analytics" />
+          <p class="options__text">Analytics</p>
+        </div>
+        <div
+          class="options__selection"
           @click="
             $router.push({ name: 'Settings', params: { id: user.userId } })
           "
         >
-          <img src="../assets/settings (1).png" alt="settings" />
-          <p>Settings</p>
+          <img
+            class="nav-img"
+            src="../assets/settings (1).png"
+            alt="settings"
+          />
+          <p class="options__text">Settings</p>
         </div>
-        <div id="version">v1.0</div>
+        <div class="options__version">v1.0</div>
       </div>
     </transition>
   </div>
@@ -43,10 +51,8 @@
 
 <script>
   import { directive as onClickaway } from 'vue-clickaway';
-
   export default {
     name: 'MobileNav',
-
     data() {
       return {
         displayOptions: false,
@@ -69,53 +75,57 @@
 </script>
 
 <style scoped>
-  #mobile-nav {
+  .mobile-nav {
     background-color: #1f43b8;
     padding: 8px 0px 8px 0px;
     display: flex;
     justify-content: space-between;
   }
+  .mobile-nav__hamburger {
+    margin-right: 5%;
+    border-radius: 10px;
+    padding: 0px 3px 0px 3px;
+  }
+  .mobile-nav__header {
+    margin-left: 5%;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+  }
   .nav-img {
     height: 32px;
     width: 32px;
-    border-radius: 10px;
-    padding: 0px 3px 0px 3px;
   }
   .nav-img:active {
     background-color: rgba(255, 255, 255, 0.185);
   }
-  #right {
-    margin-right: 5%;
-  }
-  #left {
-    margin-left: 5%;
-  }
-  #options {
+
+  .options {
     z-index: 99;
     background-color: #1f43b8;
     position: absolute;
     top: 47px;
     right: 0px;
     padding: 20px;
-    border-radius: 0px 0px 0px 10px;
+    border-radius: 0px 0px 0px 6px;
   }
-  .option {
+  .options__selection {
     display: flex;
-    border-radius: 10px;
+    border-radius: 6px;
   }
-  .option:active {
-    background-color: rgba(255, 255, 255, 0.185);
+  .options__selection:active {
+    background-color: rgba(255, 255, 255, 0.048);
   }
-  .option img {
-    height: 32px;
-    width: 32px;
-    margin-right: 10px;
-  }
-  .option p {
+  .options__text {
     font-size: 30px;
     color: white;
     margin-bottom: 15px;
+    margin-left: 10px;
   }
+  .options__version {
+    color: white;
+    text-align: right;
+  }
+
   .alter-enter-active,
   .alter-leave-active {
     transition: 250ms;
@@ -128,13 +138,9 @@
     opacity: 0;
     transform: translateX(10px);
   }
-  #version {
-    color: white;
-    text-align: right;
-  }
 
   @media only screen and (min-width: 768px) {
-    #mobile-nav {
+    .mobile-nav {
       display: none;
     }
   }

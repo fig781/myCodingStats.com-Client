@@ -4,7 +4,7 @@
       <div id="navbar">
         <div id="left-nav">
           <div id="logo">
-            <router-link to="/">My Coding Stats</router-link>
+            <router-link to="/">myCodingStats</router-link>
           </div>
           <div
             id="app-button"
@@ -266,6 +266,7 @@
     font-size: 30px;
     font-weight: 600;
     margin: auto;
+    font-family: 'Montserrat', sans-serif;
   }
   #logo a {
     color: white;

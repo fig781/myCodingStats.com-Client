@@ -6,6 +6,7 @@ import SignIn from '../views/SignIn';
 import SignUp from '../views/SignUp';
 import AppGridView from '../views/AppGridView';
 import AppSettings from '../views/AppSettings';
+import AppAnalytics from '../views/AppAnalytics';
 import FourOThree from '../views/ErrorScreens/FourOThree';
 import FourOFour from '../views/ErrorScreens/FourOFour';
 Vue.use(VueRouter);
@@ -35,6 +36,11 @@ const routes = [
     path: '/app/:id/settings',
     name: 'Settings',
     component: AppSettings,
+  },
+  {
+    path: '/app/:id/analytics',
+    name: 'Analytics',
+    component: AppAnalytics,
   },
   {
     path: '/forbidden',
