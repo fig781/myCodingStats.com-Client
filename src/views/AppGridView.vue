@@ -5,7 +5,7 @@
       <SideNavigationBar />
       <div id="main-container">
         <div id="headings-container">
-          <h1>Monthly Progress</h1>
+          <h1>My Monthly Progress</h1>
 
           <div id="totals-container">
             <div class="total">

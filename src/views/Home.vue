@@ -250,7 +250,7 @@
       rgb(89, 60, 194) 0%,
       rgb(17, 69, 182) 100%
     );
-    min-height: 100vh;
+    height: 100vh;
     color: white;
   }
   /* NAVBAR */
@@ -400,12 +400,15 @@
   }
 
   @media only screen and (max-width: 1000px) {
+    #landing {
+      height: 110vh;
+    }
     #main-container {
       display: block;
       text-align: center;
       margin-right: 8%;
       margin-left: 8%;
-      height: auto;
+      height: fit-content;
     }
     #left-container {
       margin: 30px auto 30px auto;
@@ -442,7 +445,10 @@
       margin: 10px auto 0 auto;
     }
   }
-  @media only screen and (max-width: 500px) {
+  @media only screen and (max-width: 540px) {
+    #landing {
+      height: 130vh;
+    }
     #main-container {
       margin-right: 1%;
       margin-left: 1%;
@@ -459,7 +465,10 @@
       font-size: 30px;
     }
   }
-  @media only screen and (max-width: 300px) {
+  @media only screen and (max-width: 360px) {
+    #landing {
+      height: 150vh;
+    }
     #right-container {
       width: 250px;
     }

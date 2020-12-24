@@ -20,7 +20,6 @@
   html,
   body {
     box-sizing: border-box;
-    height: 100%;
     position: relative;
     background-color: #f0f3f6;
   }
