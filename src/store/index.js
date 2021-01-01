@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import appGridView from './modules/appGridView';
 import userAccounts from './modules/userAccounts';
 import appSettings from './modules/appSettings';
+import appAnalytics from './modules/appAnalytics';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -10,5 +11,6 @@ export default new Vuex.Store({
     appGridView,
     userAccounts,
     appSettings,
+    appAnalytics,
   },
 });

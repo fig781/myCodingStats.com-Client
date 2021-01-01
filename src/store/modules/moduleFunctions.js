@@ -92,4 +92,13 @@ export default {
       return 0;
     }
   },
+  convertNumberToTotalTime: (number) => {
+    if (number == null) {
+      return '--';
+    }
+    let hours, minutes;
+    hours = Math.floor(number / 60);
+    minutes = number % 60;
+    return `${hours}hr ${minutes}min`;
+  },
 };
