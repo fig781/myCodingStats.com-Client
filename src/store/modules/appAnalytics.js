@@ -1,4 +1,3 @@
-import router from '../../router/index';
 import globalUrl from '../../globalFunctions/globalUrl';
 import moduleFunctions from '../modules/moduleFunctions';
 
@@ -80,7 +79,8 @@ const actions = {
       if (res.status == 200) {
         commit('setCategoryTotals', jsonResponse);
       } else {
-        router.push('/forbidden');
+        console.log('getCategoryTotals error');
+        console.log(res);
       }
     } catch (err) {
       console.log(err);
@@ -99,7 +99,8 @@ const actions = {
       if (res.status == 200) {
         commit('setTagTotals', jsonResponse);
       } else {
-        router.push('/forbidden');
+        console.log('getTagTotals error');
+        console.log(res);
       }
     } catch (err) {
       console.log(err);
@@ -118,7 +119,8 @@ const actions = {
       if (res.status == 200) {
         commit('setProjectTotals', jsonResponse);
       } else {
-        router.push('/forbidden');
+        console.log('getProjectTotals error');
+        console.log(res);
       }
     } catch (err) {
       console.log(err);
