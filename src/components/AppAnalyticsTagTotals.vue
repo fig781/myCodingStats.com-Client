@@ -1,10 +1,23 @@
 <template>
   <div class="tag-totals">
     <h3 class="tag-totals__title">Total Time on each {{ title }}</h3>
-    <div class="tag-compare" v-for="tag in tags" :key="tag.id">
-      <p>{{ tag.name }}</p>
-      <span class="tag-compare__bar"></span>
-      <p>{{ tag.totalTime }}</p>
+    <p class="tag-totals__no-tags" v-if="tags.length == 0">
+      Looks like there are no data
+    </p>
+    <div class="tag-display">
+      <div class="tag-row" v-for="tag in tags" :key="tag.id">
+        <p class="tag-row__cell tag-row__name">{{ tag.name }}</p>
+        <div class="tag-row__cell">
+          <span
+            class="tag-row__bar"
+            :style="{
+              width:
+                tag.percentage == 0.0 ? '3px' : tag.percentage * 300 + 'px',
+            }"
+          ></span>
+          <p class="tag-row__total">{{ tag.total }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,16 +44,32 @@
   .tag-totals__title {
     margin-bottom: 10px;
   }
-  .tag-compare {
-    display: flex;
-    margin-bottom: 5px;
-    justify-content: flex-end;
+  .tag-totals__no-tags {
+    text-align: center;
   }
-  .tag-compare__bar {
-    width: 200px;
+  .tag-display {
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  .tag-row {
+    display: table-row;
+    border-bottom: 5px solid transparent;
+  }
+  .tag-row__name {
+    text-align: right;
+    padding-right: 5px;
+  }
+  .tag-row__bar {
     height: 20px;
-    background-color: rgb(56, 53, 202);
-    margin: 0 8px;
-    justify-content: flex-start;
+    background-color: #1f43b8;
+    display: inherit;
+  }
+  .tag-row__cell {
+    display: table-cell;
+  }
+  .tag-row__total {
+    display: inherit;
+    padding-left: 5px;
   }
 </style>

@@ -9,10 +9,14 @@ const state = {
     totalPassiveTime: '--',
     totalCodingChallengesTime: '--',
   },
+  tagTotals: [],
+  projectTotals: [],
 };
 
 const getters = {
   getCategoryTotals: (state) => state.categoryTotals,
+  getTagTotals: (state) => state.tagTotals,
+  getProjectTotals: (state) => state.projectTotals,
 };
 
 const mutations = {
@@ -32,6 +36,34 @@ const mutations = {
       payload.coding_problems_time
     );
   },
+  setTagTotals: (state, payload) => {
+    let totalTime = 0;
+    for (let x = 0; x < payload.length; x++) {
+      totalTime += Number(payload[x].total);
+    }
+    for (let y = 0; y < payload.length; y++) {
+      payload[y].percentage = moduleFunctions.findPercentageOfTotal(
+        totalTime,
+        payload[y].total
+      );
+      payload[y].total = moduleFunctions.convertNumberToTime(payload[y].total);
+    }
+    state.tagTotals = payload;
+  },
+  setProjectTotals: (state, payload) => {
+    let totalTime = 0;
+    for (let x = 0; x < payload.length; x++) {
+      totalTime += Number(payload[x].total);
+    }
+    for (let y = 0; y < payload.length; y++) {
+      payload[y].percentage = moduleFunctions.findPercentageOfTotal(
+        totalTime,
+        payload[y].total
+      );
+      payload[y].total = moduleFunctions.convertNumberToTime(payload[y].total);
+    }
+    state.projectTotals = payload;
+  },
 };
 
 const actions = {
@@ -45,9 +77,46 @@ const actions = {
         }
       );
       const jsonResponse = await res.json();
-      console.log(jsonResponse);
       if (res.status == 200) {
         commit('setCategoryTotals', jsonResponse);
+      } else {
+        router.push('/forbidden');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getTagTotals: async ({ rootState, commit }) => {
+    try {
+      const res = await fetch(
+        `${globalUrl}analytics/tagtotals/${rootState.userAccounts.loggedInUser.userId}`,
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
+      );
+      const jsonResponse = await res.json();
+      if (res.status == 200) {
+        commit('setTagTotals', jsonResponse);
+      } else {
+        router.push('/forbidden');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getProjectTotals: async ({ rootState, commit }) => {
+    try {
+      const res = await fetch(
+        `${globalUrl}analytics/projecttotals/${rootState.userAccounts.loggedInUser.userId}`,
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
+      );
+      const jsonResponse = await res.json();
+      if (res.status == 200) {
+        commit('setProjectTotals', jsonResponse);
       } else {
         router.push('/forbidden');
       }

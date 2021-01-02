@@ -25,8 +25,8 @@
         </div>
       </div>
       <div class="tags">
-        <AppAnalyticsTagTotals title="Tag" :tags="allTags" />
-        <AppAnalyticsTagTotals title="Project" :tags="allProjects" />
+        <AppAnalyticsTagTotals title="Tag" :tags="tagTotals" />
+        <AppAnalyticsTagTotals title="Project" :tags="projectTotals" />
       </div>
     </div>
   </div>
@@ -44,11 +44,11 @@
       AppAnalyticsTagTotals,
     },
     computed: {
-      allTags() {
-        return this.$store.getters.getAllTags;
+      tagTotals() {
+        return this.$store.getters.getTagTotals;
       },
-      allProjects() {
-        return this.$store.getters.getAllProjects;
+      projectTotals() {
+        return this.$store.getters.getProjectTotals;
       },
       categoryTotals() {
         return this.$store.getters.getCategoryTotals;
@@ -56,10 +56,8 @@
     },
     created() {
       this.$store.dispatch('getCategoryTotals');
-      if (this.allTags.length == 0 && this.allProjects.length == 0) {
-        this.$store.dispatch('fetchAllTags');
-        this.$store.dispatch('fetchAllProjects');
-      }
+      this.$store.dispatch('getTagTotals');
+      this.$store.dispatch('getProjectTotals');
     },
   };
 </script>
@@ -109,6 +107,9 @@
     }
     .totals {
       align-items: center;
+      justify-content: center;
+    }
+    .tags {
       justify-content: center;
     }
   }

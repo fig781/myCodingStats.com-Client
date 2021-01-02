@@ -101,4 +101,8 @@ export default {
     minutes = number % 60;
     return `${hours}hr ${minutes}min`;
   },
+  findPercentageOfTotal: (total, value) => {
+    let x = Number.parseFloat(value / total).toPrecision(2);
+    return Number(x);
+  },
 };
