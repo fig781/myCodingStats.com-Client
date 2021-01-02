@@ -169,8 +169,8 @@
   }
   img {
     cursor: pointer;
-    max-height: 32px;
-    max-width: 32px;
+    max-height: 26px;
+    max-width: 26px;
   }
   img:hover {
     filter: invert(44%) sepia(0%) saturate(153%) hue-rotate(166deg)
