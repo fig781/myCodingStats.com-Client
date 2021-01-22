@@ -92,7 +92,7 @@
 
 <script>
   import CustomSelect from './CustomSelect';
-  import InputErrorMessage from './InputErrorMessage';
+  import InputErrorMessage from '../InputErrorMessage';
   import CustomTimeInput from './CustomTimeInput';
   import { directive as onClickaway } from 'vue-clickaway';
 

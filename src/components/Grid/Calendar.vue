@@ -1,15 +1,15 @@
 <template>
-  <div id="table">
+  <div class="table">
     <div class="table-row">
       <div class="table-header">
-        <p class="table-header-text">Date</p>
+        <p class="table-header__text">Date</p>
       </div>
       <div class="table-header">
-        <p class="table-header-text">Day</p>
+        <p class="table-header__text">Day</p>
       </div>
       <div class="table-header">
         <div class="info-header">
-          <p class="table-header-text">
+          <p class="table-header__text">
             Active Learning
           </p>
           <div
@@ -17,8 +17,12 @@
             @mouseover="activeTimeHover = true"
             @mouseleave="activeTimeHover = false"
           >
-            <img src="../assets/information.png" alt="info." />
-            <span class="tooltip-text active" v-if="activeTimeHover">
+            <img
+              class="tooltip__img"
+              src="../../assets/information.png"
+              alt="info."
+            />
+            <span class="tooltip__text tooltip--active" v-if="activeTimeHover">
               Activaly writing code
             </span>
           </div>
@@ -26,14 +30,21 @@
       </div>
       <div class="table-header">
         <div class="info-header">
-          <p class="table-header-text">Passive Learning</p>
+          <p class="table-header__text">Passive Learning</p>
           <div
             class="tooltip"
             @mouseover="passiveTimeHover = true"
             @mouseleave="passiveTimeHover = false"
           >
-            <img src="../assets/information.png" alt="info." />
-            <span class="tooltip-text passive" v-if="passiveTimeHover">
+            <img
+              class="tooltip__img"
+              src="../../assets/information.png"
+              alt="info."
+            />
+            <span
+              class="tooltip__text tooltip--passive"
+              v-if="passiveTimeHover"
+            >
               Watching tutorials and reading guides
             </span>
           </div>
@@ -41,33 +52,37 @@
       </div>
       <div class="table-header">
         <div class="info-header">
-          <p class="table-header-text">Coding Challenges</p>
+          <p class="table-header__text">Coding Challenges</p>
           <div
             class="tooltip"
             @mouseover="codingTimeHover = true"
             @mouseleave="codingTimeHover = false"
           >
-            <img src="../assets/information.png" alt="info." />
-            <span class="tooltip-text coding" v-if="codingTimeHover">
+            <img
+              class="tooltip__img"
+              src="../../assets/information.png"
+              alt="info."
+            />
+            <span class="tooltip__text tooltip--coding" v-if="codingTimeHover">
               Doing coding challenges
             </span>
           </div>
         </div>
       </div>
       <div class="table-header">
-        <p class="table-header-text">Tag</p>
+        <p class="table-header__text">Tag</p>
       </div>
       <div class="table-header">
-        <p class="table-header-text">Project</p>
+        <p class="table-header__text">Project</p>
       </div>
       <div class="table-header">
-        <p class="table-header-text">Description</p>
+        <p class="table-header__text">Description</p>
       </div>
       <div class="table-header">
-        <p class="table-header-text">Day Total</p>
+        <p class="table-header__text">Day Total</p>
       </div>
-      <div class="table-header" id="last-column">
-        <p class="table-header-text">Week Total</p>
+      <div class="table-header table-header--last">
+        <p class="table-header__text">Week Total</p>
       </div>
     </div>
 
@@ -122,7 +137,7 @@
 </script>
 
 <style scoped>
-  #table {
+  .table {
     display: table;
     border-collapse: collapse;
     margin-left: 3rem;
@@ -132,7 +147,7 @@
   .table-row {
     display: table-row;
   }
-  #last-column {
+  .table-header--last {
     padding-right: 10px;
   }
   .table-header {
@@ -144,20 +159,20 @@
     padding-left: 12px;
     border-bottom: 1px solid grey;
   }
-  .table-header-text {
+  .table-header__text {
     font-weight: bold;
     text-align: center;
   }
   .info-header {
     display: flex;
   }
-  img {
+  .tooltip__img {
     margin-left: 2px;
   }
   .tooltip {
     position: relative;
   }
-  .tooltip .tooltip-text {
+  .tooltip .tooltip__text {
     background-color: #484c57;
     color: rgb(255, 255, 255);
     text-align: center;
@@ -167,15 +182,15 @@
     z-index: 1;
     transition: opacity 0.3s;
   }
-  .active {
+  .tooltip--active {
     top: -150%;
     margin-left: -88px;
   }
-  .passive {
+  .tooltip--passive {
     top: -150%;
     left: -715%;
   }
-  .coding {
+  .tooltip--coding {
     top: -150%;
     left: -455%;
   }
@@ -192,7 +207,7 @@
   }
 
   @media only screen and (max-width: 768px) {
-    #table {
+    .table {
       margin-left: 0;
       display: flex;
       flex-wrap: wrap;

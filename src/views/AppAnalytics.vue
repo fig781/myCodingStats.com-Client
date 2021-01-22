@@ -28,6 +28,7 @@
         <AppAnalyticsTagTotals title="Tag" :tags="tagTotals" />
         <AppAnalyticsTagTotals title="Project" :tags="projectTotals" />
       </div>
+      <div></div>
     </div>
   </div>
 </template>
@@ -35,7 +36,8 @@
 <script>
   import SideNavigationBar from '../components/SideNavigationBar';
   import MobileNav from '../components/MobileNav';
-  import AppAnalyticsTagTotals from '../components/AppAnalyticsTagTotals';
+  import AppAnalyticsTagTotals from '../components/Analytics/AppAnalyticsTagTotals';
+
   export default {
     name: 'AppAnalytics',
     components: {

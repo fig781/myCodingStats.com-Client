@@ -1,47 +1,49 @@
 <template>
   <div
-    id="table-row"
+    class="row"
     :class="oddId && shader"
     @click="showCalendarDayEdit(oneCalendarDay)"
   >
-    <div class="table-cell date">
+    <div class="row__cell row__cell--date">
       {{ oneCalendarDay.date }}
     </div>
-    <div class="table-cell day">{{ oneCalendarDay.day }}</div>
-    <div class="table-cell mobile-shaded">
-      <div class="mobile-only">Active time:</div>
+    <div class="row__cell row__cell--day">
+      {{ oneCalendarDay.day }}
+    </div>
+    <div class="row__cell row__cell--mobile-shaded">
+      <div class="row__mobile">Active time:</div>
       {{ oneCalendarDay.active }}
     </div>
-    <div class="table-cell">
-      <div class="mobile-only">Passive time:</div>
+    <div class="row__cell">
+      <div class="row__mobile">Passive time:</div>
       {{ oneCalendarDay.passive }}
     </div>
-    <div class="table-cell mobile-shaded">
-      <div class="mobile-only">Coding Challenges time:</div>
+    <div class="row__cell row__cell--mobile-shaded">
+      <div class="row__mobile">Coding Challenges time:</div>
       {{ oneCalendarDay.coding }}
     </div>
-    <div class="table-cell mobile-flex ">
-      <div class="mobile-only">Tag:</div>
+    <div class="row__cell row__cell--flex">
+      <div class="row__mobile">Tag:</div>
       <div :class="tagNotNull && rounded">
         {{ oneCalendarDay.tag.name }}
       </div>
     </div>
-    <div class="table-cell mobile-flex mobile-shaded">
-      <div class="mobile-only">Project:</div>
+    <div class="row__cell row__cell--flex row__cell--mobile-shaded">
+      <div class="row__mobile">Project:</div>
       <div :class="projectNotNull && rounded">
         {{ oneCalendarDay.project.name }}
       </div>
     </div>
-    <div class="table-cell ">
-      <div class="mobile-only">Description:</div>
+    <div class="row__cell ">
+      <div class="row__mobile">Description:</div>
       {{ oneCalendarDay.description }}
     </div>
-    <div class="table-cell total mobile-shaded">
-      <div class="mobile-only">Day Total:</div>
+    <div class="row__cell row__cell--total row__cell--mobile-shaded">
+      <div class="row__mobile">Day Total:</div>
       {{ dayTotal }}
     </div>
-    <div class="table-cell total " :class="sunday && highlightWeek">
-      <div class="mobile-only">Week Total:</div>
+    <div class="row__cell row__cell--total " :class="sunday && highlightWeek">
+      <div class="row__mobile">Week Total:</div>
       {{ oneCalendarDay.weekRow.rowTime }}
     </div>
   </div>
@@ -55,7 +57,7 @@
         sunday: false,
         oddId: false,
         today: false,
-        shader: 'shaded',
+        shader: 'row__cell--shaded',
         highlightWeek: 'highlightWeek',
         todayHighlighted: 'todayHighlighted',
         projectNotNull: false,
@@ -147,10 +149,10 @@
 </script>
 
 <style scoped>
-  #table-row {
+  .row {
     display: table-row;
   }
-  .table-cell {
+  .row__cell {
     display: table-cell;
     padding-top: 6px;
     padding-bottom: 6px;
@@ -161,6 +163,30 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
+  }
+
+  .row__cell--total {
+    border-left: 1px solid grey;
+  }
+  .row__cell--date {
+    color: #1f43b8;
+    padding-left: 10px;
+  }
+  .row:hover {
+    background-color: rgba(121, 134, 252, 0.233);
+    cursor: pointer;
+  }
+  .row__cell--shaded {
+    background-color: #0951ec18;
+  }
+
+  .row__mobile {
+    display: none;
+  }
+  .highlightWeek {
+    border-top: solid grey 1px;
+    border-bottom: solid grey 1px;
+    font-weight: bold;
   }
   .rounded {
     border: 1px solid grey;
@@ -175,31 +201,9 @@
     background-color: #f0f3f6;
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034);
   }
-  .total {
-    border-left: 1px solid grey;
-  }
-  .date {
-    color: #1f43b8;
-    padding-left: 10px;
-  }
-  #table-row:hover {
-    background-color: rgba(121, 134, 252, 0.233);
-    cursor: pointer;
-  }
-  .shaded {
-    background-color: #0951ec18;
-  }
-  .highlightWeek {
-    border-top: solid grey 1px;
-    border-bottom: solid grey 1px;
-    font-weight: bold;
-  }
-  .mobile-only {
-    display: none;
-  }
 
   @media only screen and (max-width: 768px) {
-    #table-row {
+    .row {
       display: grid;
       border: 1px solid rgba(167, 167, 167, 0.466);
       margin: 5px;
@@ -207,27 +211,27 @@
       background-color: #f7fbff;
       box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
     }
-    .table-cell {
+    .row__cell {
       padding: 2px 5px 2px 5px;
       max-width: none;
       text-align: left;
     }
-    .mobile-only {
+    .row__mobile {
       display: inline;
     }
-    .total {
+    .row__cell--total {
       border: none;
       border-radius: 0px 0px 5px 5px;
     }
     .highlightWeek {
       border: none;
     }
-    .date {
+    .row__cell--date {
       text-align: center;
       background-color: #0951ec18;
       border-radius: 5px 5px 0px 0px;
     }
-    .day {
+    .row__cell--day {
       text-align: center;
       font-weight: 700;
     }
@@ -239,10 +243,10 @@
       max-width: 150px;
       text-overflow: ellipsis;
     }
-    .mobile-flex {
+    .row__cell--flex {
       display: flex;
     }
-    .mobile-shaded {
+    .row__cell--mobile-shaded {
       background-color: rgba(61, 61, 61, 0.075);
     }
   }

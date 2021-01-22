@@ -4,7 +4,10 @@
       {{ entry.name }}
     </div>
     <div class="table-cell delete">
-      <img src="../assets/trash-can.png" @click="deleteTagOrProject(entry)" />
+      <img
+        src="../../assets/trash-can.png"
+        @click="deleteTagOrProject(entry)"
+      />
     </div>
   </div>
 </template>

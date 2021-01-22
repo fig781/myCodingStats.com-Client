@@ -46,8 +46,8 @@
 
 <script>
   import SideNavigationBar from '../components/SideNavigationBar';
-  import AppSettingsTable from '../components/AppSettingsTable';
-  import AppSettingsEdit from '../components/AppSettingsEdit';
+  import AppSettingsTable from '../components/Settings/AppSettingsTable';
+  import AppSettingsEdit from '../components/Settings/AppSettingsEdit';
   import MobileNav from '../components/MobileNav';
 
   export default {

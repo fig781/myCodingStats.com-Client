@@ -6,7 +6,7 @@
     <div id="dropdown" v-if="open" v-on-clickaway="away">
       <div class="time-clicker">
         <div class="button increase-hours-button" @click="increaseHours">
-          <img class="arrow" src="../assets/up-arrow.png" alt="arrow" />
+          <img class="arrow" src="../../assets/up-arrow.png" alt="arrow" />
         </div>
         <div class="time-window">
           <div id="hours">
@@ -14,12 +14,12 @@
           </div>
         </div>
         <div class="button" @click="decreaseHours">
-          <img class="arrow" src="../assets/down-arrow.png" alt="arrow" />
+          <img class="arrow" src="../../assets/down-arrow.png" alt="arrow" />
         </div>
       </div>
       <div class="time-clicker">
         <div class="button" @click="increaseMinutes">
-          <img class="arrow" src="../assets/up-arrow.png" alt="arrow" />
+          <img class="arrow" src="../../assets/up-arrow.png" alt="arrow" />
         </div>
         <div class="time-window minutes">
           <div id="minutes">
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="button" @click="decreaseMinutes">
-          <img class="arrow" src="../assets/down-arrow.png" alt="arrow" />
+          <img class="arrow" src="../../assets/down-arrow.png" alt="arrow" />
         </div>
       </div>
     </div>
@@ -97,10 +97,10 @@
       },
       increaseMinutes() {
         let minutes = parseInt(this.minutesInput);
-        if (minutes == 59) {
+        if (minutes == 55) {
           minutes = 0;
         } else {
-          minutes++;
+          minutes += 5;
         }
         if (minutes < 10) {
           this.minutesInput = '0' + minutes.toString();
@@ -116,9 +116,9 @@
       decreaseMinutes() {
         let minutes = parseInt(this.minutesInput);
         if (minutes == 0) {
-          minutes = 59;
+          minutes = 55;
         } else {
-          minutes--;
+          minutes -= 5;
         }
         if (minutes < 10) {
           this.minutesInput = '0' + minutes.toString();

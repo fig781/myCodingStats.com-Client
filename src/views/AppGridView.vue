@@ -62,7 +62,7 @@
 
 <script>
   import SideNavigationBar from '../components/SideNavigationBar';
-  import Calendar from '../components/Calendar';
+  import Calendar from '../components/Grid/Calendar';
   import MobileNav from '../components/MobileNav';
 
   export default {

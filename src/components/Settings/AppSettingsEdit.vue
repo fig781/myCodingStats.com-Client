@@ -20,8 +20,8 @@
 </template>
 
 <script>
-  import InputErrorMessage from './InputErrorMessage';
-  import { inputValidation } from '../globalFunctions/inputValidation';
+  import InputErrorMessage from '../InputErrorMessage';
+  import { inputValidation } from '../../globalFunctions/inputValidation';
   export default {
     name: 'AppSettingsEdit',
     data() {
