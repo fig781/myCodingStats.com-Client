@@ -13,4 +13,29 @@ export default new Vuex.Store({
     appSettings,
     appAnalytics,
   },
+
+  //Global Things
+  state: {
+    todaysDate: {
+      month: {
+        name: '',
+        number: 0,
+      },
+      date: 1,
+      year: 0,
+    },
+  },
+  mutations: {
+    setTodaysDate: (state) => {
+      const today = new Date();
+      const monthFormat = new Intl.DateTimeFormat('en-US', {
+        month: 'long',
+      });
+      //todaysDate
+      state.todaysDate.month.number = today.getMonth();
+      state.todaysDate.month.name = monthFormat.format(today);
+      state.todaysDate.date = today.getDate();
+      state.todaysDate.year = today.getFullYear();
+    },
+  },
 });

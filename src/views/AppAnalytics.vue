@@ -28,7 +28,7 @@
         <AppAnalyticsTagTotals title="Tag" :tags="tagTotals" />
         <AppAnalyticsTagTotals title="Project" :tags="projectTotals" />
       </div>
-      <div></div>
+      <AppAnalyticsChartContainer />
     </div>
   </div>
 </template>
@@ -37,6 +37,7 @@
   import SideNavigationBar from '../components/SideNavigationBar';
   import MobileNav from '../components/MobileNav';
   import AppAnalyticsTagTotals from '../components/Analytics/AppAnalyticsTagTotals';
+  import AppAnalyticsChartContainer from '../components/Analytics/AppAnalyticsChartContainer';
 
   export default {
     name: 'AppAnalytics',
@@ -44,6 +45,7 @@
       SideNavigationBar,
       MobileNav,
       AppAnalyticsTagTotals,
+      AppAnalyticsChartContainer,
     },
     computed: {
       tagTotals() {
@@ -57,9 +59,11 @@
       },
     },
     created() {
+      this.$store.dispatch('actionSetInitialAnalyticsMonthYear');
       this.$store.dispatch('getCategoryTotals');
       this.$store.dispatch('getTagTotals');
       this.$store.dispatch('getProjectTotals');
+      this.$store.dispatch('compileChartValues');
     },
   };
 </script>

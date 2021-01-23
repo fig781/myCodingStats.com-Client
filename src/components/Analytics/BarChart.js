@@ -6,6 +6,7 @@ export default {
     return {
       chartOptions: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           xAxes: [
             {

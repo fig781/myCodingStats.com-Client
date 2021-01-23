@@ -97,10 +97,10 @@
     },
     computed: {
       year() {
-        return this.$store.getters.year;
+        return this.$store.getters.gridYear;
       },
       month() {
-        return this.$store.getters.month;
+        return this.$store.getters.gridMonth;
       },
       calendar() {
         return this.$store.getters.calendar;
@@ -117,7 +117,7 @@
     },
     created() {
       this.$store.commit('clearCalendar');
-      this.$store.commit('setTodaysDateMonthYear');
+      this.$store.dispatch('actionSetInitialGridMonthYear');
       this.$store.dispatch('generateAllCalendarRows');
       if (this.allTags.length == 0 && this.allProjects.length == 0) {
         this.$store.dispatch('fetchAllTags');

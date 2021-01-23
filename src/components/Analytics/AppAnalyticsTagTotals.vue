@@ -2,7 +2,7 @@
   <div class="tag-totals">
     <h3 class="tag-totals__title">Total Time on each {{ title }}</h3>
     <p class="tag-totals__no-tags" v-if="tags.length == 0">
-      Looks like there are no data
+      Looks like there is no data
     </p>
     <div class="tag-display">
       <div class="tag-row" v-for="tag in tags" :key="tag.id">

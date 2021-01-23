@@ -1,22 +1,12 @@
 import router from '../../router/index';
 import moduleFunctions from './moduleFunctions';
-
 import globalUrl from '../../globalFunctions/globalUrl';
 
 const state = {
-  year: 0,
-  month: {
+  gridYear: 0,
+  gridMonth: {
     name: '',
     number: 0,
-  },
-  //date needs to have year, month, date
-  todaysDate: {
-    month: {
-      name: '',
-      number: 0,
-    },
-    date: 1,
-    year: 0,
   },
   calendar: [],
   monthTotals: {
@@ -30,8 +20,8 @@ const state = {
 };
 
 const getters = {
-  year: (state) => state.year,
-  month: (state) => state.month,
+  gridYear: (state) => state.gridYear,
+  gridMonth: (state) => state.gridMonth,
   calendar: (state) => state.calendar,
   monthTotals: (state) => state.monthTotals,
 };
@@ -40,23 +30,10 @@ const mutations = {
   clearCalendar: (state) => {
     state.calendar = [];
   },
-  setTodaysDateMonthYear: (state) => {
-    const today = new Date();
-    const monthFormat = new Intl.DateTimeFormat('en-US', {
-      month: 'long',
-    });
-    //todaysDate
-    state.todaysDate.month.number = today.getMonth();
-    state.todaysDate.month.name = monthFormat.format(today);
-    state.todaysDate.date = today.getDate();
-    state.todaysDate.year = today.getFullYear();
-
-    //year
-    state.year = today.getFullYear();
-
-    //month
-    state.month.number = today.getMonth();
-    state.month.name = monthFormat.format(today);
+  setInitialGridMonthYear: (state, payload) => {
+    //payload = rootState
+    state.gridYear = payload.todaysDate.year;
+    state.gridMonth = payload.todaysDate.month;
   },
 
   decreaseMonthAndYear: (state) => {
@@ -74,13 +51,13 @@ const mutations = {
       'November',
       'December',
     ];
-    if (state.month.number === 0) {
-      state.month.number = 11;
-      state.month.name = months[state.month.number];
-      state.year--;
+    if (state.gridMonth.number === 0) {
+      state.gridMonth.number = 11;
+      state.gridMonth.name = months[state.gridMonth.number];
+      state.gridYear--;
     } else {
-      state.month.number--;
-      state.month.name = months[state.month.number];
+      state.gridMonth.number--;
+      state.gridMonth.name = months[state.gridMonth.number];
     }
   },
   increaseMonthAndYear: (state) => {
@@ -98,13 +75,13 @@ const mutations = {
       'November',
       'December',
     ];
-    if (state.month.number === 11) {
-      state.month.number = 0;
-      state.month.name = months[state.month.number];
-      state.year++;
+    if (state.gridMonth.number === 11) {
+      state.gridMonth.number = 0;
+      state.gridMonth.name = months[state.gridMonth.number];
+      state.gridYear++;
     } else {
-      state.month.number++;
-      state.month.name = months[state.month.number];
+      state.gridMonth.number++;
+      state.gridMonth.name = months[state.gridMonth.number];
     }
   },
   populateOneCalendarRow: (state, payload) => {
@@ -125,12 +102,12 @@ const mutations = {
     const date = new Date();
     const dayFormat = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
 
-    date.setFullYear(state.year);
-    date.setMonth(state.month.number);
+    date.setFullYear(state.gridYear);
+    date.setMonth(state.gridMonth.number);
     date.setDate(payload.rowId);
 
     oneCalendarDay.id = payload.rowId;
-    oneCalendarDay.date = `${state.month.number + 1}/${payload.rowId}`;
+    oneCalendarDay.date = `${state.gridMonth.number + 1}/${payload.rowId}`;
     oneCalendarDay.day = dayFormat.format(date);
     oneCalendarDay.dayId = moduleFunctions.setDayOfWeekId(oneCalendarDay.day);
     if (payload.dayObject.active_time != 0) {
@@ -262,6 +239,9 @@ const mutations = {
 };
 
 const actions = {
+  actionSetInitialGridMonthYear: ({ rootState, commit }) => {
+    commit('setInitialGridMonthYear', rootState);
+  },
   fetchRowsWithValues: async ({ rootState }, date) => {
     try {
       const res = await fetch(
@@ -282,11 +262,11 @@ const actions = {
     }
   },
   generateAllCalendarRows: async ({ commit, dispatch, state }) => {
-    let monthNumber = state.month.number + 1;
+    let monthNumber = state.gridMonth.number + 1;
     if (monthNumber < 10) {
       monthNumber = '0' + monthNumber.toString();
     }
-    const yearAndMonth = `${state.year}-${monthNumber}`;
+    const yearAndMonth = `${state.gridYear}-${monthNumber}`;
     const fetchedRowInformation = await dispatch(
       'fetchRowsWithValues',
       yearAndMonth
@@ -306,7 +286,7 @@ const actions = {
       30,
       31,
     ];
-    const numberOfDaysInThisMonth = numberOfDaysInMonth[state.month.number];
+    const numberOfDaysInThisMonth = numberOfDaysInMonth[state.gridMonth.number];
     let dateEntered = false;
     for (let id = 1; id <= numberOfDaysInThisMonth; id++) {
       for (let entry = 0; entry < extractedDates.length; entry++) {
@@ -340,7 +320,7 @@ const actions = {
   },
   addGridRow: async ({ rootState, state, commit }, rowEntryInfo) => {
     try {
-      const formattedDate = rowEntryInfo.inAppDate + '/' + state.year;
+      const formattedDate = rowEntryInfo.inAppDate + '/' + state.gridYear;
       const res = await fetch(`${globalUrl}gridmonth`, {
         method: 'POST',
         body: JSON.stringify({

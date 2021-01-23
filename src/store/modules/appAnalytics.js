@@ -2,6 +2,11 @@ import globalUrl from '../../globalFunctions/globalUrl';
 import moduleFunctions from '../modules/moduleFunctions';
 
 const state = {
+  analyticsYear: 0,
+  analyticsMonth: {
+    name: 'yeet',
+    number: 0,
+  },
   categoryTotals: {
     totalCodingTime: '--',
     totalActivetime: '--',
@@ -13,12 +18,19 @@ const state = {
 };
 
 const getters = {
+  getAnalyticsYear: (state) => state.analyticsYear,
+  getAnalyticsMonth: (state) => state.analyticsMonth,
   getCategoryTotals: (state) => state.categoryTotals,
   getTagTotals: (state) => state.tagTotals,
   getProjectTotals: (state) => state.projectTotals,
 };
 
 const mutations = {
+  setInitialAnalyticsMonthYear: (state, payload) => {
+    //payload = rootState
+    state.analyticsYear = payload.todaysDate.year;
+    state.analyticsMonth = payload.todaysDate.month;
+  },
   setCategoryTotals: (state, payload) => {
     const timeTotals =
       payload.active_time + payload.passive_time + payload.coding_problems_time;
@@ -66,6 +78,9 @@ const mutations = {
 };
 
 const actions = {
+  actionSetInitialAnalyticsMonthYear: ({ rootState, commit }) => {
+    commit('setInitialAnalyticsMonthYear', rootState);
+  },
   getCategoryTotals: async ({ rootState, commit }) => {
     try {
       const res = await fetch(
@@ -125,6 +140,36 @@ const actions = {
     } catch (err) {
       console.log(err);
     }
+  },
+
+  getChartValues: async ({ rootState }, date) => {
+    try {
+      const res = await fetch(
+        `${globalUrl}analytics/chart/?date=${date}&userid=${rootState.userAccounts.loggedInUser.userId}`,
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
+      );
+      const jsonResponse = await res.json();
+      if (res.status == 200) {
+        return jsonResponse;
+      } else {
+        console.log('err');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  compileChartValues: async ({ dispatch }) => {
+    let monthNumber = state.analyticsMonth.number + 1;
+    if (monthNumber < 10) {
+      monthNumber = '0' + monthNumber.toString();
+    }
+    const yearAndMonth = `${state.analyticsYear}-${monthNumber}`;
+    const fetchedChartValues = await dispatch('getChartValues', yearAndMonth);
+    console.log(fetchedChartValues);
   },
 };
 
