@@ -59,11 +59,11 @@
       },
     },
     created() {
+      this.$store.commit('setTodaysDate');
       this.$store.dispatch('actionSetInitialAnalyticsMonthYear');
       this.$store.dispatch('getCategoryTotals');
       this.$store.dispatch('getTagTotals');
       this.$store.dispatch('getProjectTotals');
-      this.$store.dispatch('compileChartValues');
     },
   };
 </script>

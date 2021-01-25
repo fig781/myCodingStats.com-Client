@@ -116,6 +116,7 @@
       },
     },
     created() {
+      this.$store.commit('setTodaysDate');
       this.$store.commit('clearCalendar');
       this.$store.dispatch('actionSetInitialGridMonthYear');
       this.$store.dispatch('generateAllCalendarRows');

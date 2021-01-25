@@ -10,12 +10,19 @@ export default {
         scales: {
           xAxes: [
             {
+              gridLines: {
+                drawOnChartArea: false,
+              },
               stacked: true,
             },
           ],
           yAxes: [
             {
               stacked: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Minutes',
+              },
             },
           ],
         },

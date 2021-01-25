@@ -8,7 +8,6 @@
   export default {
     name: 'App',
     created() {
-      this.$store.commit('setTodaysDate');
       this.$store.dispatch('autoLogin');
     },
   };

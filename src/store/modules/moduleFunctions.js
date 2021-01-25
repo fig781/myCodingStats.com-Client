@@ -105,4 +105,52 @@ export default {
     let x = Number.parseFloat(value / total).toPrecision(2);
     return Number(x);
   },
+
+  //analytics
+  generateCompleteChartData: (month, year, fetchedEntries) => {
+    let totalValues = [];
+    const daysInMonth = new Date(year, month, 0).getDate();
+
+    for (let x = 1; x <= daysInMonth; x++) {
+      let entryAdded = false;
+      if (fetchedEntries.length !== 0) {
+        for (let entry of fetchedEntries) {
+          if (entry.in_app_day == x) {
+            entry.in_app_day = Number(entry.in_app_day);
+            totalValues.push(entry);
+            entryAdded = true;
+            fetchedEntries.splice(fetchedEntries.indexOf(entry), 1);
+            break;
+          }
+        }
+      }
+
+      if (entryAdded == false) {
+        totalValues.push({
+          in_app_day: x,
+          active_time: 0,
+          passive_time: 0,
+          coding_problems_time: 0,
+        });
+      }
+    }
+    return totalValues;
+  },
+  generateChartLabels: (month, year) => {
+    let labels = [];
+    const daysInMonth = new Date(year, month, 0).getDate();
+
+    for (let x = 1; x <= daysInMonth; x++) {
+      labels.push(`${month}/${x}`);
+    }
+    return labels;
+  },
+  generateChartDataArray: (dataSubject, compiledData) => {
+    let data = [];
+
+    for (let entry of compiledData) {
+      data.push(entry[dataSubject]);
+    }
+    return data;
+  },
 };

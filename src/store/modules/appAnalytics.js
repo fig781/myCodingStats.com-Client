@@ -4,7 +4,7 @@ import moduleFunctions from '../modules/moduleFunctions';
 const state = {
   analyticsYear: 0,
   analyticsMonth: {
-    name: 'yeet',
+    name: '',
     number: 0,
   },
   categoryTotals: {
@@ -26,6 +26,54 @@ const getters = {
 };
 
 const mutations = {
+  decreaseAnalyticsMonthAndYear: (state) => {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+    if (state.analyticsMonth.number === 0) {
+      state.analyticsMonth.number = 11;
+      state.analyticsMonth.name = months[state.analyticsMonth.number];
+      state.analyticsYear--;
+    } else {
+      state.analyticsMonth.number--;
+      state.analyticsMonth.name = months[state.analyticsMonth.number];
+    }
+  },
+  increaseAnalyticsMonthAndYear: (state) => {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+    if (state.analyticsMonth.number === 11) {
+      state.analyticsMonth.number = 0;
+      state.analyticsMonth.name = months[state.analyticsMonth.number];
+      state.analyticsYear++;
+    } else {
+      state.analyticsMonth.number++;
+      state.analyticsMonth.name = months[state.analyticsMonth.number];
+    }
+  },
   setInitialAnalyticsMonthYear: (state, payload) => {
     //payload = rootState
     state.analyticsYear = payload.todaysDate.year;
@@ -162,7 +210,7 @@ const actions = {
     }
   },
 
-  compileChartValues: async ({ dispatch }) => {
+  compileChartValues: async ({ dispatch, state }) => {
     let monthNumber = state.analyticsMonth.number + 1;
     if (monthNumber < 10) {
       monthNumber = '0' + monthNumber.toString();
@@ -170,6 +218,46 @@ const actions = {
     const yearAndMonth = `${state.analyticsYear}-${monthNumber}`;
     const fetchedChartValues = await dispatch('getChartValues', yearAndMonth);
     console.log(fetchedChartValues);
+
+    const chartData = moduleFunctions.generateCompleteChartData(
+      state.analyticsMonth.number + 1,
+      state.analyticsYear,
+      fetchedChartValues
+    );
+
+    const chartActiveTime = moduleFunctions.generateChartDataArray(
+      'active_time',
+      chartData
+    );
+    const chartPassiveTime = moduleFunctions.generateChartDataArray(
+      'passive_time',
+      chartData
+    );
+    const chartCodingTime = moduleFunctions.generateChartDataArray(
+      'coding_problems_time',
+      chartData
+    );
+
+    const chartLabels = moduleFunctions.generateChartLabels(
+      state.analyticsMonth.number + 1,
+      state.analyticsYear
+    );
+
+    console.log(chartLabels);
+    console.log(chartData);
+    console.log(chartActiveTime);
+    console.log(chartPassiveTime);
+    console.log(chartCodingTime);
+
+    return {
+      labels: chartLabels,
+
+      activeData: chartActiveTime,
+
+      passiveData: chartPassiveTime,
+
+      codingData: chartCodingTime,
+    };
   },
 };
 
