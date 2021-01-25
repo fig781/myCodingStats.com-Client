@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="analytics-chart-container">
     <div class="navigation">
       <img
         class="navigation__arrow"
@@ -97,7 +97,7 @@
 <style scoped>
   .navigation {
     display: flex;
-    margin-top: 15px;
+    margin-top: 5px;
   }
   .navigation__arrow {
     cursor: pointer;
@@ -110,6 +110,14 @@
   }
   .navigation__date {
     font-family: 'Montserrat', sans-serif;
+  }
+  .analytics-chart-container {
+    padding: 15px;
+    border-radius: 5px;
+    margin: 5px;
+    border: solid 1px rgb(128, 128, 128);
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
+    max-width: 1400px;
   }
   .fade-enter-active,
   .fade-leave-active {

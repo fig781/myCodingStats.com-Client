@@ -1,6 +1,6 @@
 <template>
   <div class="chart-container">
-    <BarChart :chart-data="chartData" />
+    <bar-chart :chart-data="chartData" />
   </div>
 </template>
 
@@ -19,7 +19,6 @@
 
 <style scoped>
   .chart-container {
-    max-width: 1200px;
-    max-height: 200px;
+    max-width: 1400px;
   }
 </style>
