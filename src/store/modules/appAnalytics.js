@@ -217,7 +217,6 @@ const actions = {
     }
     const yearAndMonth = `${state.analyticsYear}-${monthNumber}`;
     const fetchedChartValues = await dispatch('getChartValues', yearAndMonth);
-    console.log(fetchedChartValues);
 
     const chartData = moduleFunctions.generateCompleteChartData(
       state.analyticsMonth.number + 1,
@@ -242,12 +241,6 @@ const actions = {
       state.analyticsMonth.number + 1,
       state.analyticsYear
     );
-
-    console.log(chartLabels);
-    console.log(chartData);
-    console.log(chartActiveTime);
-    console.log(chartPassiveTime);
-    console.log(chartCodingTime);
 
     return {
       labels: chartLabels,
