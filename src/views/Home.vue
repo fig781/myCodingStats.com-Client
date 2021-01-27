@@ -96,6 +96,7 @@
               placeholder="Password"
               v-model="formData.password"
             /><br />
+            <Loader v-if="loading" />
             <input
               id="signup-button"
               type="submit"
@@ -115,10 +116,12 @@
   //    </div>
   import InputErrorMessage from '../components/InputErrorMessage';
   import { inputValidation } from '../globalFunctions/inputValidation';
+  import Loader from '../components/Loader';
   export default {
     name: 'Home',
     components: {
       InputErrorMessage,
+      Loader,
     },
     data() {
       return {
@@ -133,6 +136,7 @@
         lastNameErrorMessage: '',
         emailErrorMessage: '',
         passwordErrorMessage: '',
+        loading: false,
       };
     },
     methods: {
@@ -206,6 +210,7 @@
           this.firstNameErrorMessage == '' &&
           this.lastNameErrorMessage == ''
         ) {
+          this.loading = true;
           const response = await this.$store.dispatch('signUp', this.formData);
 
           if (response) {
@@ -223,6 +228,7 @@
             }
           }
         }
+        this.loading = false;
       },
     },
     computed: {

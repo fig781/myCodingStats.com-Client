@@ -52,7 +52,7 @@
     text-indent: -9999px;
     width: 0.9em;
     height: 1.5em;
-    margin: 0px 1.6em 6px 1.6em;
+    margin: 3px 1.6em 0px 1.6em;
   }
   .loader:not(:required):before,
   .loader:not(:required):after {

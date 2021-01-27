@@ -45,7 +45,8 @@
             @click="increaseMonthYear"
             alt="right-arrow"
           />
-          <h2>{{ month.name }} {{ year }}</h2>
+          <h2 class="month-container__date">{{ month.name }} {{ year }}</h2>
+          <Loader v-if="loading" />
         </div>
         <transition :name="transitionDirection">
           <Calendar
@@ -64,6 +65,7 @@
   import SideNavigationBar from '../components/SideNavigationBar';
   import Calendar from '../components/Grid/Calendar';
   import MobileNav from '../components/MobileNav';
+  import Loader from '../components/Loader';
 
   export default {
     name: 'AppGridView',
@@ -71,28 +73,34 @@
       SideNavigationBar,
       Calendar,
       MobileNav,
+      Loader,
     },
     data() {
       return {
         componentKey: 0,
         mobile: false,
         transitionDirection: 'left-transition',
+        loading: false,
       };
     },
     methods: {
-      decreaseMonthYear() {
+      async decreaseMonthYear() {
+        this.loading = true;
         this.$store.commit('clearCalendar');
         this.$store.commit('decreaseMonthAndYear');
-        this.$store.dispatch('generateAllCalendarRows');
         this.componentKey++;
         this.transitionDirection = 'left-transition';
+        await this.$store.dispatch('generateAllCalendarRows');
+        this.loading = false;
       },
-      increaseMonthYear() {
+      async increaseMonthYear() {
+        this.loading = true;
         this.$store.commit('clearCalendar');
         this.$store.commit('increaseMonthAndYear');
-        this.$store.dispatch('generateAllCalendarRows');
         this.componentKey++;
         this.transitionDirection = 'right-transition';
+        await this.$store.dispatch('generateAllCalendarRows');
+        this.loading = false;
       },
     },
     computed: {
@@ -115,11 +123,13 @@
         return this.$store.getters.getAllProjects;
       },
     },
-    created() {
+    async created() {
+      this.loading = true;
       this.$store.commit('setTodaysDate');
       this.$store.commit('clearCalendar');
-      this.$store.dispatch('actionSetInitialGridMonthYear');
-      this.$store.dispatch('generateAllCalendarRows');
+      await this.$store.dispatch('actionSetInitialGridMonthYear');
+      await this.$store.dispatch('generateAllCalendarRows');
+      this.loading = false;
       if (this.allTags.length == 0 && this.allProjects.length == 0) {
         this.$store.dispatch('fetchAllTags');
         this.$store.dispatch('fetchAllProjects');
@@ -167,6 +177,9 @@
   }
   #month-container h2 {
     font-size: 27px;
+  }
+  .month-container__date {
+    margin-right: 15px;
   }
   img {
     cursor: pointer;

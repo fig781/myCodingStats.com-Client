@@ -14,6 +14,7 @@
         alt="right-arrow"
       />
       <h2 class="navigation__date">{{ month.name }} {{ year }}</h2>
+      <Loader v-if="!loaded" />
     </div>
     <transition name="fade">
       <AppAnalyticsBarChart v-if="loaded" :chartData="chartData" />
@@ -23,6 +24,7 @@
 
 <script>
   import AppAnalyticsBarChart from './AppAnalyticsBarChart';
+  import Loader from '../Loader';
   export default {
     name: 'AppAnalyticsChartContainer',
     data() {
@@ -34,6 +36,7 @@
     },
     components: {
       AppAnalyticsBarChart,
+      Loader,
     },
     methods: {
       async decreaseMonthYear() {
@@ -110,6 +113,7 @@
   }
   .navigation__date {
     font-family: 'Montserrat', sans-serif;
+    margin-right: 15px;
   }
   .analytics-chart-container {
     padding: 15px;
