@@ -2,32 +2,38 @@
   <div>
     <MobileNav />
     <SideNavigationBar />
-    <div id="main-container">
-      <div id="tags-container">
-        <h1>Tags</h1>
-        <p>Tags are used to mark the type of work you've done each day.</p>
-        <p>Ex: Python, Javascript, UX, DevOps</p>
-        <div class="table-container">
+    <div class="main-con">
+      <div class="tags-con">
+        <h1 class="header">Tags</h1>
+        <p class="description">
+          Tags are used to mark the type of work you've done each day.
+        </p>
+        <p class="description">Ex: Python, Javascript, UX, DevOps</p>
+        <div class="table-con">
           <div class="button-row">
             <div class="icon" @click="toggleAppSettingsEdit('Tag')"></div>
           </div>
-          <h3 v-if="allTags.length == 0">No tags have been added</h3>
+          <h3 class="no-values" v-if="allTags.length == 0">
+            No tags have been added
+          </h3>
           <AppSettingsTable :allEntries="allTags" v-if="allTags.length != 0" />
         </div>
       </div>
-      <div id="projects-container">
-        <h1>Projects</h1>
-        <p>
+      <div class="projects-con">
+        <h1 class="header">Projects</h1>
+        <p class="description">
           Use the projects tag to track what project you were working on.
         </p>
-        <p>
+        <p class="description">
           Ex: Weather app, Stock trading app
         </p>
-        <div class="table-container">
+        <div class="table-con">
           <div class="button-row">
             <div class="icon" @click="toggleAppSettingsEdit('Project')"></div>
           </div>
-          <h3 v-if="allProjects.length == 0">No projects have been added</h3>
+          <h3 class="no-values" v-if="allProjects.length == 0">
+            No projects have been added
+          </h3>
           <AppSettingsTable
             :allEntries="allProjects"
             v-if="allProjects.length != 0"
@@ -86,27 +92,27 @@
 </script>
 
 <style scoped>
-  #main-container {
+  .main-con {
     margin-left: 5rem;
   }
-  h1 {
+  .header {
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 10px;
   }
-  p {
+  .description {
     margin-bottom: 4px;
   }
-  #tags-container {
+  .tags-con {
     margin-left: 3rem;
     margin-top: 3rem;
   }
 
-  #projects-container {
+  .projects-con {
     margin-left: 3rem;
     margin-top: 3rem;
   }
 
-  .table-container {
+  .table-con {
     width: 28rem;
   }
   .button-row {
@@ -148,26 +154,26 @@
     height: 2px;
     box-shadow: none;
   }
-  h3 {
+  .no-values {
     margin: 4rem;
   }
   @media only screen and (max-width: 768px) {
-    #main-container {
+    .main-con {
       margin-left: 5%;
     }
-    #tags-container {
+    .tags-con {
       margin-left: 0;
     }
-    #projects-container {
+    .projects-con {
       margin-left: 0;
     }
   }
   @media only screen and (max-width: 500px) {
-    .table-container {
+    .table-con {
       width: auto;
       margin-right: 5%;
     }
-    #tags-container {
+    .tags-con {
       margin-top: 10px;
     }
   }

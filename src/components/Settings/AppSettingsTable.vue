@@ -41,7 +41,7 @@
     padding-bottom: 2px;
     padding-left: 2px;
   }
-  .table-row__header--text {
+  .table-row__header-text {
     font-weight: bold;
   }
 </style>
