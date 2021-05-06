@@ -1,10 +1,11 @@
 <template>
   <div class="table-row">
-    <div class="table-cell name">
+    <div class="table-cell table-cell__name">
       {{ entry.name }}
     </div>
-    <div class="table-cell delete">
+    <div class="table-cell table-cell__delete">
       <img
+        class="table-cell__img"
         src="../../assets/trash-can.png"
         @click="deleteTagOrProject(entry)"
       />
@@ -20,9 +21,9 @@
     },
     methods: {
       deleteTagOrProject(entry) {
-        if (entry.type == 'tag') {
+        if (entry.type === 'tag') {
           this.$store.dispatch('deleteTag', entry.id);
-        } else if (entry.type == 'project') {
+        } else if (entry.type === 'project') {
           this.$store.dispatch('deleteProject', entry.id);
         }
       },
@@ -44,18 +45,18 @@
     text-align: left;
   }
 
-  .name {
+  .table-cell__name {
     width: 28rem;
   }
-  .delete {
+  .table-cell__delete {
     text-align: right;
     padding-right: 0.2rem;
   }
-  img {
+  .table-cell__img {
     height: 15px;
     width: 15px;
   }
-  img:hover {
+  .table-cell__img:hover {
     cursor: pointer;
   }
 </style>
