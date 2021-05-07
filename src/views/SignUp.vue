@@ -6,59 +6,25 @@
       </div>
 
       <form @submit.prevent="onSubmit">
-        <InputErrorMessage
-          class="error"
-          :message="firstNameErrorMessage"
-          v-if="firstNameErrorMessage"
-        />
-        <input
-          class="text-input"
-          type="text"
-          placeholder="First Name"
-          v-model="formData.firstName"
-        /><br />
-        <InputErrorMessage
-          class="error"
-          :message="lastNameErrorMessage"
-          v-if="lastNameErrorMessage"
-        />
-        <input
-          class="text-input"
-          type="text"
-          placeholder="Last Name"
-          v-model="formData.lastName"
-        /><br />
-        <InputErrorMessage
-          class="error"
-          :message="emailErrorMessage"
-          v-if="emailErrorMessage"
-        />
-        <input
-          class="text-input"
-          type="text"
-          placeholder="Username"
-          v-model="formData.email"
-        /><br />
-        <InputErrorMessage
-          class="error"
-          :message="passwordErrorMessage"
-          v-if="passwordErrorMessage"
-        />
-        <input
-          class="text-input"
-          type="password"
-          placeholder="Password"
-          v-model="formData.password"
-        /><br />
-        <Loader v-if="loading" />
-        <input id="button" type="submit" value="Submit" name="submit" /><br />
+        <InputErrorMessage class="error" :message="firstNameErrorMessage" v-if="firstNameErrorMessage" />
+        <input class="text-input" type="text" placeholder="First Name" v-model="formData.firstName" /><br />
+        <InputErrorMessage class="error" :message="lastNameErrorMessage" v-if="lastNameErrorMessage" />
+        <input class="text-input" type="text" placeholder="Last Name" v-model="formData.lastName" /><br />
+        <InputErrorMessage class="error" :message="emailErrorMessage" v-if="emailErrorMessage" />
+        <input class="text-input" type="text" placeholder="Username" v-model="formData.email" /><br />
+        <InputErrorMessage class="error" :message="passwordErrorMessage" v-if="passwordErrorMessage" />
+        <input class="text-input" type="password" placeholder="Password" v-model="formData.password" /><br />
+
+        <div id="button" type="submit" name="submit" @click="onSubmit">
+          <Loader v-if="loading" />
+          <p v-if="!loading">Submit</p>
+        </div>
+        <br />
       </form>
       <div id="bottom-container">
         <router-link class="bottom-text" to="/">Home</router-link>
         |
-        <router-link class="bottom-text" to="/login"
-          >Already have an account?</router-link
-        >
+        <router-link class="bottom-text" to="/login">Already have an account?</router-link>
       </div>
     </div>
   </div>
@@ -96,35 +62,15 @@
         this.emailErrorMessage = '';
         this.passwordErrorMessage = '';
 
-        const firstNameEmpty = inputValidation.checkIfInputEmpty(
-          this.formData.firstName
-        );
-        const lastNameEmpty = inputValidation.checkIfInputEmpty(
-          this.formData.lastName
-        );
-        const emailEmpty = inputValidation.checkIfInputEmpty(
-          this.formData.email
-        );
-        const passwordEmpty = inputValidation.checkIfInputEmpty(
-          this.formData.password
-        );
+        const firstNameEmpty = inputValidation.checkIfInputEmpty(this.formData.firstName);
+        const lastNameEmpty = inputValidation.checkIfInputEmpty(this.formData.lastName);
+        const emailEmpty = inputValidation.checkIfInputEmpty(this.formData.email);
+        const passwordEmpty = inputValidation.checkIfInputEmpty(this.formData.password);
 
-        const firstNameToolong = inputValidation.checkIfInputTooLong(
-          this.formData.firstName,
-          40
-        );
-        const lastNameTooLong = inputValidation.checkIfInputTooLong(
-          this.formData.lastName,
-          40
-        );
-        const emailToolong = inputValidation.checkIfInputTooLong(
-          this.formData.email,
-          40
-        );
-        const passwordTooLong = inputValidation.checkIfInputTooLong(
-          this.formData.password,
-          40
-        );
+        const firstNameToolong = inputValidation.checkIfInputTooLong(this.formData.firstName, 40);
+        const lastNameTooLong = inputValidation.checkIfInputTooLong(this.formData.lastName, 40);
+        const emailToolong = inputValidation.checkIfInputTooLong(this.formData.email, 40);
+        const passwordTooLong = inputValidation.checkIfInputTooLong(this.formData.password, 40);
 
         if (firstNameEmpty) {
           this.firstNameErrorMessage = 'First name empty';
@@ -150,12 +96,7 @@
           this.passwordErrorMessage = 'Password too long';
         }
 
-        if (
-          this.emailErrorMessage == '' &&
-          this.passwordErrorMessage == '' &&
-          this.firstNameErrorMessage == '' &&
-          this.lastNameErrorMessage == ''
-        ) {
+        if (this.emailErrorMessage == '' && this.passwordErrorMessage == '' && this.firstNameErrorMessage == '' && this.lastNameErrorMessage == '') {
           this.loading = true;
           const response = await this.$store.dispatch('signUp', this.formData);
 
@@ -192,7 +133,7 @@
   }
 
   form {
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     max-width: 270px;
     margin: auto;
   }
@@ -235,7 +176,6 @@
     text-align: center;
     background-color: #1f43b8;
     color: white;
-    width: 100%;
   }
   #button:hover {
     background: #2a54b1;

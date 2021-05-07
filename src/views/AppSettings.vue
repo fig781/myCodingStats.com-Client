@@ -34,19 +34,12 @@
           <h3 class="no-values" v-if="allProjects.length == 0">
             No projects have been added
           </h3>
-          <AppSettingsTable
-            :allEntries="allProjects"
-            v-if="allProjects.length != 0"
-          />
+          <AppSettingsTable :allEntries="allProjects" v-if="allProjects.length != 0" />
         </div>
       </div>
     </div>
 
-    <AppSettingsEdit
-      v-if="showAppSettingsEdit"
-      @close="showAppSettingsEdit = false"
-      :type="whatIsBeingAdded"
-    />
+    <AppSettingsEdit v-if="showAppSettingsEdit" @close="showAppSettingsEdit = false" :type="whatIsBeingAdded" />
   </div>
 </template>
 

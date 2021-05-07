@@ -6,31 +6,16 @@
           <div id="logo">
             <router-link to="/">myCodingStats</router-link>
           </div>
-          <div
-            id="app-button"
-            class="nav-button"
-            v-if="loggedIn"
-            @click="
-              $router.push({ name: 'GridView', params: { id: user.userId } })
-            "
-          >
+          <div id="app-button" class="nav-button" v-if="loggedIn" @click="$router.push({ name: 'GridView', params: { id: user.userId } })">
             Go To App
           </div>
         </div>
 
         <div id="right-nav">
-          <div
-            class="nav-button sign-in"
-            v-if="!loggedIn"
-            @click="$router.push('login')"
-          >
+          <div class="nav-button sign-in" v-if="!loggedIn" @click="$router.push('login')">
             Sign In
           </div>
-          <div
-            class="nav-button sign-up"
-            v-if="!loggedIn"
-            @click="$router.push('register')"
-          >
+          <div class="nav-button sign-up" v-if="!loggedIn" @click="$router.push('register')">
             Sign Up
           </div>
           <p v-if="loggedIn">{{ user.firstName }} {{ user.lastName }}</p>
@@ -43,8 +28,7 @@
         <div id="left-container">
           <h1>This app tracks your coding time</h1>
           <h2>
-            We make it easy to track your coding time so you can go from zero to
-            hero in no time.
+            We make it easy to track your coding time so you can go from zero to hero in no time.
           </h2>
         </div>
         <div id="right-container" v-if="!loggedIn">
@@ -52,57 +36,20 @@
             <h2>Create Your Account</h2>
           </div>
           <form @submit.prevent="onSubmit">
-            <InputErrorMessage
-              class="error"
-              :message="firstNameErrorMessage"
-              v-if="firstNameErrorMessage"
-            />
-            <input
-              class="text-input"
-              type="text"
-              placeholder="First Name"
-              v-model="formData.firstName"
-            /><br />
-            <InputErrorMessage
-              class="error"
-              :message="lastNameErrorMessage"
-              v-if="lastNameErrorMessage"
-            />
-            <input
-              class="text-input"
-              type="text"
-              placeholder="Last Name"
-              v-model="formData.lastName"
-            /><br />
-            <InputErrorMessage
-              class="error"
-              :message="emailErrorMessage"
-              v-if="emailErrorMessage"
-            />
-            <input
-              class="text-input"
-              type="text"
-              placeholder="Username"
-              v-model="formData.email"
-            /><br />
-            <InputErrorMessage
-              class="error"
-              :message="passwordErrorMessage"
-              v-if="passwordErrorMessage"
-            />
-            <input
-              class="text-input"
-              type="password"
-              placeholder="Password"
-              v-model="formData.password"
-            /><br />
-            <Loader v-if="loading" />
-            <input
-              id="signup-button"
-              type="submit"
-              value="Sign Up"
-              name="submit"
-            /><br />
+            <InputErrorMessage class="error" :message="firstNameErrorMessage" v-if="firstNameErrorMessage" />
+            <input class="text-input" type="text" placeholder="First Name" v-model="formData.firstName" /><br />
+            <InputErrorMessage class="error" :message="lastNameErrorMessage" v-if="lastNameErrorMessage" />
+            <input class="text-input" type="text" placeholder="Last Name" v-model="formData.lastName" /><br />
+            <InputErrorMessage class="error" :message="emailErrorMessage" v-if="emailErrorMessage" />
+            <input class="text-input" type="text" placeholder="Username" v-model="formData.email" /><br />
+            <InputErrorMessage class="error" :message="passwordErrorMessage" v-if="passwordErrorMessage" />
+            <input class="text-input" type="password" placeholder="Password" v-model="formData.password" /><br />
+
+            <div id="signup-button" type="submit" name="submit" @click="onSubmit">
+              <Loader v-if="loading" />
+              <p v-if="!loading">Sign Up</p>
+            </div>
+            <br />
           </form>
         </div>
       </div>
@@ -150,35 +97,15 @@
         this.emailErrorMessage = '';
         this.passwordErrorMessage = '';
 
-        const firstNameEmpty = inputValidation.checkIfInputEmpty(
-          this.formData.firstName
-        );
-        const lastNameEmpty = inputValidation.checkIfInputEmpty(
-          this.formData.lastName
-        );
-        const emailEmpty = inputValidation.checkIfInputEmpty(
-          this.formData.email
-        );
-        const passwordEmpty = inputValidation.checkIfInputEmpty(
-          this.formData.password
-        );
+        const firstNameEmpty = inputValidation.checkIfInputEmpty(this.formData.firstName);
+        const lastNameEmpty = inputValidation.checkIfInputEmpty(this.formData.lastName);
+        const emailEmpty = inputValidation.checkIfInputEmpty(this.formData.email);
+        const passwordEmpty = inputValidation.checkIfInputEmpty(this.formData.password);
 
-        const firstNameToolong = inputValidation.checkIfInputTooLong(
-          this.formData.firstName,
-          40
-        );
-        const lastNameTooLong = inputValidation.checkIfInputTooLong(
-          this.formData.lastName,
-          40
-        );
-        const emailToolong = inputValidation.checkIfInputTooLong(
-          this.formData.email,
-          40
-        );
-        const passwordTooLong = inputValidation.checkIfInputTooLong(
-          this.formData.password,
-          40
-        );
+        const firstNameToolong = inputValidation.checkIfInputTooLong(this.formData.firstName, 40);
+        const lastNameTooLong = inputValidation.checkIfInputTooLong(this.formData.lastName, 40);
+        const emailToolong = inputValidation.checkIfInputTooLong(this.formData.email, 40);
+        const passwordTooLong = inputValidation.checkIfInputTooLong(this.formData.password, 40);
 
         if (firstNameEmpty) {
           this.firstNameErrorMessage = 'First name empty';
@@ -204,12 +131,7 @@
           this.passwordErrorMessage = 'Password too long';
         }
 
-        if (
-          this.emailErrorMessage == '' &&
-          this.passwordErrorMessage == '' &&
-          this.firstNameErrorMessage == '' &&
-          this.lastNameErrorMessage == ''
-        ) {
+        if (this.emailErrorMessage == '' && this.passwordErrorMessage == '' && this.firstNameErrorMessage == '' && this.lastNameErrorMessage == '') {
           this.loading = true;
           const response = await this.$store.dispatch('signUp', this.formData);
 
@@ -237,11 +159,7 @@
       },
     },
     mounted() {
-      if (
-        this.user.userId != null &&
-        this.user.firstName != null &&
-        this.user.lastName != null
-      ) {
+      if (this.user.userId != null && this.user.firstName != null && this.user.lastName != null) {
         this.loggedIn = true;
       }
     },
@@ -251,11 +169,7 @@
 <style scoped>
   /* HERO */
   #landing {
-    background: linear-gradient(
-      113deg,
-      rgb(89, 60, 194) 0%,
-      rgb(17, 69, 182) 100%
-    );
+    background: linear-gradient(113deg, rgb(89, 60, 194) 0%, rgb(17, 69, 182) 100%);
     height: 100vh;
     color: white;
   }
@@ -369,7 +283,7 @@
   }
 
   form {
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     margin: auto;
   }
   .error {
@@ -399,7 +313,6 @@
     text-align: center;
     background-color: #1f43b8;
     color: white;
-    width: 100%;
   }
   #signup-button:hover {
     background: #2a54b1;

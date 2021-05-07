@@ -1,18 +1,8 @@
 <template>
   <div class="analytics-chart-container">
     <div class="navigation">
-      <img
-        class="navigation__arrow"
-        src="../../assets/left-arrow.png"
-        @click="decreaseMonthYear"
-        alt="left-arrow"
-      />
-      <img
-        class="navigation__arrow"
-        src="../../assets/right-arrow.png"
-        @click="increaseMonthYear"
-        alt="right-arrow"
-      />
+      <img class="navigation__arrow" src="../../assets/left-arrow.png" @click="decreaseMonthYear" alt="left-arrow" />
+      <img class="navigation__arrow" src="../../assets/right-arrow.png" @click="increaseMonthYear" alt="right-arrow" />
       <h2 class="navigation__date">{{ month.name }} {{ year }}</h2>
       <Loader v-if="!loaded" />
     </div>
@@ -42,18 +32,14 @@
       async decreaseMonthYear() {
         this.loaded = false;
         this.$store.commit('decreaseAnalyticsMonthAndYear');
-        this.fetchedChartData = await this.$store.dispatch(
-          'compileChartValues'
-        );
+        this.fetchedChartData = await this.$store.dispatch('compileChartValues');
         this.fillData();
         this.loaded = true;
       },
       async increaseMonthYear() {
         this.loaded = false;
         this.$store.commit('increaseAnalyticsMonthAndYear');
-        this.fetchedChartData = await this.$store.dispatch(
-          'compileChartValues'
-        );
+        this.fetchedChartData = await this.$store.dispatch('compileChartValues');
         this.fillData();
         this.loaded = true;
       },
@@ -100,6 +86,7 @@
 <style scoped>
   .navigation {
     display: flex;
+    align-items: center;
     margin-top: 5px;
   }
   .navigation__arrow {
@@ -108,8 +95,7 @@
     max-width: 26px;
   }
   .navigation__arrow:hover {
-    filter: invert(44%) sepia(0%) saturate(153%) hue-rotate(166deg)
-      brightness(98%) contrast(92%);
+    filter: invert(44%) sepia(0%) saturate(153%) hue-rotate(166deg) brightness(98%) contrast(92%);
   }
   .navigation__date {
     font-family: 'Montserrat', sans-serif;

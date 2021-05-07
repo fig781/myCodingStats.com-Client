@@ -51,7 +51,7 @@
     position: relative;
     text-indent: -9999px;
     width: 0.9em;
-    height: 1.5em;
+    height: 13px;
     margin: 3px 1.6em 0px 1.6em;
   }
   .loader:not(:required):before,
@@ -60,7 +60,7 @@
     content: '\x200B';
     display: inline-block;
     width: 0.9em;
-    height: 1.5em;
+    height: 13px;
     position: absolute;
     top: 0;
   }
