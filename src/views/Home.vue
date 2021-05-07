@@ -120,9 +120,9 @@
         }
 
         if (emailEmpty) {
-          this.emailErrorMessage = 'Email empty';
+          this.emailErrorMessage = 'Username empty';
         } else if (emailToolong) {
-          this.emailErrorMessage = 'Email too long';
+          this.emailErrorMessage = 'Username too long';
         }
 
         if (passwordEmpty) {

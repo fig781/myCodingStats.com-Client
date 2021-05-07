@@ -57,9 +57,9 @@
         const passwordTooLong = inputValidation.checkIfInputTooLong(this.formData.password, 40);
 
         if (emailEmpty) {
-          this.emailErrorMessage = 'Email empty';
+          this.emailErrorMessage = 'Username empty';
         } else if (emailToolong) {
-          this.emailErrorMessage = 'Email too long';
+          this.emailErrorMessage = 'Username too long';
         }
 
         if (passwordEmpty) {
