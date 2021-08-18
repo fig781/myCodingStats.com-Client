@@ -1,7 +1,7 @@
 # myCodingStats.com Client
 
 ```
-Potential employers feel free to use the prepopulated demo account
+Potential employers feel free to use the demo account
 Username: Test
 Password: Test123
 ```
