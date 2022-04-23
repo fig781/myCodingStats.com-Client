@@ -6,19 +6,39 @@
       </div>
 
       <form @submit.prevent="onSubmit">
-        <InputErrorMessage :message="emailErrorMessage" v-if="emailErrorMessage" class="error" />
-        <input class="text-input" type="text" placeholder="Username" v-model="formData.email" /><br />
-        <InputErrorMessage :message="passwordErrorMessage" v-if="passwordErrorMessage" class="error" />
-        <input class="text-input" type="password" placeholder="Password" v-model="formData.password" /><br />
-        <div id="button" type="submit" @click="onSubmit">
+        <InputErrorMessage
+          :message="emailErrorMessage"
+          v-if="emailErrorMessage"
+          class="error"
+        />
+        <input
+          class="text-input"
+          type="text"
+          placeholder="Username"
+          v-model="formData.email"
+        /><br />
+        <InputErrorMessage
+          :message="passwordErrorMessage"
+          v-if="passwordErrorMessage"
+          class="error"
+        />
+        <input
+          class="text-input"
+          type="password"
+          placeholder="Password"
+          v-model="formData.password"
+        /><br />
+        <button id="button" type="submit" @click="onSubmit">
           <Loader v-if="loading" />
           <p v-if="!loading">Submit</p>
-        </div>
+        </button>
         <br />
       </form>
       <div id="bottom-container">
         <router-link class="bottom-text" to="/">Home</router-link> |
-        <router-link class="bottom-text" to="/register">Don't have an account?</router-link>
+        <router-link class="bottom-text" to="/register"
+          >Don't have an account?</router-link
+        >
       </div>
     </div>
   </div>
@@ -51,10 +71,18 @@
         this.emailErrorMessage = '';
         this.passwordErrorMessage = '';
         const emailEmpty = inputValidation.checkIfInputEmpty(this.formData.email);
-        const passwordEmpty = inputValidation.checkIfInputEmpty(this.formData.password);
+        const passwordEmpty = inputValidation.checkIfInputEmpty(
+          this.formData.password
+        );
 
-        const emailToolong = inputValidation.checkIfInputTooLong(this.formData.email, 40);
-        const passwordTooLong = inputValidation.checkIfInputTooLong(this.formData.password, 40);
+        const emailToolong = inputValidation.checkIfInputTooLong(
+          this.formData.email,
+          40
+        );
+        const passwordTooLong = inputValidation.checkIfInputTooLong(
+          this.formData.password,
+          40
+        );
 
         if (emailEmpty) {
           this.emailErrorMessage = 'Username empty';
@@ -101,8 +129,7 @@
     font-weight: normal;
   }
   form {
-    padding: 20px 20px 0px 20px;
-    margin: auto;
+    padding: 20px;
   }
   .error {
     text-align: left;
@@ -114,12 +141,13 @@
     border: solid 1px grey;
     border-radius: 6px;
     background-color: #f6f8fa;
+    width: 300px;
   }
   .text-input {
     border: 1px solid black;
     padding: 5px 10px;
     font-size: 18px;
-    border-radius: 2px;
+    border-radius: 6px;
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
@@ -140,6 +168,7 @@
     text-align: center;
     background-color: #1f43b8;
     color: white;
+    width: 100%;
   }
   #button:hover {
     background: #2a54b1;

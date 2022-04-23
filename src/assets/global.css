@@ -19,6 +19,10 @@
   padding: 0;
 }
 
+*:focus {
+  outline: 2px dotted var(--clr-prime);
+}
+
 h1,
 h2,
 h3,
