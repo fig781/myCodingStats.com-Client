@@ -1,11 +1,10 @@
 <template>
-  <div id="table">
+  <div class="table">
     <div class="table-row">
-      <div class="table-header">
-        <p class="table-header-text">Name</p>
+      <div class="table-row__header">
+        <p class="table-row__header-text">Name</p>
       </div>
     </div>
-    <transition-group> </transition-group>
     <AppSettingsTableRow
       v-for="entry in allEntries"
       :key="entry.id"
@@ -30,19 +29,19 @@
 </script>
 
 <style scoped>
-  #table {
+  .table {
     display: table;
     border-collapse: collapse;
   }
   .table-row {
     display: table-row;
   }
-  .table-header {
+  .table-row__header {
     display: table-cell;
     padding-bottom: 2px;
     padding-left: 2px;
   }
-  .table-header-text {
+  .table-row__header-text {
     font-weight: bold;
   }
 </style>

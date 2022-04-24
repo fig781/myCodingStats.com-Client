@@ -50,8 +50,12 @@
           placeholder="Password"
           v-model="formData.password"
         /><br />
-        <Loader v-if="loading" />
-        <input id="button" type="submit" value="Submit" name="submit" /><br />
+
+        <button id="button" type="submit" name="submit" @click="onSubmit">
+          <Loader v-if="loading" />
+          <p v-if="!loading">Submit</p>
+        </button>
+        <br />
       </form>
       <div id="bottom-container">
         <router-link class="bottom-text" to="/">Home</router-link>
@@ -102,9 +106,7 @@
         const lastNameEmpty = inputValidation.checkIfInputEmpty(
           this.formData.lastName
         );
-        const emailEmpty = inputValidation.checkIfInputEmpty(
-          this.formData.email
-        );
+        const emailEmpty = inputValidation.checkIfInputEmpty(this.formData.email);
         const passwordEmpty = inputValidation.checkIfInputEmpty(
           this.formData.password
         );
@@ -139,9 +141,9 @@
         }
 
         if (emailEmpty) {
-          this.emailErrorMessage = 'Email empty';
+          this.emailErrorMessage = 'Username empty';
         } else if (emailToolong) {
-          this.emailErrorMessage = 'Email too long';
+          this.emailErrorMessage = 'Username too long';
         }
 
         if (passwordEmpty) {
@@ -193,8 +195,6 @@
 
   form {
     padding: 20px;
-    max-width: 270px;
-    margin: auto;
   }
   #sign-up {
     height: 100vh;
@@ -207,12 +207,13 @@
     border: solid 1px grey;
     border-radius: 6px;
     background-color: #f6f8fa;
+    width: 300px;
   }
   .text-input {
     border: 1px solid black;
     padding: 5px 10px;
     font-size: 18px;
-    border-radius: 2px;
+    border-radius: 6px;
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;

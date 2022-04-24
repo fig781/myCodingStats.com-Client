@@ -1,54 +1,54 @@
 <template>
-  <div id="home">
-    <div id="landing">
-      <div id="navbar">
-        <div id="left-nav">
-          <div id="logo">
-            <router-link to="/">myCodingStats</router-link>
+  <main>
+    <header class="nav">
+      <div class="nav-inner">
+        <div class="nav-left">
+          <div class="logo">
+            <router-link to="/"><h1>myCodingStats</h1> </router-link>
           </div>
-          <div
-            id="app-button"
-            class="nav-button"
+          <button
+            class="app-btn nav-btn"
             v-if="loggedIn"
-            @click="
-              $router.push({ name: 'GridView', params: { id: user.userId } })
-            "
+            @click="$router.push({ name: 'GridView', params: { id: user.userId } })"
           >
             Go To App
-          </div>
+          </button>
         </div>
 
-        <div id="right-nav">
-          <div
-            class="nav-button sign-in"
+        <div class="nav-right">
+          <button
+            class="nav-btn sign-in"
             v-if="!loggedIn"
             @click="$router.push('login')"
           >
             Sign In
-          </div>
-          <div
-            class="nav-button sign-up"
+          </button>
+          <button
+            class="nav-btn sign-up"
             v-if="!loggedIn"
             @click="$router.push('register')"
           >
             Sign Up
-          </div>
+          </button>
           <p v-if="loggedIn">{{ user.firstName }} {{ user.lastName }}</p>
-          <div class="nav-button" id="logout" v-if="loggedIn" @click="logout">
+          <button class="nav-btn logout-btn" v-if="loggedIn" @click="logout">
             Logout
-          </div>
+          </button>
         </div>
       </div>
-      <div id="main-container">
-        <div id="left-container">
-          <h1>This app tracks your coding time</h1>
-          <h2>
-            We make it easy to track your coding time so you can go from zero to
-            hero in no time.
-          </h2>
-        </div>
-        <div id="right-container" v-if="!loggedIn">
-          <div id="header">
+    </header>
+
+    <section class="mid">
+      <div class="mid-text">
+        <h1>This website tracks your coding time.</h1>
+        <h2>
+          We make it easy to track your coding time so you can go from zero to hero
+          in no time.
+        </h2>
+      </div>
+      <div class="create-account-container">
+        <div class="create-account" v-if="!loggedIn">
+          <div class="create-account-head">
             <h2>Create Your Account</h2>
           </div>
           <form @submit.prevent="onSubmit">
@@ -96,27 +96,32 @@
               placeholder="Password"
               v-model="formData.password"
             /><br />
-            <Loader v-if="loading" />
-            <input
-              id="signup-button"
-              type="submit"
-              value="Sign Up"
-              name="submit"
-            /><br />
+
+            <button id="signup-button" type="submit" name="submit" @click="onSubmit">
+              <Loader v-if="loading" />
+              <p v-if="!loading">Sign Up</p>
+            </button>
           </form>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        Made by Aden Eilers
+        <a target="_blank" href="https://github.com/fig781/myCodingStats.com-Client"
+          >Github</a
+        >
+      </p>
+    </footer>
+  </main>
 </template>
 
 <script>
-  //<div id="descriptions">
-  //      other cool stuff here
-  //    </div>
   import InputErrorMessage from '../components/InputErrorMessage';
   import { inputValidation } from '../globalFunctions/inputValidation';
   import Loader from '../components/Loader';
+
   export default {
     name: 'Home',
     components: {
@@ -156,9 +161,7 @@
         const lastNameEmpty = inputValidation.checkIfInputEmpty(
           this.formData.lastName
         );
-        const emailEmpty = inputValidation.checkIfInputEmpty(
-          this.formData.email
-        );
+        const emailEmpty = inputValidation.checkIfInputEmpty(this.formData.email);
         const passwordEmpty = inputValidation.checkIfInputEmpty(
           this.formData.password
         );
@@ -193,9 +196,9 @@
         }
 
         if (emailEmpty) {
-          this.emailErrorMessage = 'Email empty';
+          this.emailErrorMessage = 'Username empty';
         } else if (emailToolong) {
-          this.emailErrorMessage = 'Email too long';
+          this.emailErrorMessage = 'Username too long';
         }
 
         if (passwordEmpty) {
@@ -250,48 +253,61 @@
 
 <style scoped>
   /* HERO */
-  #landing {
-    background: linear-gradient(
-      113deg,
-      rgb(89, 60, 194) 0%,
-      rgb(17, 69, 182) 100%
-    );
+  main {
+    background: linear-gradient(113deg, rgb(89, 60, 194) 0%, rgb(17, 69, 182) 100%);
     height: 100vh;
     color: white;
   }
+
   /* NAVBAR */
-  #navbar {
-    padding: 3rem 7rem 0rem 7rem;
+  .nav {
+    max-width: 1320px;
+    width: 100%;
+    padding: 40px 0px;
+    margin: 0 auto;
+  }
+
+  .nav-inner {
     display: flex;
     justify-content: space-between;
   }
-  #left-nav {
+
+  .nav-left {
     display: flex;
+    align-items: center;
   }
-  #logo {
+
+  .logo h1 {
     font-size: 30px;
     font-weight: 600;
-    margin: auto;
-    font-family: 'Montserrat', sans-serif;
   }
-  #logo a {
+
+  .logo a {
     color: white;
-    text-decoration: none;
   }
-  #app-button {
+
+  .app-btn {
     background-color: white;
     margin-left: 30px;
-    color: #1f43b8;
+    color: var(--clr-font-secondary);
+    border: solid 1px transparent;
   }
-  #right-nav {
+
+  .app-btn:hover {
+    border: solid 1px #eef0ff;
+    background-color: #eef0ff;
+  }
+
+  .nav-right {
     display: flex;
   }
-  #right-nav p {
+
+  .nav-right p {
     margin: auto;
     font-size: 20px;
     padding-right: 15px;
   }
-  .nav-button {
+  .nav-btn {
     padding: 10px;
     border-radius: 8px;
     font-size: 18px;
@@ -300,78 +316,82 @@
   }
   .sign-up {
     background-color: white;
-    color: #1f43b8;
-    border: solid 1px #1f43b8;
+    color: var(--clr-font-secondary);
+    border: solid 1px transparent;
   }
   .sign-up:hover {
     border: solid 1px #eef0ff;
-    color: #1f43b8;
     background-color: #eef0ff;
   }
   .sign-in {
     border: solid 1px white;
     margin-right: 10px;
+    background: transparent;
+    color: white;
   }
   .sign-in:hover {
-    color: #eeeeee;
+    color: var(--clr-bg);
     border: solid 1px rgb(209, 209, 209);
   }
-  #logout {
-    background-color: rgba(178, 34, 34, 0);
+
+  .logout-btn {
+    color: white;
+    background-color: transparent;
     border: solid 1px white;
   }
-  #logout:hover {
-    background-color: rgba(178, 34, 34, 0);
-    border: solid 1px white;
+  .logout-btn:hover {
+    color: var(--clr-font-secondary);
+    background-color: white;
   }
 
   /* MIDDLE HERO */
-  #main-container {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    grid-template-rows: auto;
-    margin: 0 18vw 0 18vw;
-    position: relative;
+  .mid {
+    display: flex;
     align-items: center;
-    height: 80vh;
+    justify-content: center;
+    height: calc(100vh - 123px - 48px);
+    margin: 0 15px;
   }
-  #left-container {
+  .mid-text {
     max-width: 650px;
+    padding: 0 15px;
+    white-space: normal;
   }
-  #left-container h1 {
-    font-size: 55px;
-    font-family: 'Montserrat', sans-serif;
+  .mid-text h1 {
+    font-size: 3.3rem;
+    font-family: var(--ft-header);
     margin-bottom: 15px;
     letter-spacing: 2px;
   }
-  #left-container h2 {
+  .mid-text h2 {
     font-weight: 400;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--ft-body);
     letter-spacing: 1px;
   }
 
-  #right-container {
+  /* CREATE ACCOUNT WIDGET */
+  .create-account {
     text-align: center;
     border-radius: 6px;
     background-color: #f6f8fa;
     width: 300px;
   }
 
-  #header {
+  .create-account-head {
     background-color: rgb(235, 235, 235);
     font-family: 'Montserrat', sans-serif;
     padding: 20px;
     border-radius: 6px 6px 0px 0px;
     color: black;
   }
-  #header h2 {
+  .create-account-head h2 {
     font-weight: normal;
   }
 
   form {
     padding: 20px;
-    margin: auto;
   }
+
   .error {
     text-align: left;
     margin-bottom: 2px;
@@ -380,7 +400,7 @@
     border: 1px solid lightgrey;
     padding: 5px 10px;
     font-size: 18px;
-    border-radius: 2px;
+    border-radius: 6px;
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
@@ -395,88 +415,95 @@
     outline: none;
     border-radius: 8px;
     font-size: 18px;
-    cursor: pointer;
     text-align: center;
     background-color: #1f43b8;
     color: white;
     width: 100%;
+    cursor: pointer;
   }
   #signup-button:hover {
     background: #2a54b1;
   }
 
-  @media only screen and (max-width: 1000px) {
-    #landing {
-      height: 110vh;
-    }
-    #main-container {
-      display: block;
-      text-align: center;
-      margin-right: 8%;
-      margin-left: 8%;
-      height: fit-content;
-    }
-    #left-container {
-      margin: 30px auto 30px auto;
-    }
-    #right-container {
-      margin: 0px auto 50px auto;
+  /* FOOTER */
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .footer a {
+    text-decoration: underline;
+    color: var(--clr-bg);
+  }
+
+  @media only screen and (max-width: 1440px) {
+    .nav {
+      padding: 40px 70px;
     }
   }
+
+  /* @media only screen and (max-width: 1024px) {
+    
+  } */
   @media only screen and (max-width: 768px) {
-    #navbar {
-      padding: 3rem 2rem 0rem 2rem;
+    main {
+      height: 100%;
+    }
+    .nav-inner {
+      flex-direction: column;
+    }
+
+    .nav-left {
+      flex-direction: column;
+      padding-bottom: 15px;
+    }
+
+    .logo {
+      padding-bottom: 15px;
+    }
+
+    .nav-btn {
+      width: 200px;
+    }
+
+    .app-btn {
+      margin: 0;
+    }
+    .nav-right {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+
+    .logout-btn {
+      margin-bottom: 15px;
+    }
+
+    .sign-in {
+      margin: 0;
+    }
+
+    .sign-up {
+      margin-bottom: 15px;
+    }
+
+    .mid {
+      flex-direction: column;
       text-align: center;
-      display: inline;
+      justify-content: start;
     }
-    #app-button {
-      margin: 10px auto 0 auto;
-      max-width: 300px;
-    }
-    .nav-button {
-      margin: 10px auto 0 auto;
-      max-width: 300px;
-    }
-    #left-nav {
-      display: block;
-    }
-    #right-nav {
-      display: block;
-    }
-    #right-nav p {
-      margin-top: 10px;
-    }
-    #logout {
-      max-width: 300px;
-      margin: 10px auto 0 auto;
+
+    .mid-text {
+      padding-bottom: 40px;
     }
   }
-  @media only screen and (max-width: 540px) {
-    #landing {
-      height: 130vh;
-    }
-    #main-container {
-      margin-right: 1%;
-      margin-left: 1%;
-    }
-    #navbar {
-      padding: 3rem 2rem 0rem 2rem;
-      display: block;
-    }
-    #right-nav {
-      justify-content: center;
-      margin-top: 15px;
-    }
-    #left-container h1 {
-      font-size: 30px;
+  @media only screen and (max-width: 425px) {
+    .mid-text h1 {
+      font-size: 2rem;
     }
   }
-  @media only screen and (max-width: 360px) {
-    #landing {
-      height: 150vh;
-    }
-    #right-container {
-      width: 250px;
-    }
-  }
+  /* @media only screen and (max-width: 375px) {
+    
+  } */
 </style>
