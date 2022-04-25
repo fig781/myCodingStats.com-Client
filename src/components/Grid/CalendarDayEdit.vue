@@ -1,21 +1,15 @@
 <template>
   <div id="calendar-day-edit-mask">
-    <div id="calendar-day-edit-inner" v-on-clickaway="away">
+    <div id="calendar-day-edit-inner">
       <form @submit.prevent="onSubmit">
         <div id="date">
           <h1>{{ oneCalendarDay.day }} {{ oneCalendarDay.date }}</h1>
         </div>
         <label for="active">Active Learning Time</label><br />
-        <CustomTimeInput
-          :timeInput="formData.activeTime"
-          @change="updateActive"
-        />
+        <CustomTimeInput :timeInput="formData.activeTime" @change="updateActive" />
 
         <label for="passive">Passive Learning Time</label><br />
-        <CustomTimeInput
-          :timeInput="formData.passiveTime"
-          @change="updatePassive"
-        />
+        <CustomTimeInput :timeInput="formData.passiveTime" @change="updatePassive" />
 
         <label for="codingChallenges">Coding Challenges Time</label><br />
         <CustomTimeInput
@@ -94,7 +88,6 @@
   import CustomSelect from './CustomSelect';
   import InputErrorMessage from '../InputErrorMessage';
   import CustomTimeInput from './CustomTimeInput';
-  import { directive as onClickaway } from 'vue-clickaway';
 
   export default {
     name: 'CalendarDayEdit',
@@ -120,16 +113,10 @@
         codingErrorMessage: '',
       };
     },
-    directives: {
-      onClickaway: onClickaway,
-    },
     props: {
       oneCalendarDay: Object,
     },
     methods: {
-      away: function() {
-        this.$emit('close');
-      },
       insertTag(option) {
         this.formData.tag.id = option.id;
         this.formData.tag.name = option.name;
@@ -156,9 +143,7 @@
       },
 
       onSubmit() {
-        const descriptionValid = this.validateDescription(
-          this.formData.description
-        );
+        const descriptionValid = this.validateDescription(this.formData.description);
         if (descriptionValid.length != 0) {
           this.descriptionErrorMessage = descriptionValid;
         } else {
@@ -189,10 +174,7 @@
         }
         if (normalizedDate.length == 4) {
           let lastValue = normalizedDate.slice(3, 4);
-          normalizedDate = normalizedDate.substring(
-            0,
-            normalizedDate.length - 1
-          );
+          normalizedDate = normalizedDate.substring(0, normalizedDate.length - 1);
           normalizedDate = normalizedDate + '0' + lastValue;
         }
 
@@ -255,11 +237,12 @@
 
   #calendar-day-edit-mask {
     position: fixed;
-    z-index: 99;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
+    overflow: auto;
     background-color: rgba(0, 0, 0, 0.623);
   }
 
@@ -275,6 +258,7 @@
 
   #date {
     margin-bottom: 15px;
+    letter-spacing: 1px;
   }
 
   .input {

@@ -148,12 +148,12 @@
   #custom-time-input-container {
     margin-top: 4px;
     margin-bottom: 10px;
+    font-size: 18px;
   }
   #selected {
     cursor: pointer;
     border: 1px solid black;
     padding: 5px 10px;
-    font-size: 18px;
     border-radius: 2px;
     min-height: 23px;
   }
