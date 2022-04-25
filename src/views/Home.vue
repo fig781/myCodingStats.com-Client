@@ -253,9 +253,10 @@
 
 <style scoped>
   /* HERO */
+
   main {
     background: linear-gradient(113deg, rgb(89, 60, 194) 0%, rgb(17, 69, 182) 100%);
-    height: 100vh;
+    height: 100%;
     color: white;
   }
 
@@ -451,6 +452,11 @@
     main {
       height: 100%;
     }
+
+    .mid {
+      height: 750px;
+    }
+
     .nav-inner {
       flex-direction: column;
     }
