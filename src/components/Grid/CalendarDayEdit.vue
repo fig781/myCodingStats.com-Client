@@ -72,14 +72,10 @@
 
         <p>{{ descChar }} characters left</p>
       </form>
-      <div id="cancel" class="button" @click="$emit('close')">Cancel</div>
-      <input
-        id="submit"
-        class="button"
-        type="submit"
-        value="Submit"
-        @click="onSubmit()"
-      />
+      <div class="btn-container">
+        <button id="submit" class="button" @click="onSubmit()">Submit</button>
+        <button id="cancel" class="button" @click="$emit('close')">Cancel</button>
+      </div>
     </div>
   </div>
 </template>
@@ -203,6 +199,10 @@
       },
     },
     created() {
+      //need to access the body element to stop scrolling
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100%';
+
       //autistic
       function cloneValue(external) {
         const internalToCloneTo = {};
@@ -227,6 +227,11 @@
       this.formData.description = this.oneCalendarDay.description;
       this.remainingCharCount();
     },
+    destroyed() {
+      //Set the styles back to normal when closing the modal
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+    },
   };
 </script>
 
@@ -242,18 +247,18 @@
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: rgba(0, 0, 0, 0.623);
   }
 
   #calendar-day-edit-inner {
-    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     border-radius: 3px;
-    width: 400px;
-    padding: 40px 40px 60px 40px;
-    margin-top: 5%;
+    padding: 40px;
   }
 
   #date {
@@ -289,8 +294,7 @@
   }
   textarea {
     resize: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
+    border: solid 1px black;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -304,14 +308,16 @@
     overflow: hidden;
     max-width: inherit;
   }
+
+  .btn-container {
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+  }
   .button {
-    float: right;
-    margin-top: 5px;
-    margin-bottom: 13px;
     width: 8rem;
     padding: 10px;
     border: none;
-    outline: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
