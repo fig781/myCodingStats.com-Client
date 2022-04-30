@@ -35,13 +35,26 @@
           </div>
         </div>
         <div id="month-container">
-          <img src="../assets/left-arrow.png" @click="decreaseMonthYear" alt="left-arrow" />
-          <img src="../assets/right-arrow.png" @click="increaseMonthYear" alt="right-arrow" />
+          <img
+            src="../assets/left-arrow.png"
+            @click="decreaseMonthYear"
+            alt="left-arrow"
+          />
+          <img
+            src="../assets/right-arrow.png"
+            @click="increaseMonthYear"
+            alt="right-arrow"
+          />
           <h2 class="month-container__date">{{ month.name }} {{ year }}</h2>
           <Loader v-if="loading" />
         </div>
         <transition :name="transitionDirection">
-          <Calendar :month="month" :year="year" :calendar="calendar" :key="componentKey" />
+          <Calendar
+            :month="month"
+            :year="year"
+            :calendar="calendar"
+            :key="componentKey"
+          />
         </transition>
       </div>
     </div>
@@ -175,7 +188,8 @@
     max-width: 26px;
   }
   img:hover {
-    filter: invert(44%) sepia(0%) saturate(153%) hue-rotate(166deg) brightness(98%) contrast(92%);
+    filter: invert(44%) sepia(0%) saturate(153%) hue-rotate(166deg) brightness(98%)
+      contrast(92%);
   }
   .right-transition-enter-active {
     transition: all 0.1s;

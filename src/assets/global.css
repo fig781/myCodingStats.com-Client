@@ -10,6 +10,9 @@
   /* FONTS */
   --ft-header: 'Montserrat', sans-serif;
   --ft-body: 'Montserrat', sans-serif;
+
+  /* OTHER */
+  --br-default: 5px;
 }
 
 /* GLOBAL STYLES */
