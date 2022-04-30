@@ -70,11 +70,15 @@
   }
 
   .custom-select .custom-select__selected {
-    border-radius: 2px;
-    border: 1px solid #666666;
+    border-radius: var(--br-default);
+    border: 1px solid black;
     padding-left: 10px;
     cursor: pointer;
     user-select: none;
+  }
+
+  .custom-select .custom-select__selected:hover {
+    border: solid 1px #0069ff;
   }
 
   .custom-select .custom-select__selected.open {
@@ -96,7 +100,7 @@
   .custom-select .custom-select__items {
     color: black;
     border-radius: 0px 0px 2px 2px;
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 200px;
     border-right: 1px solid black;
     border-left: 1px solid black;

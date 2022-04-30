@@ -128,9 +128,9 @@
     width: 100%;
     padding: 5px 10px;
     margin: 8px 0;
-    box-sizing: border-box;
     font-size: 18px;
     border: solid 1px black;
+    border-radius: var(--br-default);
   }
 
   .settings-edit-inner__input:focus {

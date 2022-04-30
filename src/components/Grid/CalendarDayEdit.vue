@@ -298,7 +298,13 @@
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    border-radius: var(--br-default);
   }
+
+  textarea:hover {
+    border: solid 1px #0069ff;
+  }
+
   textarea:focus {
     border: solid 1px #0069ff;
     outline: #0069ff;

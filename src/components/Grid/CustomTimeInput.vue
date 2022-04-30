@@ -148,14 +148,16 @@
   #custom-time-input-container {
     margin-top: 4px;
     margin-bottom: 10px;
-    font-size: 18px;
   }
   #selected {
     cursor: pointer;
     border: 1px solid black;
     padding: 5px 10px;
-    border-radius: 2px;
-    min-height: 23px;
+    display: flex;
+    align-items: center;
+    min-height: 37px;
+    border-radius: var(--br-default);
+    font-size: 18px;
   }
   #selected:hover {
     border: solid 1px #0069ff;
@@ -179,6 +181,9 @@
     margin: 5px;
     text-align: center;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .button:hover {
     background-color: #afb8cc;
