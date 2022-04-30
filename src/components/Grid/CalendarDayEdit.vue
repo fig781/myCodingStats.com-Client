@@ -350,23 +350,4 @@
   #cancel:active {
     background-color: #afb8cc;
   }
-  @media only screen and (max-width: 768px) {
-    #calendar-day-edit-inner {
-      width: 300px;
-    }
-  }
-  @media only screen and (max-width: 360px) {
-    #calendar-day-edit-inner {
-      width: 200px;
-      height: 500px;
-      padding: 20px 20px 60px 20px;
-    }
-    #date h1 {
-      font-size: 20px;
-    }
-    .button {
-      padding: 5px;
-      width: auto;
-    }
-  }
 </style>
